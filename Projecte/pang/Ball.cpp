@@ -5,6 +5,7 @@
 #include "Game.h"
 #include <map>
 #include "Constants.h"
+#include <cmath>
 
 
 
@@ -49,15 +50,9 @@ void Ball::update()
     // Suelo
     if (map->collisionMoveDown(posBall, get<0>(sizeMap[size]), &posBall.y))
     {
-        posBall.y -= int(round(speed));
-        if (posBall.y < 55) speed = -1.75;
-        else if (posBall.y < 65) speed = -2.8;
-        else if (posBall.y < 80) speed = -3.2;
-        else if (posBall.y < 95) speed = -3.5;
-        else speed = -get<3>(sizeMap[size]);
-
-        // Min speed = -4.625
-        // Min posBall = 155
+        
+        if (posBall.y >= 160) speed = -get<3>(sizeMap[size]);
+        else speed = -sqrt(2 * GRAVEDAD * (posBall.y - 15)); // 15 es la altura maxima
     }
 
     posBall.x += direction;
