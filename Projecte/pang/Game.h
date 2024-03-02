@@ -4,10 +4,7 @@
 
 #include <GLFW/glfw3.h>
 #include "Scene.h"
-
-
-#define SCREEN_WIDTH 640
-#define SCREEN_HEIGHT 480
+#include "Constants.h"
 
 
 // Game is a singleton (a class with a single instance) that represents our whole application

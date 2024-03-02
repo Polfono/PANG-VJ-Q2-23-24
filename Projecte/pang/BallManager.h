@@ -20,7 +20,6 @@ public:
 	void removeBall(Ball* ball);
 	void updateBalls();
 	void renderBalls();
-	void splitAll();
 	vector<Ball*> getBalls();
 
 	void setTileMap(TileMap* tileMap);

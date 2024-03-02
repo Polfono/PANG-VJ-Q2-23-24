@@ -3,8 +3,9 @@
 
 #include "Sprite.h"
 #include "TileMap.h"
+#include "Constants.h"
 
-const float GRAVEDAD = 0.075f;
+
 
 enum BallSize {
 	SMALL, MEDIUM, LARGE, EXTRA_LARGE

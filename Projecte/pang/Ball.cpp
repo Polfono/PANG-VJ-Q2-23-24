@@ -4,9 +4,9 @@
 #include "Ball.h"
 #include "Game.h"
 #include <map>
+#include "Constants.h"
 
-#define SCREEN_X 32
-#define SCREEN_Y 16
+
 
 // tamaño de la bola, tamaño de la bola en el spritesheet, posición en el spritesheet, velocidad
 
@@ -26,7 +26,7 @@ void Ball::init(const glm::ivec2& tileMapPos, ShaderProgram& shaderProgram, Ball
 
     sprite = Sprite::createSprite(get<0>(sizeMap[size]), get<1>(sizeMap[size]), &spritesheet, &shaderProgram);
     sprite->setNumberAnimations(1);
-    sprite->setAnimationSpeed(0, 12);
+    sprite->setAnimationSpeed(0, SPRITE_SPEED);
     sprite->addKeyframe(0, get<2>(sizeMap[size]));
     sprite->changeAnimation(0);
 

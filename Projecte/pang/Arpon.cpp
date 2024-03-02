@@ -3,16 +3,17 @@
 #include <GL/glew.h>
 #include "Arpon.h"
 #include "Game.h"
+#include "Constants.h"
 
 void Arpon::init(const glm::ivec2& tileMapPos, ShaderProgram& shaderProgram)
 {
 	bThrowing = false;
 	spritesheet.loadFromFile("images/arpon.png", TEXTURE_PIXEL_FORMAT_RGBA);
 	sprite = Sprite::createSprite(glm::ivec2(9, 200), glm::vec2(0.01454334, 1), &spritesheet, &shaderProgram);
-	sprite->setNumberAnimations(69);
+	sprite->setNumberAnimations(NUMBER_FRAMES_ARPON);
 
-	sprite->setAnimationSpeed(0, 12);
-	for (int i = 0; i < 69; i++)
+	sprite->setAnimationSpeed(0, SPRITE_SPEED);
+	for (int i = 0; i < NUMBER_FRAMES_ARPON; i++)
 		sprite->addKeyframe(i, glm::vec2(0.0145 * i, 0.0f));
 	sprite->changeAnimation(0);
 

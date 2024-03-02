@@ -1,4 +1,20 @@
-﻿  Ball.cpp
-C:\Users\Gorka\Documents\Gorka\Uni\Q6\VJ\PANG-VJ-Q2-23-24\Projecte\pang\Ball.cpp(59,43): warning C4305: '=': truncamiento de 'double' a 'float'
-C:\Users\Gorka\Documents\Gorka\Uni\Q6\VJ\PANG-VJ-Q2-23-24\Projecte\pang\Ball.cpp(60,43): warning C4305: '=': truncamiento de 'double' a 'float'
-  pang.vcxproj -> C:\Users\Gorka\Documents\Gorka\Uni\Q6\VJ\PANG-VJ-Q2-23-24\Projecte\Debug\pang.exe
+﻿  Arpon.cpp
+  Ball.cpp
+C:\Users\Gorka\Documents\Gorka\Uni\Q6\VJ\PANG2\PANG-VJ-Q2-23-24\Projecte\pang\Ball.cpp(54,43): warning C4305: '=': truncamiento de 'double' a 'float'
+C:\Users\Gorka\Documents\Gorka\Uni\Q6\VJ\PANG2\PANG-VJ-Q2-23-24\Projecte\pang\Ball.cpp(55,43): warning C4305: '=': truncamiento de 'double' a 'float'
+  BallManager.cpp
+  Game.cpp
+  Player.cpp
+  Scene.cpp
+  ShaderProgram.cpp
+  Sprite.cpp
+  Texture.cpp
+  TileMap.cpp
+  main.cpp
+  Generando código...
+LINK : warning LNK4098: la biblioteca predeterminada'MSVCRT' entra en conflicto con otras bibliotecas; use la biblioteca /NODEFAULTLIB:biblioteca
+SOIL.lib(image_DXT.obj) : warning LNK4099: no se encontró PDB '' con 'SOIL.lib(image_DXT.obj)' o en ''; se vinculará el objeto sin tener en cuenta información de depuración
+SOIL.lib(image_helper.obj) : warning LNK4099: no se encontró PDB '' con 'SOIL.lib(image_helper.obj)' o en ''; se vinculará el objeto sin tener en cuenta información de depuración
+SOIL.lib(SOIL.obj) : warning LNK4099: no se encontró PDB '' con 'SOIL.lib(SOIL.obj)' o en ''; se vinculará el objeto sin tener en cuenta información de depuración
+SOIL.lib(stb_image_aug.obj) : warning LNK4099: no se encontró PDB '' con 'SOIL.lib(stb_image_aug.obj)' o en ''; se vinculará el objeto sin tener en cuenta información de depuración
+  pang.vcxproj -> C:\Users\Gorka\Documents\Gorka\Uni\Q6\VJ\PANG2\PANG-VJ-Q2-23-24\Projecte\Debug\pang.exe

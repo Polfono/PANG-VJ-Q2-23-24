@@ -3,10 +3,7 @@
 #include <GL/glew.h>
 #include "Player.h"
 #include "Game.h"
-
-
-#define JUMP_ANGLE_STEP 4
-#define FALL_STEP 4
+#include "Constants.h"
 
 
 enum PlayerAnims
@@ -22,18 +19,18 @@ void Player::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 	sprite = Sprite::createSprite(glm::ivec2(32, 32), glm::vec2(0.08, 0.16), &spritesheet, &shaderProgram);
 	sprite->setNumberAnimations(4);
 		
-		sprite->setAnimationSpeed(STAND_RIGHT, 12);
+		sprite->setAnimationSpeed(STAND_RIGHT, SPRITE_SPEED);
 		sprite->addKeyframe(STAND_RIGHT, glm::vec2(0.025f, 0.53f));
 
-		sprite->setAnimationSpeed(STAND_LEFT, 12);
+		sprite->setAnimationSpeed(STAND_LEFT, SPRITE_SPEED);
 		sprite->addKeyframe(STAND_LEFT, glm::vec2(0.89f, 0.53f));
 
 		
-		sprite->setAnimationSpeed(MOVE_LEFT, 12);
+		sprite->setAnimationSpeed(MOVE_LEFT, SPRITE_SPEED);
 		for (int i = 0; i < 5; i++)
 			sprite->addKeyframe(MOVE_LEFT, glm::vec2(0.89f - i*0.086f, 0.01f));
 		
-		sprite->setAnimationSpeed(MOVE_RIGHT, 12);
+		sprite->setAnimationSpeed(MOVE_RIGHT, SPRITE_SPEED);
 		for (int i = 0; i < 5; i++)
 			sprite->addKeyframe(MOVE_RIGHT, glm::vec2(0.025f + i * 0.086f, 0.01f));
 		
