@@ -4,6 +4,7 @@
 #include "Scene.h"
 #include "Game.h"
 #include "Constants.h"
+#include "Text.h"
 
 Scene::Scene()
 {
@@ -95,4 +96,9 @@ void Scene::initShaders()
 	texProgram.bindFragmentOutput("outColor");
 	vShader.free();
 	fShader.free();
+}
+
+void Scene::timer()
+{
+
 }

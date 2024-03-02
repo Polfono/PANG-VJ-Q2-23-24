@@ -23,6 +23,7 @@ public:
 	void init();
 	void update(int deltaTime);
 	void render();
+	void timer();
 
 private:
 	void initShaders();
