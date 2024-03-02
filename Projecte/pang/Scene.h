@@ -39,7 +39,6 @@ private:
 	glm::mat4 projection;
 	int timeLeft = MAX_TIME;
 	int timeInSecs = 0;
-	// Init Writing
 	Text textRenderer;
 
 };

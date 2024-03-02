@@ -47,7 +47,7 @@ void Scene::init()
 	currentTime = 0.0f;
 
 	// Init Writing
-	textRenderer.init("fonts/OpenSans-Regular.ttf");
+	textRenderer.init("fonts/PressStart2P-vaV7.ttf");
 }
 
 void Scene::update(int deltaTime)
@@ -72,9 +72,7 @@ void Scene::render()
 	ballManager->renderBalls();
 
 	// Render Text
-	textRenderer.init("fonts/OpenSans-Regular.ttf");
-	string aux = " Time" + 1;
-	textRenderer.render(aux, glm::vec2(500, 20), 16, glm::vec4(1, 1, 1, 1));
+	textRenderer.render("TIME:090", glm::vec2(445, 60), 16, glm::vec4(1, 1, 1, 1));
 }
 
 void Scene::initShaders()
