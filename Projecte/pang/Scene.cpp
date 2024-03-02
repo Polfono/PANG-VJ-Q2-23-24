@@ -4,7 +4,8 @@
 #include "Scene.h"
 #include "Game.h"
 #include "Constants.h"
-#include "Text.h"
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
 
 Scene::Scene()
 {
@@ -44,6 +45,9 @@ void Scene::init()
 	float zoomFactor = 1.425f;
 	projection = glm::ortho(0.f, float(SCREEN_WIDTH)/zoomFactor, float(SCREEN_HEIGHT)/zoomFactor, 0.f);
 	currentTime = 0.0f;
+
+	// Init Writing
+	textRenderer.init("fonts/OpenSans-Regular.ttf");
 }
 
 void Scene::update(int deltaTime)
@@ -66,6 +70,11 @@ void Scene::render()
 	map->render();
 	player->render();
 	ballManager->renderBalls();
+
+	// Render Text
+	textRenderer.init("fonts/OpenSans-Regular.ttf");
+	string aux = " Time" + 1;
+	textRenderer.render(aux, glm::vec2(500, 20), 16, glm::vec4(1, 1, 1, 1));
 }
 
 void Scene::initShaders()
@@ -98,7 +107,11 @@ void Scene::initShaders()
 	fShader.free();
 }
 
-void Scene::timer()
+int Scene::timer()
 {
-
+	if (glfwGetTime() > currentTime) {
+		timeInSecs = glfwGetTime();
+		timeLeft--;
+		return timeLeft;
+	}
 }

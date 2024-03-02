@@ -7,6 +7,8 @@
 #include "TileMap.h"
 #include "Player.h"
 #include "BallManager.h"
+#include "Text.h"
+#include "Constants.h"
 
 
 // Scene contains all the entities of our game.
@@ -23,7 +25,7 @@ public:
 	void init();
 	void update(int deltaTime);
 	void render();
-	void timer();
+	int timer();
 
 private:
 	void initShaders();
@@ -35,6 +37,10 @@ private:
 	ShaderProgram texProgram;
 	float currentTime;
 	glm::mat4 projection;
+	int timeLeft = MAX_TIME;
+	int timeInSecs = 0;
+	// Init Writing
+	Text textRenderer;
 
 };
 
