@@ -26,6 +26,8 @@ public:
 	void update(int deltaTime);
 	void render();
 	int timer();
+	void setLevel(int level);
+	void nextLevel();
 
 private:
 	void initShaders();
@@ -39,6 +41,9 @@ private:
 	int timeLeft = 90;
 	float currentTime = 0.0f; 
 	Text textRenderer;
+	TexturedQuad* bground;
+	Texture scene;
+	int level = 1;
 
 };
 

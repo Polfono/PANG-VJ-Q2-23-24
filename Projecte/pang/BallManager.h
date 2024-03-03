@@ -18,18 +18,16 @@ public:
 	}
 	void addBall(const glm::vec2& pos, const glm::ivec2& tileMapPos, BallSize size, int dir);
 	void removeBall(Ball* ball);
-	void updateBalls();
+	bool updateBalls();
 	void renderBalls();
 	vector<Ball*> getBalls();
 
 	void setTileMap(TileMap* tileMap);
-	void setShaderProgram(ShaderProgram& shaderProgram);
 
 private:
 	BallManager() {}
 	static BallManager* s_inst;
 	vector<Ball*> balls;
-	ShaderProgram texProgram;
 	TileMap* map;
 };
 

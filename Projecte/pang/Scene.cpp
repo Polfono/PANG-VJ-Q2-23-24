@@ -7,6 +7,7 @@
 #include "ShaderProgramManager.h"
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+#include "Level.h"
 
 Scene::Scene()
 {
@@ -25,37 +26,44 @@ Scene::~Scene()
 
 void Scene::init()
 {
+	map = Level::instance().LoadMapLevel(level);
+
 	// Init shaders
 	texProgram = ShaderProgramManager::instance().getShaderProgram();
 
-	// Load level map
-	map = TileMap::createTileMap("levels/level01.txt", glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
+	// Init Background
+	glm::vec2 geom[2] = { glm::vec2(32.f, 16.f), glm::vec2(416, 224) }; // Quad size
+	glm::vec2 texCoords[2] = { glm::vec2(0.f, 0.f), glm::vec2(1.f, 1.f) }; // Texture coordinates
+	bground = TexturedQuad::createTexturedQuad(geom, texCoords, ShaderProgramManager::instance().getShaderProgram());
 
-	// Init player
+	// Init Player
 	player = new Player();
 	player->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
-	player->setPosition(glm::vec2(INIT_PLAYER_X_TILES * map->getTileSize(), INIT_PLAYER_Y_TILES * map->getTileSize()));
-	player->setTileMap(map);
 
-	// Init balls
+	// Init Ball Manager
 	ballManager = BallManager::instance();
-	ballManager->setTileMap(map);
-	ballManager->setShaderProgram(texProgram);
-	ballManager->addBall(glm::vec2(27 * map->getTileSize(), 5 * map->getTileSize()), glm::ivec2(SCREEN_X, SCREEN_Y), EXTRA_LARGE, 1);
-	ballManager->addBall(glm::vec2(18 * map->getTileSize(), 5 * map->getTileSize()), glm::ivec2(SCREEN_X, SCREEN_Y), EXTRA_LARGE, -1);
 
+	// Init Projection
 	float zoomFactor = 1.425f;
-	projection = glm::ortho(0.f, float(SCREEN_WIDTH)/zoomFactor, float(SCREEN_HEIGHT)/zoomFactor, 0.f);
+	projection = glm::ortho(0.f, float(SCREEN_WIDTH) / zoomFactor, float(SCREEN_HEIGHT) / zoomFactor, 0.f);
 
 	// Init Writing
 	textRenderer.init("fonts/PressStart2P-vaV7.ttf");
+
+	// Cada nivel
+	// -- Background
+	// -- TileMap
+	// -- Player Position
+	// -- addBalls BallManager
+
+	Level::instance().LoadMapConfig(level, map, &scene, player, ballManager);
 }
 
 void Scene::update(int deltaTime)
 {
 	currentTime += deltaTime;
 	player->update(deltaTime);
-	ballManager->updateBalls();
+	if (!ballManager->updateBalls()) nextLevel();
 
 	// Actualizar timer
 	if (currentTime / 1000 >= 1) {
@@ -74,6 +82,10 @@ void Scene::render()
 	modelview = glm::mat4(0.5f);
 	texProgram.setUniformMatrix4f("modelview", modelview);
 	texProgram.setUniform2f("texCoordDispl", 0.f, 0.f);
+
+	// Render Background
+	bground->render(scene);
+
 	map->render();
 	player->render();
 	ballManager->renderBalls();
@@ -84,4 +96,22 @@ void Scene::render()
 	if (timeLeft < 10) timeText += "0";
 	timeText += std::to_string(timeLeft);
 	textRenderer.render(timeText, glm::vec2(445, 60), 16, glm::vec4(1, 1, 1, 1));
+}
+
+void Scene::nextLevel() {
+	level++;
+	if(level > 17) // end
+
+	map = Level::instance().LoadMapLevel(level);
+	Level::instance().LoadMapConfig(level, map, &scene, player, ballManager);
+
+	timeLeft = 90;
+}
+
+void Scene::setLevel(int level) {
+	this->level = level;
+	map = Level::instance().LoadMapLevel(level);
+	Level::instance().LoadMapConfig(level, map, &scene, player, ballManager);
+
+	timeLeft = 90;
 }

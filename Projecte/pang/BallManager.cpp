@@ -1,12 +1,13 @@
 #include "BallManager.h"
 #include <iostream>
+#include "ShaderProgramManager.h"
 
 BallManager* BallManager::s_inst = nullptr;
 
 void BallManager::addBall(const glm::vec2& pos, const glm::ivec2& tileMapPos, BallSize size, int dir)
 {
 	Ball* ball = new Ball();
-	ball->init(tileMapPos, texProgram, size, dir);
+	ball->init(tileMapPos, ShaderProgramManager::instance().getShaderProgram(), size, dir);
 	ball->setPosition(pos);
 	ball->setTileMap(map);
 	balls.push_back(ball);
@@ -25,12 +26,16 @@ void BallManager::removeBall(Ball* ball)
 	}
 }
 
-void BallManager::updateBalls()
+bool BallManager::updateBalls()
 {
+	if(balls.empty())
+		return false;
+
 	for (auto& ball : balls)
 	{
 		ball->update();
 	}
+	return true;
 }
 
 void BallManager::renderBalls()
@@ -44,11 +49,6 @@ void BallManager::renderBalls()
 void BallManager::setTileMap(TileMap* tileMap)
 {
 	map = tileMap;
-}
-
-void BallManager::setShaderProgram(ShaderProgram& shaderProgram)
-{
-	texProgram = shaderProgram;
 }
 
 vector<Ball*> BallManager::getBalls()

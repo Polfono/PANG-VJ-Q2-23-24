@@ -8,6 +8,7 @@ Menu::Menu()
 	glm::vec2 texCoords[2] = { glm::vec2(0.f, 0.f), glm::vec2(1.f, 1.f) };
 	bground = TexturedQuad::createTexturedQuad(geom, texCoords, ShaderProgramManager::instance().getShaderProgram());
 
+
 	spritesheet.loadFromFile("images/cangrejos.png", TEXTURE_PIXEL_FORMAT_RGBA);
 	sprite1 = Sprite::createSprite(glm::ivec2(64, 64), glm::vec2(0.25f, 1.f), &spritesheet, &ShaderProgramManager::instance().getShaderProgram());
 	sprite1->setNumberAnimations(4);
@@ -46,10 +47,6 @@ Menu::~Menu()
 
 void Menu::init(const int& idScene)
 {
-	scene.setWrapS(GL_CLAMP_TO_EDGE);
-	scene.setWrapT(GL_CLAMP_TO_EDGE);
-	scene.setMinFilter(GL_NEAREST);
-	scene.setMagFilter(GL_NEAREST);
 }
 
 void Menu::update(int deltaTime)
