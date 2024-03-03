@@ -4,6 +4,7 @@
 #include "Scene.h"
 #include "Game.h"
 #include "Constants.h"
+#include "ShaderProgramManager.h"
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
@@ -24,7 +25,8 @@ Scene::~Scene()
 
 void Scene::init()
 {
-	initShaders();
+	// Init shaders
+	texProgram = ShaderProgramManager::instance().getShaderProgram();
 
 	// Load level map
 	map = TileMap::createTileMap("levels/level01.txt", glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
@@ -44,7 +46,6 @@ void Scene::init()
 
 	float zoomFactor = 1.425f;
 	projection = glm::ortho(0.f, float(SCREEN_WIDTH)/zoomFactor, float(SCREEN_HEIGHT)/zoomFactor, 0.f);
-	currentTime = 0.0f;
 
 	// Init Writing
 	textRenderer.init("fonts/PressStart2P-vaV7.ttf");
@@ -55,6 +56,12 @@ void Scene::update(int deltaTime)
 	currentTime += deltaTime;
 	player->update(deltaTime);
 	ballManager->updateBalls();
+
+	// Actualizar timer
+	if (currentTime / 1000 >= 1) {
+		if(timeLeft > 0) timeLeft--;
+		currentTime = 0;
+	}
 }
 
 void Scene::render()
@@ -72,44 +79,9 @@ void Scene::render()
 	ballManager->renderBalls();
 
 	// Render Text
-	textRenderer.render("TIME:090", glm::vec2(445, 60), 16, glm::vec4(1, 1, 1, 1));
-}
-
-void Scene::initShaders()
-{
-	Shader vShader, fShader;
-
-	vShader.initFromFile(VERTEX_SHADER, "shaders/texture.vert");
-	if(!vShader.isCompiled())
-	{
-		cout << "Vertex Shader Error" << endl;
-		cout << "" << vShader.log() << endl << endl;
-	}
-	fShader.initFromFile(FRAGMENT_SHADER, "shaders/texture.frag");
-	if(!fShader.isCompiled())
-	{
-		cout << "Fragment Shader Error" << endl;
-		cout << "" << fShader.log() << endl << endl;
-	}
-	texProgram.init();
-	texProgram.addShader(vShader);
-	texProgram.addShader(fShader);
-	texProgram.link();
-	if(!texProgram.isLinked())
-	{
-		cout << "Shader Linking Error" << endl;
-		cout << "" << texProgram.log() << endl << endl;
-	}
-	texProgram.bindFragmentOutput("outColor");
-	vShader.free();
-	fShader.free();
-}
-
-int Scene::timer()
-{
-	if (glfwGetTime() > currentTime) {
-		timeInSecs = glfwGetTime();
-		timeLeft--;
-		return timeLeft;
-	}
+	std::string timeText = "TIME:";
+	if (timeLeft < 100) timeText += "0";
+	if (timeLeft < 10) timeText += "0";
+	timeText += std::to_string(timeLeft);
+	textRenderer.render(timeText, glm::vec2(445, 60), 16, glm::vec4(1, 1, 1, 1));
 }

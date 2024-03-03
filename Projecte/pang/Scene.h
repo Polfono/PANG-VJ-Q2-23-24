@@ -35,10 +35,9 @@ private:
 	Player *player;
 	BallManager* ballManager = BallManager::instance();
 	ShaderProgram texProgram;
-	float currentTime;
 	glm::mat4 projection;
-	int timeLeft = MAX_TIME;
-	int timeInSecs = 0;
+	int timeLeft = 90;
+	float currentTime = 0.0f; 
 	Text textRenderer;
 
 };

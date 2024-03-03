@@ -5,6 +5,11 @@ VisualStudioVersion = 17.9.34622.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "pang", "pang\pang.vcxproj", "{5BE6CA2A-E5A8-40CC-9015-047CE0C78036}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Elementos de la solución", "Elementos de la solución", "{38F2B194-9D23-497B-ABB0-E85507782B29}"
+	ProjectSection(SolutionItems) = preProject
+		pang\Constants.h = pang\Constants.h
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -18,5 +23,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {07DE7477-3D65-4AE5-A8AF-C79CAA663F9E}
 	EndGlobalSection
 EndGlobal

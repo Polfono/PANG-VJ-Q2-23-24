@@ -5,6 +5,7 @@
 #include <GLFW/glfw3.h>
 #include "Scene.h"
 #include "Constants.h"
+#include "Menu.h"
 
 
 // Game is a singleton (a class with a single instance) that represents our whole application
@@ -38,6 +39,9 @@ public:
 	bool getKey(int key) const;
 
 private:
+	bool start;
+	int posIndex;
+	Menu* menu;
 	bool bPlay; // Continue to play game?
 	bool keys[GLFW_KEY_LAST+1]; // Store key states so that 
 							    // we can have access at any time
