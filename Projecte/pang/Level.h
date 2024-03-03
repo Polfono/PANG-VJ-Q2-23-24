@@ -17,7 +17,7 @@ public:
 	Level();
 	~Level();
 	TileMap* LoadMapLevel(int level);
-	void LoadMapConfig(int level, TileMap* map, Texture* scene, Player* player, BallManager* ballManager);
+	void LoadMapConfig(int level, TileMap* map, Texture* scene, Player* player, BallManager* ballManager, string* nameStage);
 };
 
 #endif // _LEVEL_INCLUDE

@@ -56,7 +56,7 @@ void Scene::init()
 	// -- Player Position
 	// -- addBalls BallManager
 
-	Level::instance().LoadMapConfig(level, map, &scene, player, ballManager);
+	Level::instance().LoadMapConfig(level, map, &scene, player, ballManager, &nameStage);
 }
 
 void Scene::update(int deltaTime)
@@ -95,7 +95,18 @@ void Scene::render()
 	if (timeLeft < 100) timeText += "0";
 	if (timeLeft < 10) timeText += "0";
 	timeText += std::to_string(timeLeft);
-	textRenderer.render(timeText, glm::vec2(445, 60), 16, glm::vec4(1, 1, 1, 1));
+	textRenderer.render(timeText, glm::vec2(440, 60), 17, glm::vec4(1, 1, 1, 1));
+	textRenderer.render("STAGE " + std::to_string(level), glm::vec2(250, 425), 17, glm::vec4(1, 1, 1, 1));
+	textRenderer.render(nameStage, glm::vec2(250, 450), 17, glm::vec4(1, 1, 1, 1));
+
+	std::string scoreText = "SCORE:";
+	if (score < 100000) scoreText += "0";
+	if (score < 10000) scoreText += "0";
+	if (score < 1000) scoreText += "0";
+	if (score < 100) scoreText += "0";
+	if (score < 10) scoreText += "0";
+	scoreText += std::to_string(score);
+	textRenderer.render(scoreText, glm::vec2(50, 350), 17, glm::vec4(1, 1, 1, 1));
 }
 
 void Scene::nextLevel() {
@@ -103,7 +114,7 @@ void Scene::nextLevel() {
 	if(level > 17) // end
 
 	map = Level::instance().LoadMapLevel(level);
-	Level::instance().LoadMapConfig(level, map, &scene, player, ballManager);
+	Level::instance().LoadMapConfig(level, map, &scene, player, ballManager, &nameStage);
 
 	timeLeft = 90;
 }
@@ -111,7 +122,7 @@ void Scene::nextLevel() {
 void Scene::setLevel(int level) {
 	this->level = level;
 	map = Level::instance().LoadMapLevel(level);
-	Level::instance().LoadMapConfig(level, map, &scene, player, ballManager);
+	Level::instance().LoadMapConfig(level, map, &scene, player, ballManager, &nameStage);
 
 	timeLeft = 90;
 }
