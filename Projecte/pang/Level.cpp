@@ -7,6 +7,9 @@
 #include "BallManager.h"
 #include <iostream>
 
+#define LEFT -1
+#define RIGHT 1
+
 Level::Level()
 {
 }
@@ -32,19 +35,17 @@ void Level::LoadMapConfig(int level, TileMap* map, Texture* scene, Player* playe
 	if (level == 1) {
 		*nameStage = "MT.FUJI";
 		player->setPosition(glm::vec2(22 * map->getTileSize(), 20 * map->getTileSize()));
-		ballManager->addBall(glm::vec2(27 * map->getTileSize(), 5 * map->getTileSize()), glm::ivec2(SCREEN_X, SCREEN_Y), EXTRA_LARGE, 1);
-		ballManager->addBall(glm::vec2(18 * map->getTileSize(), 5 * map->getTileSize()), glm::ivec2(SCREEN_X, SCREEN_Y), EXTRA_LARGE, -1);
+		ballManager->addBall(glm::vec2(4 * map->getTileSize(), 2 * map->getTileSize()), glm::ivec2(SCREEN_X, SCREEN_Y), EXTRA_LARGE, RIGHT);
 	} else if (level == 2) {
-		*nameStage = "MT.FUJI";
-		player->setPosition(glm::vec2(22 * map->getTileSize(), 20 * map->getTileSize()));
-		ballManager->addBall(glm::vec2(27 * map->getTileSize(), 5 * map->getTileSize()), glm::ivec2(SCREEN_X, SCREEN_Y), EXTRA_LARGE, 1);
-		ballManager->addBall(glm::vec2(18 * map->getTileSize(), 5 * map->getTileSize()), glm::ivec2(SCREEN_X, SCREEN_Y), EXTRA_LARGE, -1);
+		*nameStage = "MT.KEIRIN";
+		player->setPosition(glm::vec2(20 * map->getTileSize(), 15 * map->getTileSize()));
+		ballManager->addBall(glm::vec2(19 * map->getTileSize(), 4 * map->getTileSize()), glm::ivec2(SCREEN_X, SCREEN_Y), EXTRA_LARGE, LEFT);
 	}
 	else if (level == 3) {
-		*nameStage = "MT.FUJI";
-		player->setPosition(glm::vec2(22 * map->getTileSize(), 20 * map->getTileSize()));
-		ballManager->addBall(glm::vec2(27 * map->getTileSize(), 5 * map->getTileSize()), glm::ivec2(SCREEN_X, SCREEN_Y), EXTRA_LARGE, 1);
-		ballManager->addBall(glm::vec2(18 * map->getTileSize(), 5 * map->getTileSize()), glm::ivec2(SCREEN_X, SCREEN_Y), EXTRA_LARGE, -1);
+		*nameStage = "EMERALD TEMPLE";
+		player->setPosition(glm::vec2(20 * map->getTileSize(), 20 * map->getTileSize()));
+		ballManager->addBall(glm::vec2(22 * map->getTileSize(), 2 * map->getTileSize()), glm::ivec2(SCREEN_X, SCREEN_Y), EXTRA_LARGE, RIGHT);
+		ballManager->addBall(glm::vec2(21 * map->getTileSize(), 8 * map->getTileSize()), glm::ivec2(SCREEN_X, SCREEN_Y), LARGE, LEFT);
 	}
 	else if (level == 4) {
 		*nameStage = "MT.FUJI";

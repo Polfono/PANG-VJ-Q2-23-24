@@ -8,7 +8,7 @@ void Game::init()
 {
 	ShaderProgramManager::instance().init();
 
-	start = false;
+	start = true;
 	bPlay = true;
 	posIndex = 0;
 
