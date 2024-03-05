@@ -23,11 +23,12 @@ public:
 	~Scene();
 
 	void init();
-	void update(int deltaTime);
+	bool update(int deltaTime);
 	void render();
 	int timer();
 	void setLevel(int level);
 	void nextLevel();
+	void reset();
 
 private:
 	void initShaders();
@@ -44,7 +45,7 @@ private:
 	TexturedQuad* bground;
 	Texture scene;
 	int level = 1;
-	int vidas = 3;
+	int vidas = 2;
 	bool hit = false;
 	string nameStage;
 	int score = 0;

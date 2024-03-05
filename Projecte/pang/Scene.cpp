@@ -59,13 +59,15 @@ void Scene::init()
 	Level::instance().LoadMapConfig(level, map, &scene, player, ballManager, &nameStage);
 }
 
-void Scene::update(int deltaTime)
+bool Scene::update(int deltaTime)
 {
 	currentTime += deltaTime;
 
-	if (vidas == 0) {
+	if (vidas < 0) {
 		// GAME OVER SCENE //
-
+		glClearColor(0.f, 0.f, 0.f, 1.0f);
+		if (Game::instance().getKey(GLFW_KEY_ENTER)) // Enter
+			return true;
 	}
 	
 	if(timeLeft == 0) {
@@ -113,52 +115,72 @@ void Scene::update(int deltaTime)
 			Level::instance().LoadMapConfig(level, map, &scene, player, ballManager, &nameStage);
 		}
 	}
+	return false;
 }
 
 
 
 void Scene::render()
 {
-	glm::mat4 modelview;
+	if (vidas >= 0) {
+		glm::mat4 modelview;
 
-	texProgram.use();
-	texProgram.setUniformMatrix4f("projection", projection);
-	texProgram.setUniform4f("color", 1.0f, 1.0f, 1.0f, 1.0f);
-	modelview = glm::mat4(0.5f);
-	texProgram.setUniformMatrix4f("modelview", modelview);
-	texProgram.setUniform2f("texCoordDispl", 0.f, 0.f);
+		texProgram.use();
+		texProgram.setUniformMatrix4f("projection", projection);
+		texProgram.setUniform4f("color", 1.0f, 1.0f, 1.0f, 1.0f);
+		modelview = glm::mat4(0.5f);
+		texProgram.setUniformMatrix4f("modelview", modelview);
+		texProgram.setUniform2f("texCoordDispl", 0.f, 0.f);
 
-	// Render Background
-	bground->render(scene);
+		// Render Background
+		bground->render(scene);
 
-	// Render TileMap
-	map->render();
+		// Render TileMap
+		map->render();
 
-	// Render Player
-	player->render();
+		// Render Player
+		player->render();
 
-	// Render Balls
-	ballManager->renderBalls();
+		// Render Balls
+		ballManager->renderBalls();
 
-	// Render Text
-	std::string timeText = "TIME:";
-	if (timeLeft < 100) timeText += "0";
-	if (timeLeft < 10) timeText += "0";
-	timeText += std::to_string(timeLeft);
-	textRenderer.render(timeText, glm::vec2(440, 60), 17, glm::vec4(1, 1, 1, 1));
-	textRenderer.render("STAGE " + std::to_string(level), glm::vec2(250, 425), 17, glm::vec4(1, 1, 1, 1));
-	textRenderer.render(nameStage, glm::vec2(250, 450), 17, glm::vec4(1, 1, 1, 1));
+		// Render Text
+		std::string timeText = "TIME:";
+		if (timeLeft < 100) timeText += "0";
+		if (timeLeft < 10) timeText += "0";
+		timeText += std::to_string(timeLeft);
+		textRenderer.render(timeText, glm::vec2(440, 60), 17, glm::vec4(1, 1, 1, 1));
+		textRenderer.render("STAGE " + std::to_string(level), glm::vec2(250, 425), 17, glm::vec4(1, 1, 1, 1));
+		textRenderer.render(nameStage, glm::vec2(250, 450), 17, glm::vec4(1, 1, 1, 1));
 
-	std::string scoreText = "SCORE:";
-	if (score < 100000) scoreText += "0";
-	if (score < 10000) scoreText += "0";
-	if (score < 1000) scoreText += "0";
-	if (score < 100) scoreText += "0";
-	if (score < 10) scoreText += "0";
-	scoreText += std::to_string(score);
-	textRenderer.render(scoreText, glm::vec2(50, 350), 17, glm::vec4(1, 1, 1, 1));
+		std::string scoreText = "SCORE:";
+		if (score < 100000) scoreText += "0";
+		if (score < 10000) scoreText += "0";
+		if (score < 1000) scoreText += "0";
+		if (score < 100) scoreText += "0";
+		if (score < 10) scoreText += "0";
+		scoreText += std::to_string(score);
+		textRenderer.render(scoreText, glm::vec2(50, 350), 17, glm::vec4(1, 1, 1, 1));
 
-	textRenderer.render("Vidas: " + std::to_string(vidas), glm::vec2(50, 375), 17, glm::vec4(1, 1, 1, 1));
+		textRenderer.render("Vidas: " + std::to_string(vidas), glm::vec2(50, 375), 17, glm::vec4(1, 1, 1, 1));
+
+		if (!hit && firstHit && vidas >= 0) {
+			if (hitTime / 333 % 2 == 0)
+				textRenderer.render("READY", glm::vec2(250, 200), 32, glm::vec4(1, 1, 1, 1));
+		}
+	}
+	else {
+		textRenderer.render("GAME OVER", glm::vec2(175, 200), 32, glm::vec4(1, 1, 1, 1));
+		std::string scoreText = "SCORE:";
+		if (score < 100000) scoreText += "0";
+		if (score < 10000) scoreText += "0";
+		if (score < 1000) scoreText += "0";
+		if (score < 100) scoreText += "0";
+		if (score < 10) scoreText += "0";
+		scoreText += std::to_string(score);
+		textRenderer.render(scoreText, glm::vec2(215, 250), 17, glm::vec4(1, 1, 1, 1));
+		textRenderer.render("PRESS 'ENTER' TO RETURN MENU", glm::vec2(140, 450), 12, glm::vec4(1, 1, 1, 1));
+	}
 }
 
 void Scene::nextLevel() {
@@ -186,4 +208,17 @@ void Scene::setLevel(int level) {
 	Level::instance().LoadMapConfig(level, map, &scene, player, ballManager, &nameStage);
 
 	timeLeft = 100;
+}
+
+void Scene::reset() {
+	hitTime = 0;
+	firstHit = true;
+
+	level = 1;
+	vidas = 2;
+	score = 0;
+	hit = false;
+
+	ballManager->clearBalls();
+	setLevel(1);
 }

@@ -2,6 +2,7 @@
 #include <GLFW/glfw3.h>
 #include "Game.h"
 #include "ShaderProgramManager.h"
+#include <iostream>
 
 
 void Game::init()
@@ -24,7 +25,11 @@ bool Game::update(int deltaTime)
 {
 	if (start)
 	{
-		scene.update(deltaTime);
+		if (scene.update(deltaTime))
+		{
+			start = false;
+			scene.reset();
+		}
 	}
 	else
 	{
@@ -37,7 +42,7 @@ bool Game::update(int deltaTime)
 void Game::render()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	if(start) scene.render();
+	if (start) scene.render();
 	else menu->render(menuSection);
 }
 
