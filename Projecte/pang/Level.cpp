@@ -48,46 +48,60 @@ void Level::LoadMapConfig(int level, TileMap* map, Texture* scene, Player* playe
 		ballManager->addBall(glm::vec2(21 * map->getTileSize(), 8 * map->getTileSize()), glm::ivec2(SCREEN_X, SCREEN_Y), LARGE, LEFT);
 	}
 	else if (level == 4) {
-		*nameStage = "MT.FUJI";
-		player->setPosition(glm::vec2(22 * map->getTileSize(), 21 * map->getTileSize()));
-		ballManager->addBall(glm::vec2(27 * map->getTileSize(), 5 * map->getTileSize()), glm::ivec2(SCREEN_X, SCREEN_Y), EXTRA_LARGE, 1);
-		ballManager->addBall(glm::vec2(18 * map->getTileSize(), 5 * map->getTileSize()), glm::ivec2(SCREEN_X, SCREEN_Y), EXTRA_LARGE, -1);
+		*nameStage = "ANKOR WATT";
+		player->setPosition(glm::vec2(20 * map->getTileSize(), 19 * map->getTileSize()));
+		ballManager->addBall(glm::vec2(22 * map->getTileSize(), 2 * map->getTileSize()), glm::ivec2(SCREEN_X, SCREEN_Y), EXTRA_LARGE, RIGHT);
+		ballManager->addBall(glm::vec2(21 * map->getTileSize(), 2 * map->getTileSize()), glm::ivec2(SCREEN_X, SCREEN_Y), EXTRA_LARGE, LEFT);
 	}
 	else if (level == 5) {
-		*nameStage = "MT.FUJI";
-		player->setPosition(glm::vec2(22 * map->getTileSize(), 21 * map->getTileSize()));
-		ballManager->addBall(glm::vec2(27 * map->getTileSize(), 5 * map->getTileSize()), glm::ivec2(SCREEN_X, SCREEN_Y), EXTRA_LARGE, 1);
-		ballManager->addBall(glm::vec2(18 * map->getTileSize(), 5 * map->getTileSize()), glm::ivec2(SCREEN_X, SCREEN_Y), EXTRA_LARGE, -1);
+		*nameStage = "AUSTRALIA";
+		player->setPosition(glm::vec2(20 * map->getTileSize(), 21 * map->getTileSize()));
+
+		ballManager->addBall(glm::vec2(2 * map->getTileSize(), 2 * map->getTileSize()), glm::ivec2(SCREEN_X, SCREEN_Y), SMALL, RIGHT);
+		ballManager->addBall(glm::vec2(3 * map->getTileSize(), 3 * map->getTileSize()), glm::ivec2(SCREEN_X, SCREEN_Y), SMALL, RIGHT);
+		ballManager->addBall(glm::vec2(6 * map->getTileSize(), 2 * map->getTileSize()), glm::ivec2(SCREEN_X, SCREEN_Y), SMALL, LEFT);
+		ballManager->addBall(glm::vec2(8 * map->getTileSize(), 3 * map->getTileSize()), glm::ivec2(SCREEN_X, SCREEN_Y), SMALL, RIGHT);
+		ballManager->addBall(glm::vec2(8 * map->getTileSize(), 2 * map->getTileSize()), glm::ivec2(SCREEN_X, SCREEN_Y), SMALL, LEFT);
+		ballManager->addBall(glm::vec2(10 * map->getTileSize(), 3 * map->getTileSize()), glm::ivec2(SCREEN_X, SCREEN_Y), SMALL, RIGHT);
+		ballManager->addBall(glm::vec2(11 * map->getTileSize(), 4 * map->getTileSize()), glm::ivec2(SCREEN_X, SCREEN_Y), SMALL, RIGHT);
+		ballManager->addBall(glm::vec2(12 * map->getTileSize(), 2 * map->getTileSize()), glm::ivec2(SCREEN_X, SCREEN_Y), SMALL, RIGHT);
+		ballManager->addBall(glm::vec2(13 * map->getTileSize(), 2 * map->getTileSize()), glm::ivec2(SCREEN_X, SCREEN_Y), SMALL, RIGHT);
+		ballManager->addBall(glm::vec2(14 * map->getTileSize(), 3 * map->getTileSize()), glm::ivec2(SCREEN_X, SCREEN_Y), SMALL, RIGHT);
+
+		ballManager->addBall(glm::vec2(16 * map->getTileSize(), 2 * map->getTileSize()), glm::ivec2(SCREEN_X, SCREEN_Y), MEDIUM, LEFT);
+		ballManager->addBall(glm::vec2(19 * map->getTileSize(), 2 * map->getTileSize()), glm::ivec2(SCREEN_X, SCREEN_Y), MEDIUM, RIGHT);
+		ballManager->addBall(glm::vec2(21 * map->getTileSize(), 2 * map->getTileSize()), glm::ivec2(SCREEN_X, SCREEN_Y), MEDIUM, RIGHT);
 	}
 	else if (level == 6) {
-		*nameStage = "MT.FUJI";
-		player->setPosition(glm::vec2(22 * map->getTileSize(), 21 * map->getTileSize()));
-		ballManager->addBall(glm::vec2(27 * map->getTileSize(), 5 * map->getTileSize()), glm::ivec2(SCREEN_X, SCREEN_Y), EXTRA_LARGE, 1);
-		ballManager->addBall(glm::vec2(18 * map->getTileSize(), 5 * map->getTileSize()), glm::ivec2(SCREEN_X, SCREEN_Y), EXTRA_LARGE, -1);
+		*nameStage = "TAJ MAHAL";
+		player->setPosition(glm::vec2(22 * map->getTileSize(), 1 * map->getTileSize()));
+		ballManager->addBall(glm::vec2(12 * map->getTileSize(), 1 * map->getTileSize()), glm::ivec2(SCREEN_X, SCREEN_Y), LARGE, LEFT);
+		ballManager->addBall(glm::vec2(8 * map->getTileSize(), 9 * map->getTileSize()), glm::ivec2(SCREEN_X, SCREEN_Y), EXTRA_LARGE, RIGHT);
+		ballManager->addBall(glm::vec2(18 * map->getTileSize(), 9 * map->getTileSize()), glm::ivec2(SCREEN_X, SCREEN_Y), EXTRA_LARGE, RIGHT);
 	}
 	else if (level == 7) {
-		*nameStage = "MT.FUJI";
+		*nameStage = "LENINGRAD";
 		player->setPosition(glm::vec2(22 * map->getTileSize(), 21 * map->getTileSize()));
-		ballManager->addBall(glm::vec2(27 * map->getTileSize(), 5 * map->getTileSize()), glm::ivec2(SCREEN_X, SCREEN_Y), EXTRA_LARGE, 1);
-		ballManager->addBall(glm::vec2(18 * map->getTileSize(), 5 * map->getTileSize()), glm::ivec2(SCREEN_X, SCREEN_Y), EXTRA_LARGE, -1);
+		ballManager->addBall(glm::vec2(33 * map->getTileSize(), 2 * map->getTileSize()), glm::ivec2(SCREEN_X, SCREEN_Y), EXTRA_LARGE, RIGHT);
+		ballManager->addBall(glm::vec2(23 * map->getTileSize(), 2 * map->getTileSize()), glm::ivec2(SCREEN_X, SCREEN_Y), EXTRA_LARGE, RIGHT);
 	}
 	else if (level == 8) {
-		*nameStage = "MT.FUJI";
-		player->setPosition(glm::vec2(22 * map->getTileSize(), 21 * map->getTileSize()));
-		ballManager->addBall(glm::vec2(27 * map->getTileSize(), 5 * map->getTileSize()), glm::ivec2(SCREEN_X, SCREEN_Y), EXTRA_LARGE, 1);
-		ballManager->addBall(glm::vec2(18 * map->getTileSize(), 5 * map->getTileSize()), glm::ivec2(SCREEN_X, SCREEN_Y), EXTRA_LARGE, -1);
+		*nameStage = "PARIS";
+		player->setPosition(glm::vec2(20 * map->getTileSize(), 21 * map->getTileSize()));
+		ballManager->addBall(glm::vec2(21 * map->getTileSize(), 1 * map->getTileSize()), glm::ivec2(SCREEN_X, SCREEN_Y), EXTRA_LARGE, RIGHT);
+		ballManager->addBall(glm::vec2(21 * map->getTileSize(), 3 * map->getTileSize()), glm::ivec2(SCREEN_X, SCREEN_Y), EXTRA_LARGE, LEFT);
+		ballManager->addBall(glm::vec2(21 * map->getTileSize(), 5 * map->getTileSize()), glm::ivec2(SCREEN_X, SCREEN_Y), EXTRA_LARGE, RIGHT);
 	}
 	else if (level == 9) {
-		*nameStage = "MT.FUJI";
-		player->setPosition(glm::vec2(22 * map->getTileSize(), 21 * map->getTileSize()));
-		ballManager->addBall(glm::vec2(27 * map->getTileSize(), 5 * map->getTileSize()), glm::ivec2(SCREEN_X, SCREEN_Y), EXTRA_LARGE, 1);
-		ballManager->addBall(glm::vec2(18 * map->getTileSize(), 5 * map->getTileSize()), glm::ivec2(SCREEN_X, SCREEN_Y), EXTRA_LARGE, -1);
+		*nameStage = "LONDON";
+		player->setPosition(glm::vec2(20 * map->getTileSize(), 21 * map->getTileSize()));
+		ballManager->addBall(glm::vec2(21 * map->getTileSize(), 2 * map->getTileSize()), glm::ivec2(SCREEN_X, SCREEN_Y), EXTRA_LARGE, RIGHT);
 	}
 	else if (level == 10) {
-		*nameStage = "MT.FUJI";
-		player->setPosition(glm::vec2(22 * map->getTileSize(), 21 * map->getTileSize()));
-		ballManager->addBall(glm::vec2(27 * map->getTileSize(), 5 * map->getTileSize()), glm::ivec2(SCREEN_X, SCREEN_Y), EXTRA_LARGE, 1);
-		ballManager->addBall(glm::vec2(18 * map->getTileSize(), 5 * map->getTileSize()), glm::ivec2(SCREEN_X, SCREEN_Y), EXTRA_LARGE, -1);
+		*nameStage = "BARCELONA";
+		player->setPosition(glm::vec2(20 * map->getTileSize(), 21 * map->getTileSize()));
+		ballManager->addBall(glm::vec2(22 * map->getTileSize(), 2 * map->getTileSize()), glm::ivec2(SCREEN_X, SCREEN_Y), EXTRA_LARGE, RIGHT);
+		ballManager->addBall(glm::vec2(3 * map->getTileSize(), 2 * map->getTileSize()), glm::ivec2(SCREEN_X, SCREEN_Y), EXTRA_LARGE, LEFT);
 	} else if (level == 11) {
 		*nameStage = "MT.FUJI";
 		player->setPosition(glm::vec2(22 * map->getTileSize(), 21 * map->getTileSize()));

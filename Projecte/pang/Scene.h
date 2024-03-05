@@ -45,7 +45,7 @@ private:
 	TexturedQuad* bground;
 	Texture scene;
 	Texture completedStage;
-	int level = 1;
+	int level = 10;
 	int vidas = 2;
 	bool hit = false;
 	string nameStage;
