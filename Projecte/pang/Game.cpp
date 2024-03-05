@@ -38,7 +38,7 @@ void Game::render()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	if(start) scene.render();
-	else menu->render();
+	else menu->render(menuSection);
 }
 
 void Game::keyPressed(int key)
@@ -58,11 +58,17 @@ void Game::keyPressed(int key)
 		menu->setPosIndex(posIndex);
 	}
 	if (key == GLFW_KEY_ENTER && start == false) { //start game
-		if(posIndex == 0) start = true;
-		else if (posIndex == 3) bPlay = false;
+		if (menuSection != 0) {
+			menuSection = 0;
+		}
+		else {
+			if (posIndex == 0) start = true;
+			else if (posIndex == 2) {
+				menuSection = 1;
+			}
+			else if (posIndex == 3) bPlay = false;
+		}
 	}
-
-
 
 	keys[key] = true;
 }

@@ -32,7 +32,8 @@ Menu::Menu()
 	sprite1->setPosition(glm::vec2(70.f, 200.f));
 	sprite2->setPosition(glm::vec2(510.f, 200.f));
 
-	scene.loadFromFile("images/menu.png", TEXTURE_PIXEL_FORMAT_RGBA);
+	menu.loadFromFile("images/menu.png", TEXTURE_PIXEL_FORMAT_RGBA);
+	credits.loadFromFile("images/credits.png", TEXTURE_PIXEL_FORMAT_RGBA);
 }
 
 Menu::~Menu()
@@ -72,10 +73,16 @@ void Menu::setPosIndex(int pos)
 	}
 }
 
-void Menu::render()
+void Menu::render(int n)
 {
 	ShaderProgramManager::instance().useShaderProgram();
-	bground->render(scene);
-	sprite1->render();
-	sprite2->render();
+
+	if (n == 0) {
+		bground->render(menu);
+		sprite1->render();
+		sprite2->render();
+	}
+		
+	else
+		bground->render(credits);
 }

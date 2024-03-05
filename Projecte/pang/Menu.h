@@ -12,7 +12,7 @@ public:
 	~Menu();
 
 	void init(const int& idScene);
-	void render();
+	void render(int n);
 	void update(int deltaTime);
 	void setPosIndex(int pos);
 
@@ -23,7 +23,8 @@ private:
 	TexturedQuad* bground;
 	Texture spritesheet;
 	glm::mat4 projection;
-	Texture scene;
+	Texture menu;
+	Texture credits;
 };
 
 #endif // _MENU_INCLUDE

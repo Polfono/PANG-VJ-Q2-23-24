@@ -41,6 +41,7 @@ public:
 private:
 	bool start;
 	int posIndex;
+	int menuSection = 0;
 	Menu* menu;
 	bool bPlay; // Continue to play game?
 	bool keys[GLFW_KEY_LAST+1]; // Store key states so that 
