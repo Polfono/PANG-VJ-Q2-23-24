@@ -111,8 +111,9 @@ void Scene::render()
 
 void Scene::nextLevel() {
 	level++;
-	if(level > 17) // end
+	if (level > 17) // end
 
+	map = NULL;
 	map = Level::instance().LoadMapLevel(level);
 	Level::instance().LoadMapConfig(level, map, &scene, player, ballManager, &nameStage);
 

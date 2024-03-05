@@ -43,7 +43,7 @@ private:
 	Text textRenderer;
 	TexturedQuad* bground;
 	Texture scene;
-	int level = 3;
+	int level = 1;
 	string nameStage;
 	int score = 0;
 

@@ -68,12 +68,14 @@ void Arpon::setTileMap(TileMap* tileMap)
 	map = tileMap;
 }
 
-void Arpon::setPosition(const glm::vec2& pos)
+bool Arpon::setPosition(const glm::vec2& pos)
 {
 	if (!bThrowing) {
-		posArpon = glm::vec2(pos.x +10, pos.y -168);
+		posArpon = glm::vec2(pos.x +12, pos.y -168);
 		sprite->setPosition(glm::vec2(float(tileMapDispl.x + posArpon.x), float(tileMapDispl.y + posArpon.y)));
+		return true;
 	}
+	return false;
 }
 
 bool Arpon::checkCollision(Ball* ball) {

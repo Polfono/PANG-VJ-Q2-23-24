@@ -24,6 +24,7 @@ public:
 	
 private:
 	bool bJumping;
+	int delayShoot = 0;
 	glm::ivec2 tileMapDispl, posPlayer;
 	int jumpAngle, startY;
 	Arpon arpon;

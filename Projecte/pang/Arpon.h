@@ -13,7 +13,7 @@ public:
 	void render();
 
 	void setTileMap(TileMap *tileMap);
-	void setPosition(const glm::vec2 &pos);
+	bool setPosition(const glm::vec2 &pos);
 	bool checkCollision(Ball* ball);
 
 private:
