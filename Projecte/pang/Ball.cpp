@@ -12,9 +12,9 @@
 // tamaño de la bola, tamaño de la bola en el spritesheet, posición en el spritesheet, velocidad
 
 std::map<BallSize, std::tuple<glm::ivec2, glm::vec2, glm::vec2, float>> sizeMap = {
-    {SMALL, {glm::ivec2(8, 8), glm::vec2(0.06, 0.05), glm::vec2(0.87, 0.12), 2.75f}},
-    {MEDIUM, {glm::ivec2(14, 14), glm::vec2(0.13, 0.1), glm::vec2(0.7, 0.1), 3.375f}},
-    {LARGE, {glm::ivec2(26, 26), glm::vec2(0.26, 0.186), glm::vec2(0.425, 0.05), 4.0f}},
+    {SMALL, {glm::ivec2(5, 5), glm::vec2(0.06, 0.05), glm::vec2(0.87, 0.12), 2.75f}},
+    {MEDIUM, {glm::ivec2(10, 10), glm::vec2(0.13, 0.1), glm::vec2(0.7, 0.1), 3.375f}},
+    {LARGE, {glm::ivec2(20, 20), glm::vec2(0.26, 0.186), glm::vec2(0.425, 0.05), 4.0f}},
     {EXTRA_LARGE, {glm::ivec2(40, 40), glm::vec2(0.4, 0.2857), glm::vec2(0.0, 0.0), 4.625f}}
 };
 
@@ -72,8 +72,9 @@ void Ball::split()
     if (size != 0)
     {
         BallSize newSize = BallSize(int(size) - 1);
-        ballManager->addBall(glm::vec2(posBall.x + get<0>(sizeMap[newSize])[0], posBall.y + 5), tileMapDispl, newSize, 1);
-        ballManager->addBall(glm::vec2(posBall.x, posBall.y + 5), tileMapDispl, newSize, -1);
+        int aux = get<0>(sizeMap[newSize])[0];
+        ballManager->addBall(glm::vec2(posBall.x + aux, posBall.y + aux/2), tileMapDispl, newSize, 1);
+        ballManager->addBall(glm::vec2(posBall.x, posBall.y + aux/2), tileMapDispl, newSize, -1);
     }
 	
     ballManager->removeBall(this);

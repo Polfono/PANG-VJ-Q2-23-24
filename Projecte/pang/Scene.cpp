@@ -66,6 +66,21 @@ bool Scene::update(int deltaTime)
 {
 	currentTime += deltaTime;
 
+	static bool wasNPressed = false;
+	if (Game::instance().getKey(GLFW_KEY_N) && !wasNPressed) {
+		wasNPressed = true;
+		nextLevel();
+	}
+	if(!Game::instance().getKey(GLFW_KEY_N)) wasNPressed = false;
+
+	static bool wasBPressed = false;
+	if (Game::instance().getKey(GLFW_KEY_B) && !wasBPressed && level > 1) {
+		level -= 2;
+		wasBPressed = true;
+		nextLevel();
+	}
+	if(!Game::instance().getKey(GLFW_KEY_B)) wasBPressed = false;
+
 	if (vidas < 0) {
 		// GAME OVER SCENE //
 		glClearColor(0.f, 0.f, 0.f, 1.0f);
@@ -210,10 +225,14 @@ void Scene::nextLevel() {
 	firstHit = true;
 
 	level++;
-	if (level > 17) // end
+	if (level > 17) { // 17 niveles
+		vidas = -1;
+		return;
+	}
 
 	map = NULL;
 	map = Level::instance().LoadMapLevel(level);
+	ballManager->clearBalls();
 	Level::instance().LoadMapConfig(level, map, &scene, player, ballManager, &nameStage);
 
 	timeLeft = 100;

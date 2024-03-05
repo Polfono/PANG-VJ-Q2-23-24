@@ -147,7 +147,7 @@ void Level::LoadMapConfig(int level, TileMap* map, Texture* scene, Player* playe
 	}
 	else if (level == 16) {
 		*nameStage = "ANTARTICA";
-		player->setPosition(glm::vec2(21 * map->getTileSize(), 2 * map->getTileSize()));
+		player->setPosition(glm::vec2(21 * map->getTileSize(), 3 * map->getTileSize()));
 		ballManager->addBall(glm::vec2(22 * map->getTileSize(), 13 * map->getTileSize()), glm::ivec2(SCREEN_X, SCREEN_Y), EXTRA_LARGE, RIGHT);
 		ballManager->addBall(glm::vec2(7 * map->getTileSize(), 3 * map->getTileSize()), glm::ivec2(SCREEN_X, SCREEN_Y), EXTRA_LARGE, LEFT);
 	}
