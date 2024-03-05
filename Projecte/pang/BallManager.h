@@ -21,6 +21,7 @@ public:
 	bool updateBalls();
 	void renderBalls();
 	vector<Ball*> getBalls();
+	void clearBalls();
 
 	void setTileMap(TileMap* tileMap);
 

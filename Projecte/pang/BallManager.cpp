@@ -56,3 +56,11 @@ vector<Ball*> BallManager::getBalls()
 	return balls;
 }
 
+void BallManager::clearBalls() {
+	for (auto& ball : balls)
+	{
+		delete ball;
+	}
+	balls.clear();
+}
+

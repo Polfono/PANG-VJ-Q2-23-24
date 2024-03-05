@@ -16,19 +16,29 @@ class Player
 
 public:
 	void init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram);
-	void update(int deltaTime);
+	bool update(int deltaTime);
+	void die();
 	void render();
 	bool checkCollision(Ball* ball);
+	void reset();
+
 	
 	void setTileMap(TileMap *tileMap);
 	void setPosition(const glm::vec2 &pos);
 	
 private:
 	int delayShoot = 0;
+	float speed = -4.5f;
+
+	int delayDead = 30;
+	bool fDead = true;
+	bool fBounceDead = true;
+	int dDead;
 	glm::ivec2 tileMapDispl, posPlayer;
 	Arpon arpon;
 	Texture spritesheet;
 	Sprite *sprite;
+	Sprite *spriteDead;
 	TileMap *map;
 
 };

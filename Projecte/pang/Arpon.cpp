@@ -89,3 +89,9 @@ bool Arpon::checkCollision(Ball* ball) {
 	}
 	return false;
 }
+
+void Arpon::reset() {
+	bThrowing = false;
+	altura = 0;
+	sprite->changeAnimation(0);
+}

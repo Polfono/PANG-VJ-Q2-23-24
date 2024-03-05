@@ -62,15 +62,60 @@ void Scene::init()
 void Scene::update(int deltaTime)
 {
 	currentTime += deltaTime;
-	player->update(deltaTime);
-	if (!ballManager->updateBalls()) nextLevel();
 
-	// Actualizar timer
-	if (currentTime / 1000 >= 1) {
-		if(timeLeft > 0) timeLeft--;
-		currentTime = 0;
+	if (vidas == 0) {
+		// GAME OVER SCENE //
+
+	}
+	
+	if(timeLeft == 0) {
+		// TIME OVER SCENE //
+		hit = true;
+	}
+
+	if (!hit) {
+		if (firstHit) { // Si es la primera vez que hit es false
+			hitTime += deltaTime;
+
+			// READY SCENE //
+
+			if (hitTime >= 2000) { // Esperar 2 segundos
+				firstHit = false; // Después de los 2 segundos, ya no es la primera vez que hit es false
+				hitTime = 0; // Reiniciar el contador de tiempo
+			}
+		}
+		else {
+			if (player->update(deltaTime)) {
+				hit = true;
+				hitTime = 0; // Reiniciar el contador de tiempo cuando hit es true
+			}
+
+			if (!ballManager->updateBalls()) nextLevel();
+
+			// Actualizar timer
+			if (currentTime / 1000 >= 1) {
+				if (timeLeft > 0) timeLeft--;
+				currentTime = 0;
+			}
+		}
+	}
+	else {
+		hitTime += deltaTime;
+		player->die();
+		if (hitTime >= 3000) { // 3000 milisegundos son 3 segundos
+			firstHit = true;
+			hitTime = 0;
+			hit = false;
+			timeLeft = 100;
+			--vidas;
+			player->reset();
+			ballManager->clearBalls();
+			Level::instance().LoadMapConfig(level, map, &scene, player, ballManager, &nameStage);
+		}
 	}
 }
+
+
 
 void Scene::render()
 {
@@ -86,8 +131,13 @@ void Scene::render()
 	// Render Background
 	bground->render(scene);
 
+	// Render TileMap
 	map->render();
+
+	// Render Player
 	player->render();
+
+	// Render Balls
 	ballManager->renderBalls();
 
 	// Render Text
@@ -107,9 +157,14 @@ void Scene::render()
 	if (score < 10) scoreText += "0";
 	scoreText += std::to_string(score);
 	textRenderer.render(scoreText, glm::vec2(50, 350), 17, glm::vec4(1, 1, 1, 1));
+
+	textRenderer.render("Vidas: " + std::to_string(vidas), glm::vec2(50, 375), 17, glm::vec4(1, 1, 1, 1));
 }
 
 void Scene::nextLevel() {
+	hitTime = 0;
+	firstHit = true;
+
 	level++;
 	if (level > 17) // end
 
@@ -117,13 +172,18 @@ void Scene::nextLevel() {
 	map = Level::instance().LoadMapLevel(level);
 	Level::instance().LoadMapConfig(level, map, &scene, player, ballManager, &nameStage);
 
-	timeLeft = 90;
+	timeLeft = 100;
 }
 
 void Scene::setLevel(int level) {
+	hitTime = 0;
+	firstHit = true;
+
 	this->level = level;
+
+	map = NULL;
 	map = Level::instance().LoadMapLevel(level);
 	Level::instance().LoadMapConfig(level, map, &scene, player, ballManager, &nameStage);
 
-	timeLeft = 90;
+	timeLeft = 100;
 }

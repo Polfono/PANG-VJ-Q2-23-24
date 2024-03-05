@@ -38,14 +38,18 @@ private:
 	BallManager* ballManager = BallManager::instance();
 	ShaderProgram texProgram;
 	glm::mat4 projection;
-	int timeLeft = 90;
+	int timeLeft = 100;
 	float currentTime = 0.0f; 
 	Text textRenderer;
 	TexturedQuad* bground;
 	Texture scene;
-	int level = 2;
+	int level = 1;
+	int vidas = 3;
+	bool hit = false;
 	string nameStage;
 	int score = 0;
+	int hitTime = 0;
+	bool firstHit = true;
 
 };
 

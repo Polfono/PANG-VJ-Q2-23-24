@@ -8,7 +8,7 @@ void Game::init()
 {
 	ShaderProgramManager::instance().init();
 
-	start = true;
+	start = false;
 	bPlay = true;
 	posIndex = 0;
 
@@ -57,7 +57,7 @@ void Game::keyPressed(int key)
 		posIndex = (posIndex) % 4;
 		menu->setPosIndex(posIndex);
 	}
-	if (key == GLFW_KEY_ENTER) { //start game
+	if (key == GLFW_KEY_ENTER && start == false) { //start game
 		if(posIndex == 0) start = true;
 		else if (posIndex == 3) bPlay = false;
 	}

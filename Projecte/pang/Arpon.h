@@ -12,6 +12,7 @@ public:
 	void update();
 	void render();
 	void disparar();
+	void reset();
 
 	void setTileMap(TileMap *tileMap);
 	bool setPosition(const glm::vec2 &pos);

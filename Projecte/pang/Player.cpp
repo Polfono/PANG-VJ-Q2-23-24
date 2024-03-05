@@ -7,7 +7,7 @@
 
 enum PlayerAnims
 {
-	STAND_LEFT, STAND_RIGHT, MOVE_LEFT, MOVE_RIGHT, SHOOT_LEFT, SHOOT_RIGHT
+	STAND_LEFT, STAND_RIGHT, MOVE_LEFT, MOVE_RIGHT, SHOOT_LEFT, SHOOT_RIGHT, DEAD_LEFT, DEAD_RIGHT
 };
 
 
@@ -15,7 +15,7 @@ void Player::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 {
 	spritesheet.loadFromFile("images/player.png", TEXTURE_PIXEL_FORMAT_RGBA);
 	sprite = Sprite::createSprite(glm::ivec2(32, 32), glm::vec2(0.08, 0.16), &spritesheet, &shaderProgram);
-	sprite->setNumberAnimations(6);
+	sprite->setNumberAnimations(8);
 		
 		sprite->setAnimationSpeed(STAND_RIGHT, SPRITE_SPEED);
 		sprite->addKeyframe(STAND_RIGHT, glm::vec2(0.025f, 0.53f));
@@ -28,6 +28,12 @@ void Player::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 
 		sprite->setAnimationSpeed(SHOOT_LEFT, SPRITE_SPEED);
 		sprite->addKeyframe(SHOOT_LEFT, glm::vec2(0.89f - 0.086f, 0.53f));
+
+		sprite->setAnimationSpeed(DEAD_LEFT, SPRITE_SPEED);
+		sprite->addKeyframe(DEAD_LEFT, glm::vec2(0.025f + 2*0.086f, 0.53f));
+
+		sprite->setAnimationSpeed(DEAD_RIGHT, SPRITE_SPEED);
+		sprite->addKeyframe(DEAD_RIGHT, glm::vec2(0.025f + 0.282f, 0.53f));
 
 		
 		sprite->setAnimationSpeed(MOVE_LEFT, SPRITE_SPEED);
@@ -45,12 +51,19 @@ void Player::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 	arpon.init(tileMapPos, shaderProgram);
 }
 
-void Player::update(int deltaTime)
+bool Player::update(int deltaTime)
 {
 	sprite->update(deltaTime);
 
-	posPlayer.y += FALL_STEP;
+	// Comprueba colisiones con las bolas
+	for (Ball* ball : BallManager::instance()->getBalls()) {
+		if (checkCollision(ball)) {
+			arpon.reset();
+			return true;
+		}
+	}
 
+	posPlayer.y += FALL_STEP;
 	// Si esta tocando el suelo y se pulsa por primera vez S se dispara y anima
 	static bool wasSPressed = false;
 	if (map->collisionMoveDown(posPlayer, glm::ivec2(32, 32), &posPlayer.y) && !wasSPressed && Game::instance().getKey(GLFW_KEY_S) && arpon.setPosition(glm::vec2(posPlayer.x, posPlayer.y))) {
@@ -100,6 +113,38 @@ void Player::update(int deltaTime)
 	arpon.update();
 
 	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posPlayer.x), float(tileMapDispl.y + posPlayer.y)));
+	return false;
+}
+
+void Player::die()
+{
+	if (fDead)
+	{
+		delayDead = 30;
+		fDead = false;
+		if (posPlayer.x > 180) dDead = -1;
+		else dDead = 1;
+	}
+	if (--delayDead < 0)
+	{
+		if(dDead == -1) sprite->changeAnimation(DEAD_LEFT);
+		else sprite->changeAnimation(DEAD_RIGHT);
+
+		speed += GRAVEDAD * 1.8f;
+		posPlayer.y += int(round(speed));
+
+
+		// Si toca el suelo, rebota
+		if (fBounceDead && map->collisionMoveDown(posPlayer, glm::ivec2(32, 32), &posPlayer.y))
+		{
+			speed = -3.0f;
+			fBounceDead = false;
+		}
+
+		posPlayer.x += dDead;
+
+		sprite->setPosition(glm::vec2(float(tileMapDispl.x + posPlayer.x), float(tileMapDispl.y + posPlayer.y)));
+	}
 }
 
 void Player::render()
@@ -122,17 +167,29 @@ void Player::setPosition(const glm::vec2 &pos)
 
 bool Player::checkCollision(Ball* ball) {
 	glm::ivec2 playerSize = glm::ivec2(32, 32);
-	glm::ivec2 ballSize = ball->getSize();
-	glm::vec2 playerPos = glm::vec2(posPlayer.x, posPlayer.y);
+	glm::vec2 playerPos = glm::vec2(posPlayer.x + 48, posPlayer.y +26);
+	float ballRadius = ball->getSize()[1]/2;
 	glm::vec2 ballPos = ball->getPosition();
+	ballPos = glm::vec2(ballPos.x + ballRadius, ballPos.y + ballRadius);
 
-	if (playerPos.x < ballPos.x + ballSize.x &&
-		playerPos.x + playerSize.x > ballPos.x &&
-		playerPos.y < ballPos.y + ballSize.y &&
-		playerSize.y + playerPos.y > ballPos.y) {
+	// Calcula la distancia entre el centro del jugador y el centro de la bola
+	float distX = playerPos.x - ballPos.x;
+	float distY = playerPos.y - ballPos.y;
+
+	float distance = sqrt((distX * distX) + (distY * distY));
+
+	// Si la distancia es menor que el radio de la bola, hay una colisión
+	if (distance < ballRadius + 8) {
 		return true;
 	}
 	return false;
+}
+
+void Player::reset() {
+	fDead = true;
+	fBounceDead = true;
+	speed = -4.5f;
+	sprite->changeAnimation(0);
 }
 
 
