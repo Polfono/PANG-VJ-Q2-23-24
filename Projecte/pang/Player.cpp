@@ -5,7 +5,6 @@
 #include "Game.h"
 #include "Constants.h"
 
-
 enum PlayerAnims
 {
 	STAND_LEFT, STAND_RIGHT, MOVE_LEFT, MOVE_RIGHT, SHOOT_LEFT, SHOOT_RIGHT
@@ -14,7 +13,6 @@ enum PlayerAnims
 
 void Player::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 {
-	bJumping = false;
 	spritesheet.loadFromFile("images/player.png", TEXTURE_PIXEL_FORMAT_RGBA);
 	sprite = Sprite::createSprite(glm::ivec2(32, 32), glm::vec2(0.08, 0.16), &spritesheet, &shaderProgram);
 	sprite->setNumberAnimations(6);
@@ -51,20 +49,22 @@ void Player::update(int deltaTime)
 {
 	sprite->update(deltaTime);
 
-	static bool wasSPressed = false;
+	posPlayer.y += FALL_STEP;
 
-	// Si se pulsa la tecla S, se asigna posicion al arpon y se cambia la animacion
-	if (!wasSPressed && Game::instance().getKey(GLFW_KEY_S) && arpon.setPosition(glm::vec2(posPlayer.x, posPlayer.y))) {
+	// Si esta tocando el suelo y se pulsa por primera vez S se dispara y anima
+	static bool wasSPressed = false;
+	if (map->collisionMoveDown(posPlayer, glm::ivec2(32, 32), &posPlayer.y) && !wasSPressed && Game::instance().getKey(GLFW_KEY_S) && arpon.setPosition(glm::vec2(posPlayer.x, posPlayer.y))) {
 		if (sprite->animation() == MOVE_LEFT || sprite->animation() == STAND_LEFT)
 			sprite->changeAnimation(SHOOT_LEFT);
 		else if (sprite->animation() == MOVE_RIGHT || sprite->animation() == STAND_RIGHT)
 			sprite->changeAnimation(SHOOT_RIGHT);
 
 		delayShoot = 5;
+		arpon.disparar();
 	}
-
 	wasSPressed = Game::instance().getKey(GLFW_KEY_S);
 
+	// Si acaba de disparar, se puede mover
 	if (--delayShoot < 0)
 	{
 		if (Game::instance().getKey(GLFW_KEY_LEFT))
@@ -96,30 +96,9 @@ void Player::update(int deltaTime)
 			else if (sprite->animation() == MOVE_RIGHT || sprite->animation() == SHOOT_RIGHT)
 				sprite->changeAnimation(STAND_RIGHT);
 		}
-
-		if (bJumping)
-		{
-			jumpAngle += JUMP_ANGLE_STEP;
-			if (jumpAngle == 180)
-			{
-				bJumping = false;
-				posPlayer.y = startY;
-			}
-			else
-			{
-				posPlayer.y = int(startY - 96 * sin(3.14159f * jumpAngle / 180.f));
-				if (jumpAngle > 90)
-					bJumping = !map->collisionMoveDown(posPlayer, glm::ivec2(32, 32), &posPlayer.y);
-			}
-		}
-		else
-		{
-			posPlayer.y += FALL_STEP;
-			map->collisionMoveDown(posPlayer, glm::ivec2(32, 32), &posPlayer.y);
-		}
 	}
-	
 	arpon.update();
+
 	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posPlayer.x), float(tileMapDispl.y + posPlayer.y)));
 }
 
@@ -139,6 +118,21 @@ void Player::setPosition(const glm::vec2 &pos)
 {
 	posPlayer = pos;
 	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posPlayer.x), float(tileMapDispl.y + posPlayer.y)));
+}
+
+bool Player::checkCollision(Ball* ball) {
+	glm::ivec2 playerSize = glm::ivec2(32, 32);
+	glm::ivec2 ballSize = ball->getSize();
+	glm::vec2 playerPos = glm::vec2(posPlayer.x, posPlayer.y);
+	glm::vec2 ballPos = ball->getPosition();
+
+	if (playerPos.x < ballPos.x + ballSize.x &&
+		playerPos.x + playerSize.x > ballPos.x &&
+		playerPos.y < ballPos.y + ballSize.y &&
+		playerSize.y + playerPos.y > ballPos.y) {
+		return true;
+	}
+	return false;
 }
 
 

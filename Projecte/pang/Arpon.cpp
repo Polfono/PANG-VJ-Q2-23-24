@@ -23,14 +23,6 @@ void Arpon::init(const glm::ivec2& tileMapPos, ShaderProgram& shaderProgram)
 
 void Arpon::update()
 {
-	static bool wasSPressed = false;
-
-	if (Game::instance().getKey(GLFW_KEY_S) && !wasSPressed) {  // S is newly pressed
-		bThrowing = true;  // Toggle throwing state
-	}
-
-	wasSPressed = Game::instance().getKey(GLFW_KEY_S);
-
 	if (bThrowing) {
 		altura += 2;
 		sprite->changeAnimation(sprite->animation() + 1);
@@ -54,6 +46,11 @@ void Arpon::update()
 		}
 	}
 	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posArpon.x), float(tileMapDispl.y + posArpon.y)));
+}
+
+void Arpon::disparar()
+{
+	bThrowing = true;
 }
 
 void Arpon::render()

@@ -18,15 +18,14 @@ public:
 	void init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram);
 	void update(int deltaTime);
 	void render();
+	bool checkCollision(Ball* ball);
 	
 	void setTileMap(TileMap *tileMap);
 	void setPosition(const glm::vec2 &pos);
 	
 private:
-	bool bJumping;
 	int delayShoot = 0;
 	glm::ivec2 tileMapDispl, posPlayer;
-	int jumpAngle, startY;
 	Arpon arpon;
 	Texture spritesheet;
 	Sprite *sprite;

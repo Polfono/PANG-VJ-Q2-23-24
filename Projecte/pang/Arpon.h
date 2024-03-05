@@ -11,6 +11,7 @@ public:
 	void init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram);
 	void update();
 	void render();
+	void disparar();
 
 	void setTileMap(TileMap *tileMap);
 	bool setPosition(const glm::vec2 &pos);
