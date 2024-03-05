@@ -241,6 +241,7 @@ void Scene::reset() {
 	score = 0;
 	hit = false;
 
+	player->reset();
 	ballManager->clearBalls();
 	setLevel(1);
 }
