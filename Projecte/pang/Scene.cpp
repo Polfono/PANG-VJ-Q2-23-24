@@ -36,6 +36,9 @@ void Scene::init()
 	glm::vec2 texCoords[2] = { glm::vec2(0.f, 0.f), glm::vec2(1.f, 1.f) }; // Texture coordinates
 	bground = TexturedQuad::createTexturedQuad(geom, texCoords, ShaderProgramManager::instance().getShaderProgram());
 
+	// Completed Stage
+	completedStage.loadFromFile("images/stageCompleted.png", TEXTURE_PIXEL_FORMAT_RGBA);
+
 	// Init Player
 	player = new Player();
 	player->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
@@ -77,7 +80,7 @@ bool Scene::update(int deltaTime)
 
 	if (!hit) {
 		if (firstHit) { // Si es la primera vez que hit es false
-			hitTime += deltaTime;
+			if(!changeStage) hitTime += deltaTime;
 
 			// READY SCENE //
 
@@ -90,9 +93,17 @@ bool Scene::update(int deltaTime)
 			if (player->update(deltaTime)) {
 				hit = true;
 				hitTime = 0; // Reiniciar el contador de tiempo cuando hit es true
+				stageTime = currentTime;
 			}
 
-			if (!ballManager->updateBalls()) nextLevel();
+			if (!ballManager->updateBalls()) {
+				changeStage = true;
+				stageTime = currentTime;
+				scoreTime = timeLeft * 100;
+				score += scoreTime;
+
+				nextLevel();
+			} 
 
 			// Actualizar timer
 			if (currentTime / 1000 >= 1) {
@@ -122,16 +133,17 @@ bool Scene::update(int deltaTime)
 
 void Scene::render()
 {
-	if (vidas >= 0) {
-		glm::mat4 modelview;
+	glm::mat4 modelview;
 
-		texProgram.use();
-		texProgram.setUniformMatrix4f("projection", projection);
-		texProgram.setUniform4f("color", 1.0f, 1.0f, 1.0f, 1.0f);
-		modelview = glm::mat4(0.5f);
-		texProgram.setUniformMatrix4f("modelview", modelview);
-		texProgram.setUniform2f("texCoordDispl", 0.f, 0.f);
+	texProgram.use();
+	texProgram.setUniformMatrix4f("projection", projection);
+	texProgram.setUniform4f("color", 1.0f, 1.0f, 1.0f, 1.0f);
+	modelview = glm::mat4(0.5f);
+	texProgram.setUniformMatrix4f("modelview", modelview);
+	texProgram.setUniform2f("texCoordDispl", 0.f, 0.f);
 
+	if (vidas >= 0 && !changeStage) {
+		
 		// Render Background
 		bground->render(scene);
 
@@ -167,6 +179,16 @@ void Scene::render()
 		if (!hit && firstHit && vidas >= 0) {
 			if (hitTime / 333 % 2 == 0)
 				textRenderer.render("READY", glm::vec2(250, 200), 32, glm::vec4(1, 1, 1, 1));
+		}
+	}
+	else if (changeStage) {
+		bground->render(completedStage);
+
+		textRenderer.render("STAGE " + std::to_string(level - 1) + " COMPLETED", glm::vec2(150, 330), 20, glm::vec4(1, 1, 1, 1));
+		textRenderer.render("TIME BONUS    " + std::to_string(scoreTime) + " PTS.", glm::vec2(130, 380), 17, glm::vec4(1, 1, 1, 1));
+		
+		if (currentTime - stageTime >= 2000) {
+			changeStage = false;
 		}
 	}
 	else {

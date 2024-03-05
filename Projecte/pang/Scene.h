@@ -44,6 +44,7 @@ private:
 	Text textRenderer;
 	TexturedQuad* bground;
 	Texture scene;
+	Texture completedStage;
 	int level = 1;
 	int vidas = 2;
 	bool hit = false;
@@ -51,6 +52,9 @@ private:
 	int score = 0;
 	int hitTime = 0;
 	bool firstHit = true;
+	bool changeStage = false;
+	int stageTime;
+	int scoreTime;
 
 };
 
