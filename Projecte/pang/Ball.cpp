@@ -37,8 +37,8 @@ void Ball::init(const glm::ivec2& tileMapPos, ShaderProgram& shaderProgram, Ball
 
 void Ball::update()
 {
-    speed += GRAVEDAD;
-    posBall.y += int(round(speed));
+    //speed += GRAVEDAD;
+    //posBall.y += int(round(speed));
 
     // Techo
     if (map->collisionMoveUp(posBall, get<0>(sizeMap[size]), &posBall.y))
@@ -53,7 +53,7 @@ void Ball::update()
         speed = max(-get<3>(sizeMap[size]), -sqrt(2 * GRAVEDAD * (posBall.y - 15))); // 15 es la altura maxima
     }
 
-    posBall.x += direction;
+    //posBall.x += direction;
 
     // Paredes
     if (map->collisionMoveLeft(posBall, get<0>(sizeMap[size])) || map->collisionMoveRight(posBall, get<0>(sizeMap[size])))

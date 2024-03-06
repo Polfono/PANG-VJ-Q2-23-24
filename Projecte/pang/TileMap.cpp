@@ -227,6 +227,29 @@ bool TileMap::collisionMoveDownPlayer(const glm::ivec2& pos, const glm::ivec2& s
 	return false;
 }
 
+bool TileMap::collisionMoveDownLadder(const glm::ivec2& pos, const glm::ivec2& size, int* posY) const
+{
+	int x0, x1, y;
+
+	x0 = pos.x / tileSize;
+	x1 = (pos.x + size.x - 1) / tileSize;
+	y = (pos.y + size.y - 1) / tileSize;
+	for (int x = x0; x <= x1; x++)
+	{
+		int block = map[y * mapSize.x + x];
+		if (block != 0 && block != 33 && block != 34 && block != 35 && block != 41 && block != 42 && block != 43 && block != 49 && block != 50 && block != 51)
+		{
+			if (*posY - tileSize * y + size.y <= 8)
+			{
+				*posY = tileSize * y - size.y;
+				return true;
+			}
+		}
+	}
+
+	return false;
+}
+
 bool TileMap::collisionMoveUp(const glm::ivec2& pos, const glm::ivec2& size, int *posY) const
 {
 	int x0, x1, y;
@@ -274,6 +297,30 @@ bool TileMap::pointCollision(const glm::ivec2& pos, const glm::ivec2& size) cons
 	return false;
 }	
 
+bool TileMap::inLadder(const glm::ivec2& pos, const glm::ivec2& size, int* posX) const
+{
+	int x0, x1, y0, y1;
+
+	x0 = pos.x / tileSize;
+	x1 = (pos.x + size.x - 1) / tileSize;
+	y0 = pos.y / tileSize;
+	y1 = (pos.y + size.y - 1) / tileSize;
+	for (int x = x0; x <= x1; x++)
+	{
+		for (int y = y0; y <= y1; y++)
+		{
+			int block = map[y * mapSize.x + x];
+			if (block == 34 || block == 42 || block == 50)
+			{
+				*posX = tileSize * (x + 1) - size.x / 2;
+				return true;
+			}
+				
+		}
+	}
+
+	return false;
+}
 
 
 

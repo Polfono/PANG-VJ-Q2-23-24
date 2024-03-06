@@ -29,6 +29,7 @@ public:
 private:
 	int delayShoot = 0;
 	float speed = 0;
+	bool subiendo = false;
 
 	int delayDead = 30;
 	bool fDead = true;
