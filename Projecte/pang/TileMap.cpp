@@ -157,7 +157,7 @@ bool TileMap::collisionMoveLeft(const glm::ivec2 &pos, const glm::ivec2 &size) c
 	for(int y=y0; y<=y1; y++)
 	{
 		int block = map[y * mapSize.x + x];
-		if(block != 0 && block != 33 && block != 34 && block != 35 && block != 41 && block != 42 && block != 43 && block != 49 && block != 50 && block != 51)
+		if(block != 0 && block != 33 && block != 34 && block != 35)
 			return true;
 	}
 	
@@ -174,7 +174,7 @@ bool TileMap::collisionMoveRight(const glm::ivec2 &pos, const glm::ivec2 &size) 
 	for(int y=y0; y<=y1; y++)
 	{
 		int block = map[y * mapSize.x + x];
-		if (block != 0 && block != 33 && block != 34 && block != 35 && block != 41 && block != 42 && block != 43 && block != 49 && block != 50 && block != 51)
+		if (block != 0 && block != 33 && block != 34 && block != 35)
 			return true;
 	}
 	

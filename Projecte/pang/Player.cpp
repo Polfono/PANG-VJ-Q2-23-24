@@ -84,7 +84,7 @@ bool Player::update(int deltaTime)
 	wasDOWNpressed = Game::instance().getKey(GLFW_KEY_DOWN);
 
 	int posLadder;
-	if (!delayClimb && map->inLadder(glm::ivec2(posPlayer.x, posPlayer.y - 1), glm::ivec2(30, 34), &posLadder)) // ESTAS EN ESCALERA
+	if (!delayClimb && map->inLadder(glm::ivec2(posPlayer.x, posPlayer.y+1), glm::ivec2(30, 32), &posLadder)) // ESTAS EN ESCALERA
 	{
 		if (Game::instance().getKey(GLFW_KEY_UP)) // QUIERES SUBIR
 		{
