@@ -231,6 +231,8 @@ void Scene::nextLevel() {
 	}
 
 	map = NULL;
+	player->reset();
+	hit = false;
 	map = Level::instance().LoadMapLevel(level);
 	ballManager->clearBalls();
 	Level::instance().LoadMapConfig(level, map, &scene, player, ballManager, &nameStage);
@@ -245,6 +247,8 @@ void Scene::setLevel(int level) {
 	this->level = level;
 
 	map = NULL;
+	player->reset();
+	hit = false;
 	map = Level::instance().LoadMapLevel(level);
 	Level::instance().LoadMapConfig(level, map, &scene, player, ballManager, &nameStage);
 
