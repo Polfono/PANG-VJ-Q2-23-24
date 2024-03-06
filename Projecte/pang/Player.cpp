@@ -15,7 +15,7 @@ void Player::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 {
 	spritesheet.loadFromFile("images/player.png", TEXTURE_PIXEL_FORMAT_RGBA);
 	sprite = Sprite::createSprite(glm::ivec2(30, 32), glm::vec2(0.1, 0.25), &spritesheet, &shaderProgram);
-	sprite->setNumberAnimations(12);
+	sprite->setNumberAnimations(13);
 		
 		sprite->setAnimationSpeed(STAND_RIGHT, SPRITE_SPEED);
 		sprite->addKeyframe(STAND_RIGHT, glm::vec2(0.0f, 0.5f));
@@ -39,13 +39,13 @@ void Player::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 		sprite->addKeyframe(CLIMB1, glm::vec2(0.0f, 0.25f));
 
 		sprite->setAnimationSpeed(CLIMB2, SPRITE_SPEED);
-		sprite->addKeyframe(CLIMB2, glm::vec2(0.1f, 0.25f));
+		sprite->addKeyframe(CLIMB2, glm::vec2(0.2f, 0.25f));
 
 		sprite->setAnimationSpeed(CLIMB3, SPRITE_SPEED);
-		sprite->addKeyframe(CLIMB3, glm::vec2(0.2f, 0.25f));
+		sprite->addKeyframe(CLIMB3, glm::vec2(0.1f, 0.25f));
 
 		sprite->setAnimationSpeed(CLIMB4, SPRITE_SPEED);
-		sprite->addKeyframe(CLIMB4, glm::vec2(0.3f, 0.25f));
+		sprite->addKeyframe(CLIMB4, glm::vec2(0.2f, 0.25f));
 
 		
 		sprite->setAnimationSpeed(MOVE_LEFT, SPRITE_SPEED);
@@ -74,42 +74,83 @@ bool Player::update(int deltaTime)
 			return true;
 		}
 	}
+	
+	static bool wasUPpressed = false;
+	static bool wasDOWNpressed = false;
+	if(!wasUPpressed && !wasDOWNpressed) delayClimb = false;
+	wasUPpressed = Game::instance().getKey(GLFW_KEY_UP);
+	wasDOWNpressed = Game::instance().getKey(GLFW_KEY_DOWN);
 
 	int posLadder;
-	if (map->inLadder(glm::ivec2(posPlayer.x, posPlayer.y -7), glm::ivec2(32, 40), &posLadder)) // ESTAS EN ESCALERA
+	if (!delayClimb && map->inLadder(glm::ivec2(posPlayer.x, posPlayer.y - 1), glm::ivec2(30, 34), &posLadder)) // ESTAS EN ESCALERA
 	{
-		
 		if (Game::instance().getKey(GLFW_KEY_UP)) // QUIERES SUBIR
 		{
-			sprite->changeAnimation(8 + (posPlayer.y / 10) % 3);
-			posPlayer.x = posLadder-2;
+			sprite->changeAnimation(8 + (posPlayer.y / 10) % 4);
 			posPlayer.y -= 2;
 			subiendo = true;
-			if (!map->inLadder(posPlayer, glm::ivec2(32, 32), &posLadder)) { // ACABAS DE SUBIR
+			if (!map->inLadder(glm::ivec2(posPlayer.x, posPlayer.y), glm::ivec2(30, 32), &posLadder)) { // ACABAS DE SUBIR
+				delayClimb = true;
 				subiendo = false;
+				if (lastDir) sprite->changeAnimation(STAND_RIGHT);
+				else sprite->changeAnimation(STAND_LEFT);
+			} // ACABAS DE SUBIR POR AIRE
+			else if (map->onlyAir(glm::ivec2(posPlayer.x + 10, posPlayer.y + 16), glm::ivec2(1, 16))) {
+				delayClimb = true;
+				subiendo = false;
+				if (lastDir) sprite->changeAnimation(STAND_RIGHT);
+				else sprite->changeAnimation(STAND_LEFT);
 			}
-				
+			else {
+				posPlayer.x = posLadder - 4;
+			}
 		}
 		else if (Game::instance().getKey(GLFW_KEY_DOWN)) // QUIERES BAJAR
 		{
-			sprite->changeAnimation(8 + (posPlayer.y/10) % 3);
+			sprite->changeAnimation(8 + (posPlayer.y / 10) % 4);
 			posPlayer.y += 2;
-			posPlayer.x = posLadder-2;
 			subiendo = true;
 			// ACABAS DE BAJAR
 			if (map->collisionMoveDownLadder(glm::ivec2(posPlayer.x + 14, posPlayer.y), glm::ivec2(2, 32), &posPlayer.y))
 			{
+				if (lastDir) sprite->changeAnimation(STAND_RIGHT);
+				else sprite->changeAnimation(STAND_LEFT);
+				delayClimb = true;
 				posPlayer.y -= 2;
 				subiendo = false;
+			} // DEJAS DE ESTAR EN UNA ESCALERA
+			else if (!map->inLadder(glm::ivec2(posPlayer.x, posPlayer.y -1), glm::ivec2(30, 34), &posLadder)) {
+				subiendo = false;
+				delayClimb = true;
+				if (lastDir) sprite->changeAnimation(STAND_RIGHT);
+				else sprite->changeAnimation(STAND_LEFT);
+			}//ACABAS DE BAJAR POR AIRE
+			else if (map->onlyAir(glm::ivec2(posPlayer.x + 10, posPlayer.y + 16), glm::ivec2(1, 16))) {
+				delayClimb = true;
+				subiendo = false;
+				if (lastDir) sprite->changeAnimation(STAND_RIGHT);
+				else sprite->changeAnimation(STAND_LEFT);
+			}
+			else {
+				posPlayer.x = posLadder - 4;
 			}
 		}
 	}
 
+	// Si no esta en una escalera se puede caer
+	int aux = 0; int* temp = &aux;
 	if (!subiendo) {
-		posPlayer.y += FALL_STEP;
-		// Si esta tocando el suelo y se pulsa por primera vez S se dispara y anima
+		speed += 0.2f;
+		posPlayer.y += int(round(speed));
+		temp = &posPlayer.y;
+	}
+
+	// Si esta tocando el suelo y se pulsa por primera vez S se dispara y anima
+	
+	if (map->collisionMoveDownPlayer(posPlayer, glm::ivec2(30, 32), temp)) {
+		speed = 0;
 		static bool wasSPressed = false;
-		if (map->collisionMoveDownPlayer(posPlayer, glm::ivec2(30, 32), &posPlayer.y) && !wasSPressed && Game::instance().getKey(GLFW_KEY_S) && arpon.setPosition(glm::vec2(posPlayer.x, posPlayer.y))) {
+		if (!wasSPressed && Game::instance().getKey(GLFW_KEY_S) && arpon.setPosition(glm::vec2(posPlayer.x, posPlayer.y))) {
 			if (sprite->animation() == MOVE_LEFT || sprite->animation() == STAND_LEFT)
 				sprite->changeAnimation(SHOOT_LEFT);
 			else if (sprite->animation() == MOVE_RIGHT || sprite->animation() == STAND_RIGHT)
@@ -119,42 +160,48 @@ bool Player::update(int deltaTime)
 			arpon.disparar();
 		}
 		wasSPressed = Game::instance().getKey(GLFW_KEY_S);
+	}
+	
 
-		// Si acaba de disparar, se puede mover
-		if (--delayShoot < 0)
+	// Si acaba de disparar, se puede mover
+	if (!subiendo && --delayShoot < 0)
+	{
+
+		if (Game::instance().getKey(GLFW_KEY_RIGHT))
 		{
-			if (Game::instance().getKey(GLFW_KEY_LEFT))
+			if (sprite->animation() != MOVE_RIGHT)
+				sprite->changeAnimation(MOVE_RIGHT);
+
+			lastDir = true;
+			posPlayer.x += 2;
+			if (map->collisionMoveRight(posPlayer, glm::ivec2(27, 32)))
 			{
-				if (sprite->animation() != MOVE_LEFT)
-					sprite->changeAnimation(MOVE_LEFT);
 				posPlayer.x -= 2;
-				if (map->collisionMoveLeft(posPlayer, glm::ivec2(30, 32)))
-				{
-					posPlayer.x += 2;
-					sprite->changeAnimation(STAND_LEFT);
-				}
-			}
-			else if (Game::instance().getKey(GLFW_KEY_RIGHT))
-			{
-				if (sprite->animation() != MOVE_RIGHT)
-					sprite->changeAnimation(MOVE_RIGHT);
-				posPlayer.x += 2;
-				if (map->collisionMoveRight(posPlayer, glm::ivec2(27, 32)))
-				{
-					posPlayer.x -= 2;
-					sprite->changeAnimation(STAND_RIGHT);
-				}
-			}
-			else
-			{
-				if (sprite->animation() == MOVE_LEFT || sprite->animation() == SHOOT_LEFT)
-					sprite->changeAnimation(STAND_LEFT);
-				else if (sprite->animation() == MOVE_RIGHT || sprite->animation() == SHOOT_RIGHT)
-					sprite->changeAnimation(STAND_RIGHT);
+				sprite->changeAnimation(STAND_RIGHT);
 			}
 		}
-		arpon.update();
+		else if (Game::instance().getKey(GLFW_KEY_LEFT))
+		{
+			if (sprite->animation() != MOVE_LEFT)
+				sprite->changeAnimation(MOVE_LEFT);
+
+			posPlayer.x -= 2;
+			lastDir = false;
+			if (map->collisionMoveLeft(posPlayer, glm::ivec2(30, 32)))
+			{
+				posPlayer.x += 2;
+				sprite->changeAnimation(STAND_LEFT);
+			}
+		}
+		else
+		{
+			if (sprite->animation() == MOVE_LEFT || sprite->animation() == SHOOT_LEFT)
+				sprite->changeAnimation(STAND_LEFT);
+			else if (sprite->animation() == MOVE_RIGHT || sprite->animation() == SHOOT_RIGHT)
+				sprite->changeAnimation(STAND_RIGHT);
+		}
 	}
+	arpon.update();
 
 	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posPlayer.x), float(tileMapDispl.y + posPlayer.y)));
 	return false;
@@ -182,6 +229,12 @@ void Player::die()
 		if (fBounceDead && map->collisionMoveDownPlayer(posPlayer, glm::ivec2(30, 32), &posPlayer.y))
 		{
 			speed = -3.0f;
+			fBounceDead = false;
+		}
+
+		if (fBounceDead && map->collisionMoveUp(posPlayer, glm::ivec2(30, 32), &posPlayer.y))
+		{
+			speed = -speed;
 			fBounceDead = false;
 		}
 
@@ -230,11 +283,12 @@ bool Player::checkCollision(Ball* ball) {
 }
 
 void Player::reset() {
+	speed = 0;
+	lastDir = false;
 	arpon.reset();
 	fDead = true;
 	fBounceDead = true;
 	subiendo = false;
-	speed = -4.5f;
 	sprite->changeAnimation(0);
 }
 

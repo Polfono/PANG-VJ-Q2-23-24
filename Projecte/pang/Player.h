@@ -30,6 +30,8 @@ private:
 	int delayShoot = 0;
 	float speed = 0;
 	bool subiendo = false;
+	bool lastDir; // true right, false left
+	bool delayClimb = false;
 
 	int delayDead = 30;
 	bool fDead = true;

@@ -214,9 +214,9 @@ bool TileMap::collisionMoveDownPlayer(const glm::ivec2& pos, const glm::ivec2& s
 	for (int x = x0; x <= x1; x++)
 	{
 		int block = map[y * mapSize.x + x];
-		if (block != 0 && block != 41 && block != 42 && block != 43 && block != 49 && block != 50 && block != 51)
+		if (block != 0)
 		{
-			if (*posY - tileSize * y + size.y <= 8)
+			if (*posY - tileSize * y + size.y <= 4)
 			{
 				*posY = tileSize * y - size.y;
 				return true;
@@ -322,6 +322,34 @@ bool TileMap::inLadder(const glm::ivec2& pos, const glm::ivec2& size, int* posX)
 	return false;
 }
 
+bool TileMap::onlyAir(const glm::ivec2& pos, const glm::ivec2& size) const
+{
+	int x0, x1, y0, y1;
+
+	x0 = pos.x / tileSize;
+	x1 = (pos.x + size.x - 1) / tileSize;
+	y0 = pos.y / tileSize;
+	y1 = (pos.y + size.y - 1) / tileSize;
+	for (int x = x0; x <= x1; x++)
+	{
+		for (int y = y0; y <= y1; y++)
+		{
+			int block = map[y * mapSize.x + x];
+			if (block != 0)
+			{
+				return false;
+			}
+			// bloque de abajo de aire no es escalera
+			int blockBelow = map[(y + 2) * mapSize.x + x];
+			if (blockBelow != 33 && blockBelow != 34 && blockBelow != 35 && blockBelow != 41 && blockBelow != 42 && blockBelow != 43 && blockBelow != 49 && blockBelow != 50 && blockBelow != 51)
+			{
+				return false;
+			}
+		}
+	}
+
+	return true;
+}
 
 
 
