@@ -8,6 +8,7 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include "Level.h"
+#include "Food.h"
 
 Scene::Scene()
 {
@@ -46,6 +47,10 @@ void Scene::init()
 	// Init Ball Manager
 	ballManager = BallManager::instance();
 
+	// Init Food
+	food = new Food();
+	food->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
+
 	// Init Projection
 	float zoomFactor = 1.425f;
 	projection = glm::ortho(0.f, float(SCREEN_WIDTH) / zoomFactor, float(SCREEN_HEIGHT) / zoomFactor, 0.f);
@@ -58,8 +63,8 @@ void Scene::init()
 	// -- TileMap
 	// -- Player Position
 	// -- addBalls BallManager
-
-	Level::instance().LoadMapConfig(level, map, &scene, player, ballManager, &nameStage);
+	food->reset();
+	Level::instance().LoadMapConfig(level, map, &scene, player, ballManager, &nameStage, food);
 }
 
 bool Scene::update(int deltaTime)
@@ -116,12 +121,14 @@ bool Scene::update(int deltaTime)
 			if (player->update(deltaTime)) {
 				hit = true;
 				hitTime = 0; // Reiniciar el contador de tiempo cuando hit es true
-				stageTime = currentTime;
+				stageTime = int(currentTime);
 			}
+
+			score += food->update();
 
 			if (!ballManager->updateBalls()) {
 				changeStage = true;
-				stageTime = currentTime;
+				stageTime = int(currentTime);
 				scoreTime = timeLeft * 100;
 				score += scoreTime;
 
@@ -146,7 +153,8 @@ bool Scene::update(int deltaTime)
 			--vidas;
 			player->reset();
 			ballManager->clearBalls();
-			Level::instance().LoadMapConfig(level, map, &scene, player, ballManager, &nameStage);
+			food->reset();
+			Level::instance().LoadMapConfig(level, map, &scene, player, ballManager, &nameStage, food);
 		}
 	}
 	return false;
@@ -178,6 +186,9 @@ void Scene::render()
 
 		// Render Balls
 		ballManager->renderBalls();
+
+		// Render Food
+		food->render();
 
 		// Render Text
 		std::string timeText = "TIME:";
@@ -245,7 +256,8 @@ void Scene::nextLevel() {
 	hit = false;
 	map = Level::instance().LoadMapLevel(level);
 	ballManager->clearBalls();
-	Level::instance().LoadMapConfig(level, map, &scene, player, ballManager, &nameStage);
+	food->reset();
+	Level::instance().LoadMapConfig(level, map, &scene, player, ballManager, &nameStage, food);
 
 	timeLeft = 100;
 }
@@ -260,7 +272,8 @@ void Scene::setLevel(int level) {
 	player->reset();
 	hit = false;
 	map = Level::instance().LoadMapLevel(level);
-	Level::instance().LoadMapConfig(level, map, &scene, player, ballManager, &nameStage);
+	food->reset();
+	Level::instance().LoadMapConfig(level, map, &scene, player, ballManager, &nameStage, food);
 
 	timeLeft = 100;
 }

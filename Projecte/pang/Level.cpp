@@ -5,6 +5,7 @@
 #include "Scene.h"
 #include "Player.h"
 #include "BallManager.h"
+#include "Food.h"
 #include <iostream>
 
 #define LEFT -1
@@ -25,11 +26,12 @@ TileMap* Level::LoadMapLevel(int level)
 }
 
 // load scene from file, set player position and add balls to ballManager
-void Level::LoadMapConfig(int level, TileMap* map, Texture* scene, Player* player, BallManager* ballManager, string* nameStage)
+void Level::LoadMapConfig(int level, TileMap* map, Texture* scene, Player* player, BallManager* ballManager, string* nameStage, Food* food)
 {
 	scene->loadFromFile("images/background" + to_string(level) + ".png", TEXTURE_PIXEL_FORMAT_RGBA);
 	player->setTileMap(map);
 	ballManager->setTileMap(map);
+	food->setTileMap(map);
 
 	// 17 levels
 	if (level == 1) {

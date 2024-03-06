@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "BallManager.h"
 #include "Texture.h"
+#include "Food.h"
 
 class Level
 {
@@ -17,7 +18,7 @@ public:
 	Level();
 	~Level();
 	TileMap* LoadMapLevel(int level);
-	void LoadMapConfig(int level, TileMap* map, Texture* scene, Player* player, BallManager* ballManager, string* nameStage);
+	void LoadMapConfig(int level, TileMap* map, Texture* scene, Player* player, BallManager* ballManager, string* nameStage, Food* food);
 };
 
 #endif // _LEVEL_INCLUDE

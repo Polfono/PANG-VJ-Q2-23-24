@@ -16,6 +16,7 @@
     <ClInclude Include="Ball.h" />
     <ClInclude Include="BallManager.h" />
     <ClInclude Include="Constants.h" />
+    <ClInclude Include="Food.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="Menu.h" />
@@ -36,6 +37,7 @@
     <ClCompile Include="Arpon.cpp" />
     <ClCompile Include="Ball.cpp" />
     <ClCompile Include="BallManager.cpp" />
+    <ClCompile Include="Food.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="main.cpp" />

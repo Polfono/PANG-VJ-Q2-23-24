@@ -9,6 +9,7 @@
 #include "BallManager.h"
 #include "Text.h"
 #include "Constants.h"
+#include "Food.h"
 
 
 // Scene contains all the entities of our game.
@@ -36,6 +37,7 @@ private:
 private:
 	TileMap *map;
 	Player *player;
+	Food *food;
 	BallManager* ballManager = BallManager::instance();
 	ShaderProgram texProgram;
 	glm::mat4 projection;
