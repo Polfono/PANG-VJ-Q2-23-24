@@ -215,6 +215,7 @@ void Player::die()
 	{
 		delayDead = 30;
 		fDead = false;
+		speed = -4.5f;
 		if (posPlayer.x > 180) dDead = -1;
 		else dDead = 1;
 	}
