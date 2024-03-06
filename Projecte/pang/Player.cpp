@@ -66,7 +66,7 @@ bool Player::update(int deltaTime)
 	posPlayer.y += FALL_STEP;
 	// Si esta tocando el suelo y se pulsa por primera vez S se dispara y anima
 	static bool wasSPressed = false;
-	if (map->collisionMoveDown(posPlayer, glm::ivec2(32, 32), &posPlayer.y) && !wasSPressed && Game::instance().getKey(GLFW_KEY_S) && arpon.setPosition(glm::vec2(posPlayer.x, posPlayer.y))) {
+	if (map->collisionMoveDownPlayer(posPlayer, glm::ivec2(32, 32), &posPlayer.y) && !wasSPressed && Game::instance().getKey(GLFW_KEY_S) && arpon.setPosition(glm::vec2(posPlayer.x, posPlayer.y))) {
 		if (sprite->animation() == MOVE_LEFT || sprite->animation() == STAND_LEFT)
 			sprite->changeAnimation(SHOOT_LEFT);
 		else if (sprite->animation() == MOVE_RIGHT || sprite->animation() == STAND_RIGHT)
@@ -135,7 +135,7 @@ void Player::die()
 
 
 		// Si toca el suelo, rebota
-		if (fBounceDead && map->collisionMoveDown(posPlayer, glm::ivec2(32, 32), &posPlayer.y))
+		if (fBounceDead && map->collisionMoveDownPlayer(posPlayer, glm::ivec2(32, 32), &posPlayer.y))
 		{
 			speed = -3.0f;
 			fBounceDead = false;

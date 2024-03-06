@@ -1,4 +1,2 @@
-﻿  Scene.cpp
-C:\Users\polfo\PANG-VJ-Q2-23-24\Projecte\pang\Scene.cpp(111,17): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
-C:\Users\polfo\PANG-VJ-Q2-23-24\Projecte\pang\Scene.cpp(116,17): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+﻿  TileMap.cpp
   pang.vcxproj -> C:\Users\polfo\PANG-VJ-Q2-23-24\Projecte\Debug\pang.exe

@@ -156,7 +156,8 @@ bool TileMap::collisionMoveLeft(const glm::ivec2 &pos, const glm::ivec2 &size) c
 	y1 = (pos.y + size.y - 1) / tileSize;
 	for(int y=y0; y<=y1; y++)
 	{
-		if(map[y*mapSize.x+x] != 0)
+		int block = map[y * mapSize.x + x];
+		if(block != 0 && block != 33 && block != 34 && block != 35 && block != 41 && block != 42 && block != 43 && block != 49 && block != 50 && block != 51)
 			return true;
 	}
 	
@@ -172,14 +173,15 @@ bool TileMap::collisionMoveRight(const glm::ivec2 &pos, const glm::ivec2 &size) 
 	y1 = (pos.y + size.y - 1) / tileSize;
 	for(int y=y0; y<=y1; y++)
 	{
-		if(map[y*mapSize.x+x] != 0)
+		int block = map[y * mapSize.x + x];
+		if (block != 0 && block != 33 && block != 34 && block != 35 && block != 41 && block != 42 && block != 43 && block != 49 && block != 50 && block != 51)
 			return true;
 	}
 	
 	return false;
 }
 
-bool TileMap::collisionMoveDown(const glm::ivec2 &pos, const glm::ivec2 &size, int *posY) const
+bool TileMap::collisionMoveDownBall(const glm::ivec2 &pos, const glm::ivec2 &size, int *posY) const
 {
 	int x0, x1, y;
 	
@@ -188,7 +190,8 @@ bool TileMap::collisionMoveDown(const glm::ivec2 &pos, const glm::ivec2 &size, i
 	y = (pos.y + size.y - 1) / tileSize;
 	for(int x=x0; x<=x1; x++)
 	{
-		if(map[y*mapSize.x+x] != 0)
+		int block = map[y * mapSize.x + x];
+		if (block != 0 && block != 33 && block != 34 && block != 35)
 		{
 			if(*posY - tileSize * y + size.y <= 8)
 			{
@@ -198,6 +201,29 @@ bool TileMap::collisionMoveDown(const glm::ivec2 &pos, const glm::ivec2 &size, i
 		}
 	}
 	
+	return false;
+}
+
+bool TileMap::collisionMoveDownPlayer(const glm::ivec2& pos, const glm::ivec2& size, int* posY) const
+{
+	int x0, x1, y;
+
+	x0 = pos.x / tileSize;
+	x1 = (pos.x + size.x - 1) / tileSize;
+	y = (pos.y + size.y - 1) / tileSize;
+	for (int x = x0; x <= x1; x++)
+	{
+		int block = map[y * mapSize.x + x];
+		if (block != 0 && block != 41 && block != 42 && block != 43 && block != 49 && block != 50 && block != 51)
+		{
+			if (*posY - tileSize * y + size.y <= 8)
+			{
+				*posY = tileSize * y - size.y;
+				return true;
+			}
+		}
+	}
+
 	return false;
 }
 
@@ -211,8 +237,9 @@ bool TileMap::collisionMoveUp(const glm::ivec2& pos, const glm::ivec2& size, int
 	// Check for collisions in the tiles the box is overlapping
 	for (int x = x0; x <= x1; x++)
 	{
+		int block = map[y * mapSize.x + x];
 		// If the tile is not empty, the box is colliding
-		if (map[y * mapSize.x + x] != 0)
+		if (block != 0 && block != 33 && block != 34 && block != 35 && block != 41 && block != 42 && block != 43 && block != 49 && block != 50 && block != 51)
 		{
 			// If the box is already intersecting the tile, correct the position
 			if (tileSize * (y + 1) - *posY <= 8)
@@ -238,7 +265,8 @@ bool TileMap::pointCollision(const glm::ivec2& pos, const glm::ivec2& size) cons
 	{
 		for (int y = y0; y <= y1; y++)
 		{
-			if (map[y * mapSize.x + x] != 0)
+			int block = map[y * mapSize.x + x];
+			if (block != 0 && block != 33 && block != 34 && block != 35)
 				return true;
 		}
 	}

@@ -28,7 +28,7 @@ public:
 	
 private:
 	int delayShoot = 0;
-	float speed = -4.5f;
+	float speed = 0;
 
 	int delayDead = 30;
 	bool fDead = true;
