@@ -21,6 +21,7 @@ public:
 	void render();
 	bool checkCollision(Ball* ball);
 	void reset();
+	void godMode();
 
 	
 	void setTileMap(TileMap *tileMap);
@@ -32,6 +33,8 @@ private:
 	bool subiendo = false;
 	bool lastDir; // true right, false left
 	bool delayClimb = false;
+
+	bool god = false;
 
 	int delayDead = 30;
 	bool fDead = true;

@@ -55,6 +55,7 @@ private:
 	bool changeStage = false;
 	int stageTime;
 	int scoreTime;
+	bool god = false;
 
 };
 

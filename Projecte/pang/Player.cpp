@@ -68,10 +68,12 @@ bool Player::update(int deltaTime)
 	sprite->update(deltaTime);
 
 	// Comprueba colisiones con las bolas
-	for (Ball* ball : BallManager::instance()->getBalls()) {
-		if (checkCollision(ball)) {
-			arpon.reset();
-			return true;
+	if(!god) {
+		for (Ball* ball : BallManager::instance()->getBalls()) {
+			if (checkCollision(ball)) {
+				arpon.reset();
+				return true;
+			}
 		}
 	}
 	
@@ -292,6 +294,9 @@ void Player::reset() {
 	sprite->changeAnimation(0);
 }
 
+void Player::godMode() {
+	god = !god;
+}
 
 
 

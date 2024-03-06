@@ -66,6 +66,14 @@ bool Scene::update(int deltaTime)
 {
 	currentTime += deltaTime;
 
+	static bool wasGPressed = false;
+	if (Game::instance().getKey(GLFW_KEY_G) && !wasGPressed) {
+		wasGPressed = true;
+		player->godMode();
+		god = !god;
+	}
+	if(!Game::instance().getKey(GLFW_KEY_G)) wasGPressed = false;
+
 	static bool wasNPressed = false;
 	if (Game::instance().getKey(GLFW_KEY_N) && !wasNPressed) {
 		wasNPressed = true;
@@ -195,6 +203,8 @@ void Scene::render()
 			if (hitTime / 333 % 2 == 0)
 				textRenderer.render("READY", glm::vec2(250, 200), 32, glm::vec4(1, 1, 1, 1));
 		}
+
+		if(god) textRenderer.render("GOD MODE", glm::vec2(440, 350), 17, glm::vec4(1, 1, 1, 1));
 	}
 	else if (changeStage) {
 		bground->render(completedStage);
