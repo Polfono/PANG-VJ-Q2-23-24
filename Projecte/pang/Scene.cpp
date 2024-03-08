@@ -156,6 +156,7 @@ bool Scene::update(int deltaTime)
 			hit = false;
 			timeLeft = 100;
 			--vidas;
+			map = Level::instance().LoadMapLevel(level);
 			player->reset();
 			ballManager->clearBalls();
 			food->reset();
