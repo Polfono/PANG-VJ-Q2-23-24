@@ -3,6 +3,7 @@
 #include <sstream>
 #include <vector>
 #include "TileMap.h"
+#include <queue>
 
 
 using namespace std;
@@ -289,6 +290,58 @@ bool TileMap::pointCollision(const glm::ivec2& pos, const glm::ivec2& size) cons
 		for (int y = y0; y <= y1; y++)
 		{
 			int block = map[y * mapSize.x + x];
+
+			// Checking if it is a destroyable block 
+			for (int i = 0; i < destroyableBlocks.size(); i++)
+			{
+				if (destroyableBlocks[i] == block)
+				{
+					// Destroy Blocks  -- Todo lo de aqui no me deja ponerlo en otra funcion :(
+					int coord = y * mapSize.x + x;
+
+					queue<pair<int,int>> cola;
+					pair<int, int> node = pair<int,int>(coord, block);
+					cola.push(node);
+
+					while (!cola.empty()) {
+						node = cola.front();
+						cola.pop();
+						int c = node.first;
+						int b = node.second;
+
+						if (map[c] >= b - 1 && map[c] <= b + 1) {
+							b = map[c];
+							map[c] = 0;
+							
+							if (map[c - 1] >= b - 1 && map[c - 1] <= b + 1) { // Esquerra
+								node = pair<int, int>(c - 1, b);
+								cola.push(node);
+							}
+							if (map[c + 1] >= b - 1 && map[c + 1] <= b + 1) { // Dreta
+								node = pair<int, int>(c + 1, b);
+								cola.push(node);
+							}
+							if (c - mapSize.x >= 0 && map[c - mapSize.x] >= b - 1 && map[c - mapSize.x] <= b + 1) {
+								cola.push(std::make_pair(c - mapSize.x, b));  // Up
+							}
+							if (c + mapSize.x < mapSize.x * mapSize.y && map[c + mapSize.x] >= b - 1 && map[c + mapSize.x] <= b + 1) {
+								cola.push(std::make_pair(c + mapSize.x, b));  // Down
+							}
+							if (c % mapSize.x > 0 && map[c - 1] >= b - 1 && map[c - 1] <= b + 1) {
+								cola.push(std::make_pair(c - 1, b));  // Left
+							}
+							if (c % mapSize.x < mapSize.x - 1 && map[c + 1] >= b - 1 && map[c + 1] <= b + 1) {
+								cola.push(std::make_pair(c + 1, b));  // Right
+							}
+						}
+					}
+					
+					brokenBlocks = true;
+
+					break;
+				}
+			}
+
 			if (block != 0 && block != 33 && block != 34 && block != 35)
 				return true;
 		}
@@ -351,28 +404,7 @@ bool TileMap::onlyAir(const glm::ivec2& pos, const glm::ivec2& size) const
 	return true;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+bool TileMap::checkBrokenBlocks()
+{
+	return brokenBlocks;
+}

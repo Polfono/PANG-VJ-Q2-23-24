@@ -118,6 +118,11 @@ bool Scene::update(int deltaTime)
 			}
 		}
 		else {
+			if (map->checkBrokenBlocks()) {
+				// Update Map
+				map->prepareArrays(glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
+			}
+
 			if (player->update(deltaTime)) {
 				hit = true;
 				hitTime = 0; // Reiniciar el contador de tiempo cuando hit es true

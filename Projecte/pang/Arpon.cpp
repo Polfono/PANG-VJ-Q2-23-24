@@ -27,7 +27,9 @@ void Arpon::update()
 		altura += 2;
 		sprite->changeAnimation(sprite->animation() + 1);
 
-		if (map->pointCollision(glm::vec2(posArpon.x+3, posArpon.y + 155 - altura), glm::ivec2(1, 9)) || altura == 138) {
+		if (map->pointCollision(glm::vec2(posArpon.x+3, posArpon.y + 155 - altura), glm::ivec2(1, 9)) == 1 
+			|| map->pointCollision(glm::vec2(posArpon.x + 3, posArpon.y + 155 - altura), glm::ivec2(1, 9)) == 2
+			|| altura == 138) {
 			bThrowing = false;
 			altura = 0;
 			sprite->changeAnimation(0);

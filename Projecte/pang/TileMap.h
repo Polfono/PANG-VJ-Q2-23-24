@@ -5,6 +5,9 @@
 #include <glm/glm.hpp>
 #include "Texture.h"
 #include "ShaderProgram.h"
+#include <vector>
+
+using namespace std;
 
 
 // Class Tilemap is capable of loading a tile map from a text file in a very
@@ -39,10 +42,13 @@ public:
 	bool pointCollision(const glm::ivec2 &pos, const glm::ivec2 &size) const;
 	bool inLadder(const glm::ivec2 &pos, const glm::ivec2 &size, int *posX) const;
 	bool onlyAir(const glm::ivec2 &pos, const glm::ivec2 &size) const;
-	
+	bool checkBrokenBlocks();
+	void prepareArrays(const glm::vec2& minCoords, ShaderProgram& program);
+
 private:
 	bool loadLevel(const string &levelFile);
-	void prepareArrays(const glm::vec2 &minCoords, ShaderProgram &program);
+	void destroyBlocks(int x, int y, int block);
+	
 
 private:
 	GLuint vao;
@@ -53,8 +59,9 @@ private:
 	int tileSize, blockSize;
 	Texture tilesheet;
 	glm::vec2 tileTexSize;
-	int *map;
-
+	int* map;
+	vector<int> destroyableBlocks = {5, 25, 26, 27, 28, 60, 61, 62, 65, 66, 67, 70, 71, 72, 73, 74, 81, 82, 83, 84, 89, 90, 91, 92};
+	mutable bool brokenBlocks = false;
 };
 
 

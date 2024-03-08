@@ -35,7 +35,7 @@ private:
 	void initShaders();
 
 private:
-	TileMap *map;
+	TileMap* map;
 	Player *player;
 	Food *food;
 	BallManager* ballManager = BallManager::instance();
