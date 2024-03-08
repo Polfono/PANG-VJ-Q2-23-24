@@ -263,7 +263,7 @@ bool TileMap::collisionMoveUp(const glm::ivec2& pos, const glm::ivec2& size, int
 	{
 		int block = map[y * mapSize.x + x];
 		// If the tile is not empty, the box is colliding
-		if (block != 0 && block != 33 && block != 34 && block != 35 && block != 41 && block != 42 && block != 43 && block != 49 && block != 50 && block != 51)
+		if (block != 0 && block != 33 && block != 34 && block != 35)
 		{
 			// If the box is already intersecting the tile, correct the position
 			if (tileSize * (y + 1) - *posY <= 8)
