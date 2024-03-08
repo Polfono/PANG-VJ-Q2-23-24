@@ -32,16 +32,28 @@ void Food::init(const glm::ivec2& tileMapPos, ShaderProgram& shaderProgram)
 	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posFood.x), float(tileMapDispl.y + posFood.y)));
 }
 
-int Food::update()
+int Food::update(glm::vec2 posPlayer)
 {
 	if (--secToAppear < 0) {
-		sprite->changeAnimation(type);
+		if (!animationAssigned) {
+			sprite->changeAnimation(type);
+			animationAssigned = true;
+		}
+
+		// gravedad
 		posFood.y += 1.75f;
 		map->collisionMoveDownPlayer(posFood, glm::ivec2(30, 30), &posFood.y);
+
+		if (map->tileInRegion(posFood, glm::ivec2(30, 30))) posFood.x += 1; // si esta en medio de una pared
+
 	}
 
 	// si toca al jugador
-	if (false) return points[type];
+	if (!consumed && posPlayer.x + 30 > posFood.x && posPlayer.x < posFood.x + 30 && posPlayer.y + 32 > posFood.y && posPlayer.y < posFood.y + 30) {
+		sprite->changeAnimation(28);
+		consumed = true;
+		return points[type];
+	}
 	
 
 	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posFood.x), float(tileMapDispl.y + posFood.y)));
@@ -66,7 +78,9 @@ void Food::reset()
 
 	// random number between 10 and 30
 	secToAppear = (rand() % 20 + 10)*60;
-	//secToAppear = 0;
+
+	consumed = false;
+	animationAssigned = false;
 
 	sprite->changeAnimation(28);
 	

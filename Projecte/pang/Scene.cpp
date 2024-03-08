@@ -129,7 +129,7 @@ bool Scene::update(int deltaTime)
 				stageTime = int(currentTime);
 			}
 
-			score += food->update();
+			score += food->update(player->getPosition());
 
 			if (!ballManager->updateBalls()) {
 				changeStage = true;

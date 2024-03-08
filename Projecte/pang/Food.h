@@ -18,7 +18,7 @@ class Food
 public:
 
 	void init(const glm::ivec2& tileMapPos, ShaderProgram& shaderProgram);
-	int update();
+	int update(glm::vec2 posPlayer);
 	void render();
 	void setTileMap(TileMap* tileMap);
 	void reset();
@@ -29,6 +29,8 @@ private:
 	Sprite* sprite;
 	TileMap* map;
 	int secToAppear = 0;
+	bool consumed = false;
+	bool animationAssigned = false;
 };
 
 #endif // FOOD_H

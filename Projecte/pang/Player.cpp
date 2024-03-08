@@ -265,6 +265,11 @@ void Player::setPosition(const glm::vec2 &pos)
 	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posPlayer.x), float(tileMapDispl.y + posPlayer.y)));
 }
 
+glm::ivec2 Player::getPosition()
+{
+	return posPlayer;
+}
+
 bool Player::checkCollision(Ball* ball) {
 	glm::ivec2 playerSize = glm::ivec2(30, 32);
 	glm::vec2 playerPos = glm::vec2(posPlayer.x + 48, posPlayer.y +26);

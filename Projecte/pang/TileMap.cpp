@@ -357,6 +357,27 @@ bool TileMap::pointCollision(const glm::ivec2& pos, const glm::ivec2& size) cons
 	return false;
 }	
 
+bool TileMap::tileInRegion(const glm::ivec2& pos, const glm::ivec2& size) const
+{
+	int x0, x1, y0, y1;
+
+	x0 = pos.x / tileSize;
+	x1 = (pos.x + size.x - 1) / tileSize;
+	y0 = pos.y / tileSize;
+	y1 = (pos.y + size.y - 1) / tileSize;
+	for (int x = x0; x <= x1; x++)
+	{
+		for (int y = y0; y <= y1; y++)
+		{
+			int block = map[y * mapSize.x + x];
+			if (block != 0)
+				return true;
+		}
+	}
+
+	return false;
+}
+
 bool TileMap::inLadder(const glm::ivec2& pos, const glm::ivec2& size, int* posX) const
 {
 	int x0, x1, y0, y1;
