@@ -53,7 +53,16 @@ void BallManager::setTileMap(TileMap* tileMap)
 
 vector<Ball*> BallManager::getBalls()
 {
-	return balls;
+	// return all non splited balls
+	vector<Ball*> nonSplitedBalls;
+	for (auto& ball : balls)
+	{
+		if (!ball->isDestroyed())
+		{
+			nonSplitedBalls.push_back(ball);
+		}
+	}
+	return nonSplitedBalls;
 }
 
 void BallManager::clearBalls() {

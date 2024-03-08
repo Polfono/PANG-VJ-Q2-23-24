@@ -23,6 +23,7 @@ public:
 	void split();
 	glm::ivec2 getSize();
 	glm::vec2 getPosition();
+	bool isDestroyed();
 
 	void setTileMap(TileMap* tileMap);
 	void setPosition(const glm::vec2& pos);
@@ -34,6 +35,7 @@ private:
 	Texture spritesheet;
 	Sprite* sprite;
 	TileMap* map;
+	int destroyCounter = 0;
 };
 
 #endif

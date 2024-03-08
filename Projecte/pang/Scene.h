@@ -48,7 +48,7 @@ private:
 	Texture scene;
 	Texture completedStage;
 	int level = 1;
-	int vidas = 3;
+	int vidas = 2;
 	bool hit = false;
 	string nameStage;
 	int score = 0;
