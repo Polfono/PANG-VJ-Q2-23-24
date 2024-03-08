@@ -418,7 +418,9 @@ bool TileMap::checkBrokenBlocks()
 
 void TileMap::doAnimations()
 {
+	bool aux = false;
 	if (!blueBlocks.empty()) {
+		aux = true;
 		for (int i = 0; i < blueBlocks.size(); i++) {
 			if (--blueBlocks[i].second.first <= 0) {
 				if (--blueBlocks[i].second.second <= 0) {
@@ -432,6 +434,7 @@ void TileMap::doAnimations()
 		}
 	}
 	if (!pinkBlocks.empty()) {
+		aux = true;
 		for (int i = 0; i < pinkBlocks.size(); i++) {
 			if (--pinkBlocks[i].second.first <= 0) {
 				if (--pinkBlocks[i].second.second <= 0) {
@@ -445,6 +448,7 @@ void TileMap::doAnimations()
 		}
 	}
 	if (!goldBlocks.empty()) {
+		aux = true;
 		for (int i = 0; i < goldBlocks.size(); i++) {
 			if (--goldBlocks[i].second.first <= 0) {
 				if (--goldBlocks[i].second.second <= 0) {
@@ -457,6 +461,9 @@ void TileMap::doAnimations()
 			}
 		}
 	}
+
+	if (!aux)
+		brokenBlocks = false;
 }
 
 int TileMap::colorOfBlock(int block) const
