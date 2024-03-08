@@ -35,22 +35,45 @@ void Food::init(const glm::ivec2& tileMapPos, ShaderProgram& shaderProgram)
 int Food::update(glm::vec2 posPlayer)
 {
 	if (--secToAppear < 0) {
-		if (!animationAssigned) {
+		timeCounter++;
+
+		if (timeCounter > 600) { // 10 segundos
+			consumed = true;
+		}
+
+		// Si el contador de tiempo es mayor que 7 segundos
+		if (timeCounter > 420) {
+			blinking = true;
+		}
+
+		if (blinking && timeCounter % 30 == 0) {
+			sprite->changeAnimation(28);
+		}
+		else if (blinking && timeCounter % 30 == 15) {
 			sprite->changeAnimation(type);
-			animationAssigned = true;
 		}
 
 		// gravedad
 		posFood.y += 1.75f;
 		map->collisionMoveDownPlayer(posFood, glm::ivec2(30, 30), &posFood.y);
 
-		if (map->tileInRegion(posFood, glm::ivec2(30, 30))) posFood.x += 1; // si esta en medio de una pared
+		// si esta en medio de una pared
+		if (map->tileInRegion(posFood, glm::ivec2(30, 30))) {
+			consumed = true; posFood = glm::ivec2(rand() % 300 + 30, 7);
+		}
+		else {
+			// no aparece hasta que no este fuera de una pared
+			if (!animationAssigned) {
+				sprite->changeAnimation(type);
+				animationAssigned = true;
+				consumed = false;
+			}
+		}
 
 	}
 
-	// si toca al jugador
+	// si toca al jugador consumir
 	if (!consumed && posPlayer.x + 30 > posFood.x && posPlayer.x < posFood.x + 30 && posPlayer.y + 32 > posFood.y && posPlayer.y < posFood.y + 30) {
-		sprite->changeAnimation(28);
 		consumed = true;
 		return points[type];
 	}
@@ -62,7 +85,7 @@ int Food::update(glm::vec2 posPlayer)
 
 void Food::render()
 {
-	sprite->render();
+	if(!consumed) sprite->render();
 }
 
 void Food::setTileMap(TileMap* tileMap)
@@ -79,12 +102,14 @@ void Food::reset()
 	// random number between 10 and 30
 	secToAppear = (rand() % 20 + 10)*60;
 
-	consumed = false;
+	consumed = true;
 	animationAssigned = false;
+	timeCounter = 0;
+	blinking = false;
 
 	sprite->changeAnimation(28);
 	
-	posFood = glm::ivec2(rand()%300+30, 5);
+	posFood = glm::ivec2(rand()%300+30, 7);
 }
 
 

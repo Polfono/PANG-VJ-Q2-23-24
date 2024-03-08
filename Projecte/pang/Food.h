@@ -31,6 +31,8 @@ private:
 	int secToAppear = 0;
 	bool consumed = false;
 	bool animationAssigned = false;
+	int timeCounter = 0;
+	bool blinking = false;
 };
 
 #endif // FOOD_H
