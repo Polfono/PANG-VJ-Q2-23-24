@@ -328,24 +328,16 @@ bool TileMap::pointCollision(const glm::ivec2& pos, const glm::ivec2& size) cons
 								}
 
 								if (map[c - 1] >= b - 1 && map[c - 1] <= b + 1) { // Esquerra
-									node = pair<int, int>(c - 1, b);
-									cola.push(node);
+									cola.push(make_pair(c - 1, b));
 								}
 								if (map[c + 1] >= b - 1 && map[c + 1] <= b + 1) { // Dreta
-									node = pair<int, int>(c + 1, b);
-									cola.push(node);
+									cola.push(make_pair(c + 1, b));
 								}
 								if (c - mapSize.x >= 0 && map[c - mapSize.x] >= b - 1 && map[c - mapSize.x] <= b + 1) {
 									cola.push(make_pair(c - mapSize.x, b));  // Up
 								}
 								if (c + mapSize.x < mapSize.x * mapSize.y && map[c + mapSize.x] >= b - 1 && map[c + mapSize.x] <= b + 1) {
 									cola.push(make_pair(c + mapSize.x, b));  // Down
-								}
-								if (c % mapSize.x > 0 && map[c - 1] >= b - 1 && map[c - 1] <= b + 1) {
-									cola.push(make_pair(c - 1, b));  // Left
-								}
-								if (c % mapSize.x < mapSize.x - 1 && map[c + 1] >= b - 1 && map[c + 1] <= b + 1) {
-									cola.push(make_pair(c + 1, b));  // Right
 								}
 							}
 						}
