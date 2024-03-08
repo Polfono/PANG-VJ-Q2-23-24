@@ -119,7 +119,7 @@ bool Scene::update(int deltaTime)
 		}
 		else {
 			if (map->checkBrokenBlocks()) {
-				// Update Map
+				map->doAnimations();
 				map->prepareArrays(glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
 			}
 

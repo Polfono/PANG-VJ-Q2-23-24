@@ -44,10 +44,12 @@ public:
 	bool onlyAir(const glm::ivec2 &pos, const glm::ivec2 &size) const;
 	bool checkBrokenBlocks();
 	void prepareArrays(const glm::vec2& minCoords, ShaderProgram& program);
+	void doAnimations();
 
 private:
 	bool loadLevel(const string &levelFile);
-	void destroyBlocks(int x, int y, int block);
+	int colorOfBlock(int block) const;
+	bool isAnimationBlock(int block) const;
 	
 
 private:
@@ -61,7 +63,14 @@ private:
 	glm::vec2 tileTexSize;
 	int* map;
 	vector<int> destroyableBlocks = {5, 25, 26, 27, 28, 60, 61, 62, 65, 66, 67, 70, 71, 72, 73, 74, 81, 82, 83, 84, 89, 90, 91, 92};
+	vector<int> blueBlocksId = {65, 66, 67};
+	vector<int> goldBlocksId = {5, 25, 26, 27, 28, 70, 71, 72, 73, 74, 81, 82, 83, 84};
+	vector<int> pinkBlocksId = {60, 61, 62, 89, 90, 91, 92};
+	vector<int> animationBlocks = { 77, 78, 79, 80, 85, 86, 87, 88, 93, 94, 95, 96};
 	mutable bool brokenBlocks = false;
+	mutable vector<pair<int, pair<int,int>>> blueBlocks; // (blockId (timeLeftAnimation, numberAnimation)
+	mutable vector<pair<int, pair<int,int>>> goldBlocks;
+	mutable vector<pair<int, pair<int,int>>> pinkBlocks;
 };
 
 

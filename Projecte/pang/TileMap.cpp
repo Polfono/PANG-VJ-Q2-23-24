@@ -310,28 +310,43 @@ bool TileMap::pointCollision(const glm::ivec2& pos, const glm::ivec2& size) cons
 						int b = node.second;
 
 						if (map[c] >= b - 1 && map[c] <= b + 1) {
-							b = map[c];
-							map[c] = 0;
-							
-							if (map[c - 1] >= b - 1 && map[c - 1] <= b + 1) { // Esquerra
-								node = pair<int, int>(c - 1, b);
-								cola.push(node);
-							}
-							if (map[c + 1] >= b - 1 && map[c + 1] <= b + 1) { // Dreta
-								node = pair<int, int>(c + 1, b);
-								cola.push(node);
-							}
-							if (c - mapSize.x >= 0 && map[c - mapSize.x] >= b - 1 && map[c - mapSize.x] <= b + 1) {
-								cola.push(std::make_pair(c - mapSize.x, b));  // Up
-							}
-							if (c + mapSize.x < mapSize.x * mapSize.y && map[c + mapSize.x] >= b - 1 && map[c + mapSize.x] <= b + 1) {
-								cola.push(std::make_pair(c + mapSize.x, b));  // Down
-							}
-							if (c % mapSize.x > 0 && map[c - 1] >= b - 1 && map[c - 1] <= b + 1) {
-								cola.push(std::make_pair(c - 1, b));  // Left
-							}
-							if (c % mapSize.x < mapSize.x - 1 && map[c + 1] >= b - 1 && map[c + 1] <= b + 1) {
-								cola.push(std::make_pair(c + 1, b));  // Right
+							if (!isAnimationBlock(map[c])) {
+								int type = colorOfBlock(b);
+
+								b = map[c];
+								if (type == 0) { // Blue
+									map[c] = 93;
+									blueBlocks.push_back(make_pair(c, make_pair(10, 4)));
+								}
+								else if (type == 1) { // Gold
+									map[c] = 77;
+									goldBlocks.push_back(make_pair(c, make_pair(10, 4)));
+								}
+								else {
+									map[c] = 85; // Pink
+									blueBlocks.push_back(make_pair(c, make_pair(10, 4)));
+								}
+
+								if (map[c - 1] >= b - 1 && map[c - 1] <= b + 1) { // Esquerra
+									node = pair<int, int>(c - 1, b);
+									cola.push(node);
+								}
+								if (map[c + 1] >= b - 1 && map[c + 1] <= b + 1) { // Dreta
+									node = pair<int, int>(c + 1, b);
+									cola.push(node);
+								}
+								if (c - mapSize.x >= 0 && map[c - mapSize.x] >= b - 1 && map[c - mapSize.x] <= b + 1) {
+									cola.push(make_pair(c - mapSize.x, b));  // Up
+								}
+								if (c + mapSize.x < mapSize.x * mapSize.y && map[c + mapSize.x] >= b - 1 && map[c + mapSize.x] <= b + 1) {
+									cola.push(make_pair(c + mapSize.x, b));  // Down
+								}
+								if (c % mapSize.x > 0 && map[c - 1] >= b - 1 && map[c - 1] <= b + 1) {
+									cola.push(make_pair(c - 1, b));  // Left
+								}
+								if (c % mapSize.x < mapSize.x - 1 && map[c + 1] >= b - 1 && map[c + 1] <= b + 1) {
+									cola.push(make_pair(c + 1, b));  // Right
+								}
 							}
 						}
 					}
@@ -408,3 +423,74 @@ bool TileMap::checkBrokenBlocks()
 {
 	return brokenBlocks;
 }
+
+void TileMap::doAnimations()
+{
+	if (!blueBlocks.empty()) {
+		for (int i = 0; i < blueBlocks.size(); i++) {
+			if (--blueBlocks[i].second.first <= 0) {
+				if (--blueBlocks[i].second.second <= 0) {
+					map[blueBlocks[i].first] = 0;
+					blueBlocks.erase(blueBlocks.begin() + i);
+				}
+				else {
+					map[blueBlocks[i].first]++;
+				}
+			}
+		}
+	}
+	if (!pinkBlocks.empty()) {
+		for (int i = 0; i < pinkBlocks.size(); i++) {
+			if (--pinkBlocks[i].second.first <= 0) {
+				if (--pinkBlocks[i].second.second <= 0) {
+					map[pinkBlocks[i].first] = 0;
+					pinkBlocks.erase(pinkBlocks.begin() + i);
+				}
+				else {
+					map[pinkBlocks[i].first]++;
+				}
+			}
+		}
+	}
+	if (!goldBlocks.empty()) {
+		for (int i = 0; i < goldBlocks.size(); i++) {
+			if (--goldBlocks[i].second.first <= 0) {
+				if (--goldBlocks[i].second.second <= 0) {
+					map[goldBlocks[i].first] = 0;
+					goldBlocks.erase(goldBlocks.begin() + i);
+				}
+				else {
+					map[goldBlocks[i].first]++;
+				}
+			}
+		}
+	}
+}
+
+int TileMap::colorOfBlock(int block) const
+{
+	for (int i = 0; i < blueBlocksId.size(); i++) {
+		if (block == blueBlocksId[i])
+			return 0;
+	}
+	for (int i = 0; i < goldBlocksId.size(); i++) {
+		if (block == goldBlocksId[i])
+			return 1;
+	}
+	for (int i = 0; i < pinkBlocksId.size(); i++) {
+		if (block == pinkBlocksId[i])
+			return 2;
+	}
+	return -1;
+}
+
+bool TileMap::isAnimationBlock(int block) const
+{
+	for (int i = 0; i < animationBlocks.size(); i++)
+	{
+		if (block == animationBlocks[i])
+			return true;
+	}
+	return false;
+}
+
