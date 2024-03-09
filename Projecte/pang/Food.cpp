@@ -73,8 +73,9 @@ int Food::update(glm::vec2 posPlayer)
 	}
 
 	// si toca al jugador consumir
-	if (!consumed && posPlayer.x + 30 > posFood.x && posPlayer.x < posFood.x + 30 && posPlayer.y + 32 > posFood.y && posPlayer.y < posFood.y + 30) {
+	if (!consumed && posPlayer.x + 15 > posFood.x && posPlayer.x < posFood.x + 15 && posPlayer.y + 32 > posFood.y && posPlayer.y < posFood.y + 15) {
 		consumed = true;
+		SoundManager::instance().getSoundEngine()->play2D("sounds/item.mp3", GL_FALSE);
 		return points[type];
 	}
 	

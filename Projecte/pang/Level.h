@@ -19,6 +19,7 @@ public:
 	~Level();
 	TileMap* LoadMapLevel(int level);
 	void LoadMapConfig(int level, TileMap* map, Texture* scene, Player* player, BallManager* ballManager, string* nameStage, Food* food);
+	void setMusicLevel(int level);
 };
 
 #endif // _LEVEL_INCLUDE

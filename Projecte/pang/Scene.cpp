@@ -82,23 +82,34 @@ bool Scene::update(int deltaTime)
 	static bool wasNPressed = false;
 	if (Game::instance().getKey(GLFW_KEY_N) && !wasNPressed) {
 		wasNPressed = true;
-		nextLevel();
+		if (level < 17) {
+			level++;
+			setLevel(level);
+		}
 	}
 	if(!Game::instance().getKey(GLFW_KEY_N)) wasNPressed = false;
 
 	static bool wasBPressed = false;
 	if (Game::instance().getKey(GLFW_KEY_B) && !wasBPressed && level > 1) {
-		level -= 2;
 		wasBPressed = true;
-		nextLevel();
+		if(level > 1) {
+			level--;
+			setLevel(level);
+		}
 	}
 	if(!Game::instance().getKey(GLFW_KEY_B)) wasBPressed = false;
 
 	if (vidas < 0) {
 		// GAME OVER SCENE //
-		glClearColor(0.f, 0.f, 0.f, 1.0f);
-		if (Game::instance().getKey(GLFW_KEY_ENTER)) // Enter
+		// hacer solo una vez
+		if(vidas == -1) {
+			SoundManager::instance().getSoundEngine()->play2D("sounds/GameOver.mp3", false);
+		}
+
+		--vidas;
+		if (Game::instance().getKey(GLFW_KEY_ENTER)) { // Enter
 			return true;
+		}
 	}
 	
 	if(timeLeft == 0) {
@@ -112,7 +123,9 @@ bool Scene::update(int deltaTime)
 
 			// READY SCENE //
 
+
 			if (hitTime >= 2000) { // Esperar 2 segundos
+				if(vidas >= 0) Level::instance().setMusicLevel(level);
 				firstHit = false; // Después de los 2 segundos, ya no es la primera vez que hit es false
 				hitTime = 0; // Reiniciar el contador de tiempo
 			}
@@ -132,6 +145,9 @@ bool Scene::update(int deltaTime)
 			score += food->update(player->getPosition());
 
 			if (!ballManager->updateBalls()) {
+				SoundManager::instance().getSoundEngine()->removeAllSoundSources();
+				SoundManager::instance().getSoundEngine()->play2D("sounds/StageCompleted.mp3", false);
+
 				changeStage = true;
 				stageTime = int(currentTime);
 				scoreTime = timeLeft * 100;
@@ -151,6 +167,8 @@ bool Scene::update(int deltaTime)
 		hitTime += deltaTime;
 		player->die();
 		if (hitTime >= 3000) { // 3000 milisegundos son 3 segundos
+			SoundManager::instance().getSoundEngine()->removeAllSoundSources();
+
 			firstHit = true;
 			hitTime = 0;
 			hit = false;
@@ -229,7 +247,7 @@ void Scene::render()
 		textRenderer.render("STAGE " + std::to_string(level - 1) + " COMPLETED", glm::vec2(150, 330), 20, glm::vec4(1, 1, 1, 1));
 		textRenderer.render("TIME BONUS    " + std::to_string(scoreTime) + " PTS.", glm::vec2(130, 380), 17, glm::vec4(1, 1, 1, 1));
 		
-		if (currentTime - stageTime >= 2000) {
+		if (currentTime - stageTime >= 4000) {
 			changeStage = false;
 		}
 	}
@@ -269,8 +287,11 @@ void Scene::nextLevel() {
 }
 
 void Scene::setLevel(int level) {
+	SoundManager::instance().getSoundEngine()->removeAllSoundSources();
 	hitTime = 0;
 	firstHit = true;
+
+
 
 	this->level = level;
 
@@ -279,6 +300,7 @@ void Scene::setLevel(int level) {
 	hit = false;
 	map = Level::instance().LoadMapLevel(level);
 	food->reset();
+	ballManager->clearBalls();
 	Level::instance().LoadMapConfig(level, map, &scene, player, ballManager, &nameStage, food);
 
 	timeLeft = 100;

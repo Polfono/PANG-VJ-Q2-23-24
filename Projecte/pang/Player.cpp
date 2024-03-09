@@ -158,6 +158,7 @@ bool Player::update(int deltaTime)
 			else if (sprite->animation() == MOVE_RIGHT || sprite->animation() == STAND_RIGHT)
 				sprite->changeAnimation(SHOOT_RIGHT);
 
+			SoundManager::instance().getSoundEngine()->play2D("sounds/shoot.mp3", GL_FALSE);
 			delayShoot = 5;
 			arpon.disparar();
 		}
@@ -221,6 +222,7 @@ void Player::die()
 	}
 	if (--delayDead < 0)
 	{
+		if(delayDead == -1) SoundManager::instance().getSoundEngine()->play2D("sounds/Hit.mp3", GL_FALSE);
 		if(dDead == -1) sprite->changeAnimation(DEAD_LEFT);
 		else sprite->changeAnimation(DEAD_RIGHT);
 

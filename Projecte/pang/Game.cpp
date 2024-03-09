@@ -7,6 +7,10 @@
 
 void Game::init()
 {
+	SoundManager::instance().init();
+	engine = SoundManager::instance().getSoundEngine();
+	engine->play2D("sounds/Menu.mp3", true, false);
+
 	ShaderProgramManager::instance().init();
 
 	start = false;
@@ -27,8 +31,9 @@ bool Game::update(int deltaTime)
 	{
 		if (scene.update(deltaTime))
 		{
-			start = false;
 			scene.reset();
+			engine->play2D("sounds/Menu.mp3", true, false);
+			start = false;
 		}
 	}
 	else
@@ -63,11 +68,15 @@ void Game::keyPressed(int key)
 		menu->setPosIndex(posIndex);
 	}
 	if (key == GLFW_KEY_ENTER && start == false) { //start game
+		engine->play2D("sounds/Select.mp3", false, false);
 		if (menuSection != 0) {
 			menuSection = 0;
 		}
 		else {
-			if (posIndex == 0) start = true;
+			if (posIndex == 0) {
+				engine->removeSoundSource("sounds/Menu.mp3");
+				start = true;
+			} 
 			else if (posIndex == 2) {
 				menuSection = 1;
 			}

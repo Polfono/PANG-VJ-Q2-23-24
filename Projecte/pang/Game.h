@@ -6,6 +6,7 @@
 #include "Scene.h"
 #include "Constants.h"
 #include "Menu.h"
+#include "SoundManager.h"
 
 
 // Game is a singleton (a class with a single instance) that represents our whole application
@@ -47,6 +48,7 @@ private:
 	bool keys[GLFW_KEY_LAST+1]; // Store key states so that 
 							    // we can have access at any time
 	Scene scene;
+	ISoundEngine* engine;
 
 };
 

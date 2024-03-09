@@ -6,6 +6,7 @@
 #include "Player.h"
 #include "BallManager.h"
 #include "Food.h"
+#include "SoundManager.h"
 #include <iostream>
 
 #define LEFT -1
@@ -161,4 +162,24 @@ void Level::LoadMapConfig(int level, TileMap* map, Texture* scene, Player* playe
 		ballManager->addBall(glm::vec2(21 * map->getTileSize(), 3 * map->getTileSize()), glm::ivec2(SCREEN_X, SCREEN_Y), EXTRA_LARGE, LEFT);
 		ballManager->addBall(glm::vec2(21 * map->getTileSize(), 5 * map->getTileSize()), glm::ivec2(SCREEN_X, SCREEN_Y), EXTRA_LARGE, RIGHT);
 	}
+}
+
+void Level::setMusicLevel(int level) {
+	if (level == 1) SoundManager::instance().getSoundEngine()->play2D("sounds/MtFuji.mp3", true);
+	if (level == 2) SoundManager::instance().getSoundEngine()->play2D("sounds/MtKeirin.mp3", true);
+	if (level == 3) SoundManager::instance().getSoundEngine()->play2D("sounds/EmeraldTemple_NewYork.mp3", true);
+	if (level == 4) SoundManager::instance().getSoundEngine()->play2D("sounds/AngkorWat_Athens.mp3", true);
+	if (level == 5) SoundManager::instance().getSoundEngine()->play2D("sounds/Australia_Kenya.mp3", true);
+	if (level == 6) SoundManager::instance().getSoundEngine()->play2D("sounds/TajMahal_Egypt.mp3", true);
+	if (level == 7) SoundManager::instance().getSoundEngine()->play2D("sounds/Leningrad_Antartica.mp3", true);
+	if (level == 8) SoundManager::instance().getSoundEngine()->play2D("sounds/Paris.mp3", true);
+	if (level == 9) SoundManager::instance().getSoundEngine()->play2D("sounds/London_Maya.mp3", true);
+	if (level == 10) SoundManager::instance().getSoundEngine()->play2D("sounds/Barcelona_EasterIsland.mp3", true);
+	if (level == 11) SoundManager::instance().getSoundEngine()->play2D("sounds/AngkorWat_Athens.mp3", true);
+	if (level == 12) SoundManager::instance().getSoundEngine()->play2D("sounds/TajMahal_Egypt.mp3", true);
+	if (level == 13) SoundManager::instance().getSoundEngine()->play2D("sounds/Australia_Kenya.mp3", true);
+	if (level == 14) SoundManager::instance().getSoundEngine()->play2D("sounds/EmeraldTemple_NewYork.mp3", true);
+	if (level == 15) SoundManager::instance().getSoundEngine()->play2D("sounds/London_Maya.mp3", true);
+	if (level == 16) SoundManager::instance().getSoundEngine()->play2D("sounds/Leningrad_Antartica.mp3", true);
+	if (level == 17) SoundManager::instance().getSoundEngine()->play2D("sounds/Barcelona_EasterIsland.mp3", true);
 }

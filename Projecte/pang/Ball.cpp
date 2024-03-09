@@ -6,6 +6,7 @@
 #include <map>
 #include "Constants.h"
 #include <cmath>
+#include "BallManager.h"
 
 
 
@@ -88,6 +89,8 @@ void Ball::split()
         ballManager->addBall(glm::vec2(posBall.x + aux, posBall.y + aux/2), tileMapDispl, newSize, 1);
         ballManager->addBall(glm::vec2(posBall.x, posBall.y + aux/2), tileMapDispl, newSize, -1);
     }
+
+    SoundManager::instance().getSoundEngine()->play2D("sounds/pop.mp3", GL_FALSE);
     destroyCounter = 20;
     sprite->changeAnimation(1);
 }
