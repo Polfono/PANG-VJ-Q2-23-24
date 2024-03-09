@@ -9,7 +9,7 @@ void Arpon::init(const glm::ivec2& tileMapPos, ShaderProgram& shaderProgram)
 {
 	bThrowing = false;
 	spritesheet.loadFromFile("images/arpon.png", TEXTURE_PIXEL_FORMAT_RGBA);
-	sprite = Sprite::createSprite(glm::ivec2(9, 200), glm::vec2(0.01454334, 1), &spritesheet, &shaderProgram);
+	sprite = Sprite::createSprite(glm::ivec2(9, 191), glm::vec2(0.01454334, 1), &spritesheet, &shaderProgram);
 	sprite->setNumberAnimations(NUMBER_FRAMES_ARPON);
 
 	sprite->setAnimationSpeed(0, SPRITE_SPEED);
@@ -24,7 +24,7 @@ void Arpon::init(const glm::ivec2& tileMapPos, ShaderProgram& shaderProgram)
 void Arpon::update()
 {
 	if (bThrowing) {
-		altura += 2;
+		altura += 2.2;
 		sprite->changeAnimation(sprite->animation() + 1);
 
 		if (map->pointCollision(glm::vec2(posArpon.x+3, posArpon.y + 155 - altura), glm::ivec2(1, 9)) == 1 
@@ -78,9 +78,9 @@ bool Arpon::setPosition(const glm::vec2& pos)
 }
 
 bool Arpon::checkCollision(Ball* ball) {
-	glm::ivec2 arponSize = glm::ivec2(9, 34 + altura);
+	glm::ivec2 arponSize = glm::ivec2(1, 34 + altura);
 	glm::ivec2 ballSize = ball->getSize();
-	glm::vec2 arponPos = glm::vec2(posArpon.x+30, posArpon.y + 175 - altura);
+	glm::vec2 arponPos = glm::vec2(posArpon.x+34, posArpon.y + 175 - altura);
 	glm::vec2 ballPos = ball->getPosition();
 
 	if (arponPos.x < ballPos.x + ballSize.x &&

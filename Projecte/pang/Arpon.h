@@ -21,7 +21,7 @@ public:
 private:
 	glm::ivec2 tileMapDispl, posArpon;
 	bool bThrowing = true;
-	int altura = 0;
+	float altura = 0;
 	Texture spritesheet;
 	Sprite *sprite;
 	TileMap *map;
