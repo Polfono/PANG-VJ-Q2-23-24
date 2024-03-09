@@ -27,6 +27,7 @@
     <ClInclude Include="Shader.h" />
     <ClInclude Include="ShaderProgram.h" />
     <ClInclude Include="ShaderProgramManager.h" />
+    <ClInclude Include="SoundManager.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Text.h" />
     <ClInclude Include="Texture.h" />
@@ -48,6 +49,7 @@
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />
     <ClCompile Include="ShaderProgramManager.cpp" />
+    <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Text.cpp" />
     <ClCompile Include="Texture.cpp" />
@@ -100,13 +102,13 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\libs\Simple OpenGL Image Library\src;..\libs\glew-1.13.0\include;..\libs\glm;..\libs\glfw-3.3.8\include;..\libs\freetype-2.3.5-1-bin\include\freetype2;..\libs\freetype-2.3.5-1-bin\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\libs\irrKlang-1.6.0\include;..\libs\Simple OpenGL Image Library\src;..\libs\glew-1.13.0\include;..\libs\glm;..\libs\glfw-3.3.8\include;..\libs\freetype-2.3.5-1-bin\include\freetype2;..\libs\freetype-2.3.5-1-bin\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>..\libs\Simple OpenGL Image Library\projects\VC9\Debug;..\libs\glew-1.13.0\lib\Release\Win32;..\libs\glfw-3.3.8\lib-vc2015;..\libs\freetype-2.3.5-1-bin\lib;..\libs\glm;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>freetype.lib;SOIL.lib;glew32.lib;glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\libs\irrKlang-1.6.0\lib\Win32-visualStudio;..\libs\Simple OpenGL Image Library\projects\VC9\Debug;..\libs\glew-1.13.0\lib\Release\Win32;..\libs\glfw-3.3.8\lib-vc2015;..\libs\freetype-2.3.5-1-bin\lib;..\libs\glm;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>freetype.lib;SOIL.lib;glew32.lib;glfw3.lib;opengl32.lib;irrKlang.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -118,15 +120,15 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\libs\Simple OpenGL Image Library\src;..\libs\glew-1.13.0\include;..\libs\glm;..\libs\glfw-3.3.8\include;..\libs\freetype-2.3.5-1-bin\include\freetype2;..\libs\freetype-2.3.5-1-bin\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\libs\irrKlang-1.6.0\include;..\libs\Simple OpenGL Image Library\src;..\libs\glew-1.13.0\include;..\libs\glm;..\libs\glfw-3.3.8\include;..\libs\freetype-2.3.5-1-bin\include\freetype2;..\libs\freetype-2.3.5-1-bin\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>..\libs\Simple OpenGL Image Library\projects\VC9\Debug;..\libs\glew-1.13.0\lib\Release\Win32;..\libs\glfw-3.3.8\lib-vc2015;..\libs\freetype-2.3.5-1-bin\lib;..\libs\glm;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>freetype.lib;SOIL.lib;glew32.lib;glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\libs\irrKlang-1.6.0\lib\Win32-visualStudio;..\libs\Simple OpenGL Image Library\projects\VC9\Debug;..\libs\glew-1.13.0\lib\Release\Win32;..\libs\glfw-3.3.8\lib-vc2015;..\libs\freetype-2.3.5-1-bin\lib;..\libs\glm;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>freetype.lib;SOIL.lib;glew32.lib;glfw3.lib;opengl32.lib;irrKlang.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
