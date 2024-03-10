@@ -74,9 +74,8 @@ void Powerup::checkCollision(glm::vec2 posPlayer)
 		// Aplicar efecto
 		if (type == DYNAMITE) Game::instance().dynamite();
 
-		else if (type == FREEZETIME) {
+		else if (type == FREEZETIME) Game::instance().freezeTime();
 
-		}
 		else if (type == INVINCIBILITY) {
 
 		}

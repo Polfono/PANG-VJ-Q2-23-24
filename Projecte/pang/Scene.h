@@ -33,6 +33,7 @@ public:
 	void reset();
 	void extraLife();
 	void dynamite();
+	void freezeTime();
 
 private:
 	void initShaders();

@@ -31,6 +31,12 @@ bool BallManager::updateBalls()
 	if (balls.empty())
 		return false;
 
+	--delayFreeze;
+	if (delayFreeze == 0) {
+		freezed = false;
+		delayFreeze = 0;
+	}	
+
 	// si aun hay bolas no small
 	--delayDynamite;
 	if (delayDynamite == 0) {
@@ -52,10 +58,13 @@ bool BallManager::updateBalls()
 }
 
 void BallManager::renderBalls()
-{
-	for (auto& ball : balls)
+{	
+	if (delayFreeze < 1 || (delayFreeze > 10 && delayFreeze < 20) || (delayFreeze > 30 && delayFreeze < 40) || (delayFreeze > 50 && delayFreeze < 60) || (delayFreeze > 70 && delayFreeze < 80) || (delayFreeze > 90 && delayFreeze < 100) || delayFreeze > 110)
 	{
-		ball->render();
+		for (auto& ball : balls)
+		{
+			ball->render();
+		}
 	}
 }
 
@@ -79,6 +88,9 @@ vector<Ball*> BallManager::getBalls()
 }
 
 void BallManager::clearBalls() {
+	freezed = false;
+	delayDynamite = 0;
+	delayFreeze = 0;
 	for (auto& ball : balls)
 	{
 		delete ball;
@@ -101,3 +113,13 @@ void BallManager::dynamite()
 	delayDynamite = 20;
 }
 
+void BallManager::freezeTime()
+{
+	delayFreeze = 60 * 5;
+	freezed = true;
+}
+
+bool BallManager::isFreezed()
+{
+	return freezed;
+}

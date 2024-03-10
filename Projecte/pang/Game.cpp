@@ -118,3 +118,8 @@ void Game::dynamite()
 {
 	scene.dynamite();
 }
+
+void Game::freezeTime()
+{
+	scene.freezeTime();
+}

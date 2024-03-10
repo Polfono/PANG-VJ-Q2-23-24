@@ -68,7 +68,7 @@ bool Player::update(int deltaTime)
 	sprite->update(deltaTime);
 
 	// Comprueba colisiones con las bolas
-	if(!god) {
+	if(!god && !BallManager::instance()->isFreezed()) {
 		for (Ball* ball : BallManager::instance()->getBalls()) {
 			if (checkCollision(ball)) {
 				arpon.reset();

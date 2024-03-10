@@ -337,3 +337,7 @@ void Scene::extraLife() {
 void Scene::dynamite() {
 	ballManager->dynamite();
 }
+
+void Scene::freezeTime() {
+	ballManager->freezeTime();
+}

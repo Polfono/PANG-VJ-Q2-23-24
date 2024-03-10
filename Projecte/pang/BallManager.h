@@ -24,6 +24,8 @@ public:
 	vector<Ball*> getBalls();
 	void clearBalls();
 	void dynamite();
+	void freezeTime();
+	bool isFreezed();
 
 	void setTileMap(TileMap* tileMap);
 
@@ -33,6 +35,8 @@ private:
 	vector<Ball*> balls;
 	TileMap* map;
 	int delayDynamite = 0;
+	int delayFreeze = 0;
+	bool freezed = false;
 };
 
 #endif
