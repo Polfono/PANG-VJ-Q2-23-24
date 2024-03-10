@@ -224,6 +224,7 @@ void Scene::render()
 		textRenderer.render(nameStage, glm::vec2(250, 450), 17, glm::vec4(1, 1, 1, 1));
 
 		std::string scoreText = "SCORE:";
+		if (score < 1000000) scoreText += "0";
 		if (score < 100000) scoreText += "0";
 		if (score < 10000) scoreText += "0";
 		if (score < 1000) scoreText += "0";
@@ -254,6 +255,7 @@ void Scene::render()
 	else {
 		textRenderer.render("GAME OVER", glm::vec2(175, 200), 32, glm::vec4(1, 1, 1, 1));
 		std::string scoreText = "SCORE:";
+		if (score < 1000000) scoreText += "0";
 		if (score < 100000) scoreText += "0";
 		if (score < 10000) scoreText += "0";
 		if (score < 1000) scoreText += "0";
