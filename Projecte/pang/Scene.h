@@ -31,6 +31,8 @@ public:
 	void setLevel(int level);
 	void nextLevel();
 	void reset();
+	void extraLife();
+	void dynamite();
 
 private:
 	void initShaders();

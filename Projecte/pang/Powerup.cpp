@@ -1,10 +1,12 @@
 #include "Powerup.h"
 #include "PowerupsManager.h"
+#include "Game.h"
 #include <iostream>
 
 
 void Powerup::init(glm::vec2 pos, const glm::ivec2& tileMapPos, ShaderProgram& shaderProgram)
 {
+	srand(time(NULL));
 	type = PowerupType(rand() % 5);
 	posPowerup = pos;
 
@@ -26,7 +28,7 @@ void Powerup::init(glm::vec2 pos, const glm::ivec2& tileMapPos, ShaderProgram& s
 	tileMapDispl = tileMapPos;
 }
 
-void Powerup::update(glm::vec2 posPlayer)
+void Powerup::update()
 {
 	timeCounter++;
 
@@ -42,37 +44,15 @@ void Powerup::update(glm::vec2 posPlayer)
 		sprite->changeAnimation(0);
 	}
 
+	if (timeCounter > 600) {
+		PowerupsManager::instance()->removePowerup(this);
+		return;
+	}
+
 	// gravedad
 	posPowerup.y += 1.75f;
 	map->collisionMoveDownPlayer(posPowerup, glm::ivec2(16, 16), &posPowerup.y);
 	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posPowerup.x), float(tileMapDispl.y + posPowerup.y)));
-
-	// si toca el jugador
-	if ((posPlayer.x + 30 > posPowerup.x && posPlayer.x < posPowerup.x + 16) && (posPlayer.y + 32 > posPowerup.y && posPlayer.y < posPowerup.y + 16)) {
-		SoundManager::instance().getSoundEngine()->play2D("sounds/item.mp3", GL_FALSE);
-		PowerupsManager::instance()->removePowerup(this);
-
-		// Aplicar efecto
-		if (type == DYNAMITE) {
-
-		}
-		else if (type == FREEZETIME) {
-
-		}
-		else if (type == INVINCIBILITY) {
-
-		}
-		else if (type == SLOWTIME) {
-
-		}
-		else if (type == EXTRALIFE) {
-
-		}
-	}
-
-	if (timeCounter > 600) {
-		PowerupsManager::instance()->removePowerup(this);
-	}
 }
 
 void Powerup::render()
@@ -84,3 +64,27 @@ void Powerup::setTileMap(TileMap* tileMap)
 {
 	map = tileMap;
 }
+
+void Powerup::checkCollision(glm::vec2 posPlayer)
+{
+	if(this == nullptr) return;
+	if ((posPlayer.x + 30 > posPowerup.x && posPlayer.x < posPowerup.x + 16) && (posPlayer.y + 32 > posPowerup.y && posPlayer.y < posPowerup.y + 16)) {
+		SoundManager::instance().getSoundEngine()->play2D("sounds/item.mp3", GL_FALSE);
+
+		// Aplicar efecto
+		if (type == DYNAMITE) Game::instance().dynamite();
+
+		else if (type == FREEZETIME) {
+
+		}
+		else if (type == INVINCIBILITY) {
+
+		}
+		else if (type == SLOWTIME) {
+
+		}
+		else if (type == EXTRALIFE) Game::instance().extraLife();
+
+		PowerupsManager::instance()->removePowerup(this);
+	}
+}	

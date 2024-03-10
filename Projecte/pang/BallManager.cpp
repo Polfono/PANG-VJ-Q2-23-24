@@ -28,8 +28,21 @@ void BallManager::removeBall(Ball* ball)
 
 bool BallManager::updateBalls()
 {
-	if(balls.empty())
+	if (balls.empty())
 		return false;
+
+	// si aun hay bolas no small
+	--delayDynamite;
+	if (delayDynamite == 0) {
+		vector<Ball*> nonSplitedBalls = getBalls();
+		for (auto& ball : nonSplitedBalls)
+		{
+			if (!ball->isSmall())
+			{
+				dynamite();
+			}
+		}
+	}
 
 	for (auto& ball : balls)
 	{
@@ -71,5 +84,20 @@ void BallManager::clearBalls() {
 		delete ball;
 	}
 	balls.clear();
+}
+
+// for all non small balls split
+void BallManager::dynamite()
+{
+	vector<Ball*> nonSplitedBalls = getBalls();
+	for (auto& ball : nonSplitedBalls)
+	{
+		if (!ball->isSmall())
+		{
+			ball->split();
+		}
+	}
+
+	delayDynamite = 20;
 }
 

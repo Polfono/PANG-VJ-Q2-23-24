@@ -39,6 +39,9 @@ public:
 
 	bool getKey(int key) const;
 
+	void extraLife();
+	void dynamite();
+
 private:
 	bool start;
 	int posIndex;

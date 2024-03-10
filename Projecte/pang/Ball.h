@@ -25,6 +25,7 @@ public:
 	glm::ivec2 getSize();
 	glm::vec2 getPosition();
 	bool isDestroyed();
+	bool isSmall();
 
 	void setTileMap(TileMap* tileMap);
 	void setPosition(const glm::vec2& pos);

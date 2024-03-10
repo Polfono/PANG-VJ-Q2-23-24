@@ -17,9 +17,10 @@ class Powerup
 public:
 
 	void init(glm::vec2 pos, const glm::ivec2& tileMapPos, ShaderProgram& shaderProgram);
-	void update(glm::vec2 posPlayer);
+	void update();
 	void render();
 	void setTileMap(TileMap* tileMap);
+	void checkCollision(glm::vec2 posPlayer);
 
 private:
 

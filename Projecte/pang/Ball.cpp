@@ -131,3 +131,8 @@ bool Ball::isDestroyed()
 {
 	return destroyCounter > 0;
 }
+
+bool Ball::isSmall()
+{
+	return size == SMALL;
+}   

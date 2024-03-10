@@ -23,6 +23,7 @@ public:
 	void renderBalls();
 	vector<Ball*> getBalls();
 	void clearBalls();
+	void dynamite();
 
 	void setTileMap(TileMap* tileMap);
 
@@ -31,6 +32,7 @@ private:
 	static BallManager* s_inst;
 	vector<Ball*> balls;
 	TileMap* map;
+	int delayDynamite = 0;
 };
 
 #endif

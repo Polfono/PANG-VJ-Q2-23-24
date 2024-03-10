@@ -329,3 +329,11 @@ void Scene::reset() {
 	ballManager->clearBalls();
 	setLevel(1);
 }
+
+void Scene::extraLife() {
+	vidas++;
+}
+
+void Scene::dynamite() {
+	ballManager->dynamite();
+}

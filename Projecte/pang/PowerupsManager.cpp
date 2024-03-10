@@ -32,8 +32,14 @@ void PowerupsManager::update(glm::vec2 posPlayer)
 
 	for (auto& powerup : powerups)
 	{
-		powerup->update(posPlayer);
+		powerup->update();
 	}
+
+	for (auto& powerup : powerups)
+	{
+		powerup->checkCollision(posPlayer);
+	}
+
 }
 
 void PowerupsManager::render()
