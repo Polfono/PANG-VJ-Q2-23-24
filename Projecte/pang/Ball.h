@@ -4,6 +4,7 @@
 #include "Sprite.h"
 #include "TileMap.h"
 #include "Constants.h"
+#include "PowerupsManager.h"
 
 
 

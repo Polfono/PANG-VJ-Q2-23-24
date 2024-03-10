@@ -21,6 +21,8 @@
     <ClInclude Include="Level.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Powerup.h" />
+    <ClInclude Include="PowerupsManager.h" />
     <ClInclude Include="Quad.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Scene.h" />
@@ -44,6 +46,8 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Powerup.cpp" />
+    <ClCompile Include="PowerupsManager.cpp" />
     <ClCompile Include="Quad.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Shader.cpp" />

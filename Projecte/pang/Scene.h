@@ -10,6 +10,7 @@
 #include "Text.h"
 #include "Constants.h"
 #include "Food.h"
+#include "PowerupsManager.h"
 
 
 // Scene contains all the entities of our game.
@@ -38,6 +39,7 @@ private:
 	TileMap* map;
 	Player *player;
 	Food *food;
+	PowerupsManager* powerupsManager = PowerupsManager::instance();
 	BallManager* ballManager = BallManager::instance();
 	ShaderProgram texProgram;
 	glm::mat4 projection;

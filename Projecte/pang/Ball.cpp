@@ -91,6 +91,11 @@ void Ball::split()
     }
 
     SoundManager::instance().getSoundEngine()->play2D("sounds/pop.mp3", GL_FALSE);
+
+    //probablididad de que salga un powerup 0.1
+    srand(time(NULL));
+    if (rand() % 9 == 0) PowerupsManager::instance()->addPowerup(glm::vec2(posBall.x, posBall.y), tileMapDispl);
+
     destroyCounter = 20;
     sprite->changeAnimation(1);
 }

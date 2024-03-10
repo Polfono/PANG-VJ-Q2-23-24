@@ -44,12 +44,12 @@ void Scene::init()
 	player = new Player();
 	player->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
 
-	// Init Ball Manager
-	ballManager = BallManager::instance();
-
 	// Init Food
 	food = new Food();
 	food->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
+
+	// Init PowerupsManager
+	powerupsManager->setTileMap(map);
 
 	// Init Projection
 	float zoomFactor = 1.425f;
@@ -144,6 +144,8 @@ bool Scene::update(int deltaTime)
 
 			score += food->update(player->getPosition());
 
+			powerupsManager->update(player->getPosition());
+
 			if (!ballManager->updateBalls()) {
 				SoundManager::instance().getSoundEngine()->removeAllSoundSources();
 				SoundManager::instance().getSoundEngine()->play2D("sounds/StageCompleted.mp3", false);
@@ -177,6 +179,7 @@ bool Scene::update(int deltaTime)
 			map = Level::instance().LoadMapLevel(level);
 			player->reset();
 			ballManager->clearBalls();
+			powerupsManager->clear();
 			food->reset();
 			Level::instance().LoadMapConfig(level, map, &scene, player, ballManager, &nameStage, food);
 		}
@@ -213,6 +216,9 @@ void Scene::render()
 
 		// Render Food
 		food->render();
+
+		// Render Powerups
+		powerupsManager->render();
 
 		// Render Text
 		std::string timeText = "TIME:";
@@ -282,6 +288,7 @@ void Scene::nextLevel() {
 	hit = false;
 	map = Level::instance().LoadMapLevel(level);
 	ballManager->clearBalls();
+	powerupsManager->clear();
 	food->reset();
 	Level::instance().LoadMapConfig(level, map, &scene, player, ballManager, &nameStage, food);
 
@@ -303,6 +310,7 @@ void Scene::setLevel(int level) {
 	map = Level::instance().LoadMapLevel(level);
 	food->reset();
 	ballManager->clearBalls();
+	powerupsManager->clear();
 	Level::instance().LoadMapConfig(level, map, &scene, player, ballManager, &nameStage, food);
 
 	timeLeft = 100;
