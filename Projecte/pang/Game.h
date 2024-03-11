@@ -42,6 +42,7 @@ public:
 	void extraLife();
 	void dynamite();
 	void freezeTime();
+	void slowTime();
 
 private:
 	bool start;

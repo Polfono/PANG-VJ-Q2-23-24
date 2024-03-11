@@ -34,6 +34,7 @@ public:
 	void extraLife();
 	void dynamite();
 	void freezeTime();
+	void slowTime();
 
 private:
 	void initShaders();

@@ -4,6 +4,7 @@
 #include <iostream>
 #include <map>
 #include <ctime>
+#include <chrono>
 
 map<FoodType, int> points =
 {
@@ -97,7 +98,11 @@ void Food::setTileMap(TileMap* tileMap)
 void Food::reset()
 {
 	// random type using time seed
-	srand(time(NULL));
+	auto currentTime = std::chrono::system_clock::now();
+	auto timestamp = std::chrono::duration_cast<std::chrono::milliseconds>(currentTime.time_since_epoch()).count();
+
+	// Inicializa la semilla srand con el valor de la marca de tiempo
+	srand(static_cast<unsigned int>(timestamp));
 	type = FoodType(rand() % 28);
 
 	// random number between 10 and 30

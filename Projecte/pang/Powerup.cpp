@@ -2,13 +2,18 @@
 #include "PowerupsManager.h"
 #include "Game.h"
 #include <iostream>
+#include <chrono>
 
 
 void Powerup::init(glm::vec2 pos, const glm::ivec2& tileMapPos, ShaderProgram& shaderProgram)
 {
-	srand(time(NULL));
+	auto currentTime = std::chrono::system_clock::now();
+	auto timestamp = std::chrono::duration_cast<std::chrono::milliseconds>(currentTime.time_since_epoch()).count();
+
+	// Inicializa la semilla srand con el valor de la marca de tiempo
+	srand(static_cast<unsigned int>(timestamp));
 	type = PowerupType(rand() % 5);
-	posPowerup = pos;
+	posPowerup = glm::ivec2(pos.x, std::min(pos.y, 184.f));
 
 	spritesheet.loadFromFile("images/powerups.png", TEXTURE_PIXEL_FORMAT_RGBA);
 	sprite = Sprite::createSprite(glm::ivec2(16, 16), glm::vec2(0.33332f, 0.33332f), &spritesheet, &shaderProgram);
@@ -79,9 +84,7 @@ void Powerup::checkCollision(glm::vec2 posPlayer)
 		else if (type == INVINCIBILITY) {
 
 		}
-		else if (type == SLOWTIME) {
-
-		}
+		else if (type == SLOWTIME) Game::instance().slowTime();
 		else if (type == EXTRALIFE) Game::instance().extraLife();
 
 		PowerupsManager::instance()->removePowerup(this);

@@ -50,9 +50,12 @@ bool BallManager::updateBalls()
 		}
 	}
 
-	for (auto& ball : balls)
-	{
-		ball->update();
+	--delaySlow;
+	if (delaySlow < 0 || delaySlow % 3 > 0) {
+		for (auto& ball : balls)
+		{
+			ball->update();
+		}
 	}
 	return true;
 }
@@ -91,6 +94,7 @@ void BallManager::clearBalls() {
 	freezed = false;
 	delayDynamite = 0;
 	delayFreeze = 0;
+	delaySlow = 0;
 	for (auto& ball : balls)
 	{
 		delete ball;
@@ -122,4 +126,9 @@ void BallManager::freezeTime()
 bool BallManager::isFreezed()
 {
 	return freezed;
+}
+
+void BallManager::slowTime()
+{
+	delaySlow = 60 * 5;
 }

@@ -123,3 +123,8 @@ void Game::freezeTime()
 {
 	scene.freezeTime();
 }
+
+void Game::slowTime()
+{
+	scene.slowTime();
+}

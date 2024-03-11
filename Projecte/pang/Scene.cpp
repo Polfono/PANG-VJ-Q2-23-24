@@ -71,6 +71,41 @@ bool Scene::update(int deltaTime)
 {
 	currentTime += deltaTime;
 
+	static bool wasTPressed = false;
+	if (Game::instance().getKey(GLFW_KEY_T) && !wasTPressed) {
+		wasTPressed = true;
+		ballManager->dynamite();
+	}
+	if (!Game::instance().getKey(GLFW_KEY_T)) wasTPressed = false;
+
+	static bool wasYPressed = false;
+	if (Game::instance().getKey(GLFW_KEY_Y) && !wasYPressed) {
+		wasYPressed = true;
+		ballManager->freezeTime();
+	}
+	if (!Game::instance().getKey(GLFW_KEY_Y)) wasYPressed = false;
+
+	static bool wasUPressed = false;
+	if (Game::instance().getKey(GLFW_KEY_U) && !wasUPressed) {
+		wasUPressed = true;
+		// invincibility
+	}
+	if (!Game::instance().getKey(GLFW_KEY_U)) wasUPressed = false;
+
+	static bool wasIPressed = false;
+	if (Game::instance().getKey(GLFW_KEY_I) && !wasIPressed) {
+		wasIPressed = true;
+		ballManager->slowTime();
+	}
+	if (!Game::instance().getKey(GLFW_KEY_I)) wasIPressed = false;
+
+	static bool wasOPressed = false;
+	if (Game::instance().getKey(GLFW_KEY_O) && !wasOPressed) {
+		wasOPressed = true;
+		extraLife();
+	}
+	if (!Game::instance().getKey(GLFW_KEY_O)) wasOPressed = false;
+
 	static bool wasGPressed = false;
 	if (Game::instance().getKey(GLFW_KEY_G) && !wasGPressed) {
 		wasGPressed = true;
@@ -340,4 +375,8 @@ void Scene::dynamite() {
 
 void Scene::freezeTime() {
 	ballManager->freezeTime();
+}
+
+void Scene::slowTime() {
+	ballManager->slowTime();
 }

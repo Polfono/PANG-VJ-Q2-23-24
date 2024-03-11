@@ -26,6 +26,7 @@ public:
 	void dynamite();
 	void freezeTime();
 	bool isFreezed();
+	void slowTime();
 
 	void setTileMap(TileMap* tileMap);
 
@@ -37,6 +38,7 @@ private:
 	int delayDynamite = 0;
 	int delayFreeze = 0;
 	bool freezed = false;
+	int delaySlow = 0;
 };
 
 #endif

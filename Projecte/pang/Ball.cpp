@@ -6,6 +6,7 @@
 #include <map>
 #include "Constants.h"
 #include <cmath>
+#include <chrono>
 #include "BallManager.h"
 
 
@@ -93,7 +94,11 @@ void Ball::split()
     SoundManager::instance().getSoundEngine()->play2D("sounds/pop.mp3", GL_FALSE);
 
     //probablididad de que salga un powerup 0.1
-    srand(time(NULL));
+    auto currentTime = std::chrono::system_clock::now();
+    auto timestamp = std::chrono::duration_cast<std::chrono::milliseconds>(currentTime.time_since_epoch()).count();
+
+    // Inicializa la semilla srand con el valor de la marca de tiempo
+    srand(static_cast<unsigned int>(timestamp));
     if (rand() % 9 == 0) PowerupsManager::instance()->addPowerup(glm::vec2(posBall.x, posBall.y), tileMapDispl);
 
     destroyCounter = 20;
