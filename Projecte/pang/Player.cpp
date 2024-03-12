@@ -149,7 +149,7 @@ bool Player::update(int deltaTime)
 
 	// Si esta tocando el suelo y se pulsa por primera vez S se dispara y anima
 	
-	if (map->collisionMoveDownPlayer(posPlayer, glm::ivec2(30, 32), temp)) {
+	if (map->collisionMoveDownPlayer(glm::vec2(posPlayer.x + 5, posPlayer.y), glm::ivec2(20, 32), temp)) {
 		speed = 0;
 		static bool wasSPressed = false;
 		if (!wasSPressed && Game::instance().getKey(GLFW_KEY_S) && arpon.setPosition(glm::vec2(posPlayer.x, posPlayer.y))) {

@@ -1,7 +1,3 @@
-﻿  Powerup.cpp
-C:\Users\polfo\PANG-VJ-Q2-23-24\Projecte\pang\Powerup.cpp(58,18): warning C4244: '+=': conversión de 'float' a 'T'; posible pérdida de datos
-C:\Users\polfo\PANG-VJ-Q2-23-24\Projecte\pang\Powerup.cpp(58,18): warning C4244:         with
-C:\Users\polfo\PANG-VJ-Q2-23-24\Projecte\pang\Powerup.cpp(58,18): warning C4244:         [
-C:\Users\polfo\PANG-VJ-Q2-23-24\Projecte\pang\Powerup.cpp(58,18): warning C4244:             T=int
-C:\Users\polfo\PANG-VJ-Q2-23-24\Projecte\pang\Powerup.cpp(58,18): warning C4244:         ]
-  pang.vcxproj -> C:\Users\polfo\PANG-VJ-Q2-23-24\Projecte\Debug\pang.exe
+﻿  Player.cpp
+C:\Users\Gorka\Documents\Gorka\Uni\Q6\VJ\PANG2\PANG-VJ-Q2-23-24\Projecte\pang\Player.cpp(278,19): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
+  pang.vcxproj -> C:\Users\Gorka\Documents\Gorka\Uni\Q6\VJ\PANG2\PANG-VJ-Q2-23-24\Projecte\Debug\pang.exe
