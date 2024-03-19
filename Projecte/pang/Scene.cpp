@@ -134,6 +134,61 @@ bool Scene::update(int deltaTime)
 	}
 	if(!Game::instance().getKey(GLFW_KEY_B)) wasBPressed = false;
 
+	// Level Selection with numbers
+	static bool was1Pressed = false;
+	if (Game::instance().getKey(GLFW_KEY_1) && !was1Pressed) {
+		setLevel(1);
+	}
+	if (!Game::instance().getKey(GLFW_KEY_1)) was1Pressed = false;
+
+	static bool was2Pressed = false;
+	if (Game::instance().getKey(GLFW_KEY_2) && !was2Pressed) {
+		setLevel(2);
+	}
+	if (!Game::instance().getKey(GLFW_KEY_2)) was2Pressed = false;
+
+	static bool was3Pressed = false;
+	if (Game::instance().getKey(GLFW_KEY_3) && !was3Pressed) {
+		setLevel(3);
+	}
+	if (!Game::instance().getKey(GLFW_KEY_3)) was3Pressed = false;
+
+	static bool was4Pressed = false;
+	if (Game::instance().getKey(GLFW_KEY_4) && !was4Pressed) {
+		setLevel(4);
+	}
+	if (!Game::instance().getKey(GLFW_KEY_4)) was4Pressed = false;
+
+	static bool was5Pressed = false;
+	if (Game::instance().getKey(GLFW_KEY_5) && !was5Pressed) {
+		setLevel(5);
+	}
+	if (!Game::instance().getKey(GLFW_KEY_5)) was5Pressed = false;
+
+	static bool was6Pressed = false;
+	if (Game::instance().getKey(GLFW_KEY_6) && !was6Pressed) {
+		setLevel(6);
+	}
+	if (!Game::instance().getKey(GLFW_KEY_6)) was6Pressed = false;
+
+	static bool was7Pressed = false;
+	if (Game::instance().getKey(GLFW_KEY_7) && !was7Pressed) {
+		setLevel(7);
+	}
+	if (!Game::instance().getKey(GLFW_KEY_7)) was7Pressed = false;
+
+	static bool was8Pressed = false;
+	if (Game::instance().getKey(GLFW_KEY_8) && !was8Pressed) {
+		setLevel(8);
+	}
+	if (!Game::instance().getKey(GLFW_KEY_8)) was8Pressed = false;
+
+	static bool was9Pressed = false;
+	if (Game::instance().getKey(GLFW_KEY_9) && !was9Pressed) {
+		setLevel(9);
+	}
+	if (!Game::instance().getKey(GLFW_KEY_9)) was9Pressed = false;
+
 	if (vidas < 0) {
 		// GAME OVER SCENE //
 		// hacer solo una vez
