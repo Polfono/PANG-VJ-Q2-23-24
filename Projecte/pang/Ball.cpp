@@ -55,7 +55,10 @@ void Ball::update()
         // Suelo
         if (map->collisionMoveDownBall(posBall, get<0>(sizeMap[size]), &posBall.y))
         {
-            speed = max(-get<3>(sizeMap[size]), -sqrt(2 * GRAVEDAD * (posBall.y - 15))); // 15 es la altura maxima
+            if (posBall.y >= 160)
+                speed = -get<3>(sizeMap[size]); // 15 es la altura maxima
+            else
+                speed = -speed;
         }
 
         if (!BallManager::instance()->isFreezed()) posBall.x += direction;

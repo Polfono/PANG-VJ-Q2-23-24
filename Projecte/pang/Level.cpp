@@ -49,7 +49,10 @@ void Level::LoadMapConfig(int level, TileMap* map, Texture* scene, Player* playe
 		*nameStage = "EMERALD TEMPLE";
 		player->setPosition(glm::vec2(21 * map->getTileSize(), 21 * map->getTileSize()));
 		ballManager->addBall(glm::vec2(8 * map->getTileSize(), 2 * map->getTileSize()), glm::ivec2(SCREEN_X, SCREEN_Y), EXTRA_LARGE, LEFT);
-		ballManager->addBall(glm::vec2(37 * map->getTileSize(), 2 * map->getTileSize()), glm::ivec2(SCREEN_X, SCREEN_Y), EXTRA_LARGE, LEFT);
+
+		ballManager->addBall(glm::vec2(8 * map->getTileSize(), 12 * map->getTileSize()), glm::ivec2(SCREEN_X, SCREEN_Y), LARGE, RIGHT);
+		ballManager->addBall(glm::vec2(15 * map->getTileSize(), 12 * map->getTileSize()), glm::ivec2(SCREEN_X, SCREEN_Y), LARGE, RIGHT);
+		ballManager->addBall(glm::vec2(35 * map->getTileSize(), 12* map->getTileSize()), glm::ivec2(SCREEN_X, SCREEN_Y), LARGE, LEFT);
 	}
 	else if (level == 4) {
 		*nameStage = "ANKOR WATT";

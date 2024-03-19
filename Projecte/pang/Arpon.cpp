@@ -70,7 +70,7 @@ void Arpon::setTileMap(TileMap* tileMap)
 bool Arpon::setPosition(const glm::vec2& pos)
 {
 	if (!bThrowing) {
-		posArpon = glm::vec2(pos.x +12, pos.y -168);
+		posArpon = glm::vec2(pos.x +12, pos.y -161);
 		sprite->setPosition(glm::vec2(float(tileMapDispl.x + posArpon.x), float(tileMapDispl.y + posArpon.y)));
 		return true;
 	}
