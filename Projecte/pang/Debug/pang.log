@@ -1,2 +1,18 @@
-﻿  Menu.cpp
+﻿  Scene.cpp
+C:\Users\Gorka\Documents\Gorka\Uni\Q6\VJ\PANG2\PANG-VJ-Q2-23-24\Projecte\pang\Scene.cpp(319,114): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\Gorka\Documents\Gorka\Uni\Q6\VJ\PANG2\PANG-VJ-Q2-23-24\Projecte\pang\Scene.cpp(320,140): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\Gorka\Documents\Gorka\Uni\Q6\VJ\PANG2\PANG-VJ-Q2-23-24\Projecte\pang\Scene.cpp(321,121): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\Gorka\Documents\Gorka\Uni\Q6\VJ\PANG2\PANG-VJ-Q2-23-24\Projecte\pang\Scene.cpp(331,116): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\Gorka\Documents\Gorka\Uni\Q6\VJ\PANG2\PANG-VJ-Q2-23-24\Projecte\pang\Scene.cpp(333,144): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\Gorka\Documents\Gorka\Uni\Q6\VJ\PANG2\PANG-VJ-Q2-23-24\Projecte\pang\Scene.cpp(337,115): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\Gorka\Documents\Gorka\Uni\Q6\VJ\PANG2\PANG-VJ-Q2-23-24\Projecte\pang\Scene.cpp(340,134): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\Gorka\Documents\Gorka\Uni\Q6\VJ\PANG2\PANG-VJ-Q2-23-24\Projecte\pang\Scene.cpp(345,159): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\Gorka\Documents\Gorka\Uni\Q6\VJ\PANG2\PANG-VJ-Q2-23-24\Projecte\pang\Scene.cpp(346,162): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\Gorka\Documents\Gorka\Uni\Q6\VJ\PANG2\PANG-VJ-Q2-23-24\Projecte\pang\Scene.cpp(353,119): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\Gorka\Documents\Gorka\Uni\Q6\VJ\PANG2\PANG-VJ-Q2-23-24\Projecte\pang\Scene.cpp(362,118): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\Gorka\Documents\Gorka\Uni\Q6\VJ\PANG2\PANG-VJ-Q2-23-24\Projecte\pang\Scene.cpp(363,137): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\Gorka\Documents\Gorka\Uni\Q6\VJ\PANG2\PANG-VJ-Q2-23-24\Projecte\pang\Scene.cpp(442,10): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\Gorka\Documents\Gorka\Uni\Q6\VJ\PANG2\PANG-VJ-Q2-23-24\Projecte\pang\Scene.cpp(443,10): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\Gorka\Documents\Gorka\Uni\Q6\VJ\PANG2\PANG-VJ-Q2-23-24\Projecte\pang\Scene.cpp(458,18): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\Gorka\Documents\Gorka\Uni\Q6\VJ\PANG2\PANG-VJ-Q2-23-24\Projecte\pang\Scene.cpp(459,17): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
   pang.vcxproj -> C:\Users\Gorka\Documents\Gorka\Uni\Q6\VJ\PANG2\PANG-VJ-Q2-23-24\Projecte\Debug\pang.exe

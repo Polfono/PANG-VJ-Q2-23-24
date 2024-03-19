@@ -360,7 +360,7 @@ void Scene::render()
 		if (score < 10) scoreText += "0";
 		scoreText += std::to_string(score);
 		textRenderer.render(scoreText, glm::vec2(round(53.0f/160.0f*currentWidth), round(25.0f/48.0f*currentHeight)), round(currentWidth / 40), glm::vec4(1, 1, 1, 1));
-		textRenderer.render("PRESS 'gENTER' TO RETURN MENU", glm::vec2(round(7.0f/32.0f*currentWidth), round(15.0f/16.0f*currentHeight)), round(currentWidth/53), glm::vec4(1, 1, 1, 1));
+		textRenderer.render("PRESS 'ENTER' TO RETURN MENU", glm::vec2(round(7.0f/32.0f*currentWidth), round(15.0f/16.0f*currentHeight)), round(currentWidth/53), glm::vec4(1, 1, 1, 1));
 	}
 }
 
