@@ -439,9 +439,24 @@ void Scene::slowTime() {
 
 void Scene::resize(int width, int height) {
 	// Tenemos que comprobar que las coordenadas mantengan relacion de aspecto de 4/3
-	
-	currentHeight = height;
-	currentWidth = width;
-	Game::instance().resizeMenu(height, width);
+	float w = width;
+	float h = height;
+	float raw = w / h;
+	if (raw > 4.0f/3.0f) {
+		// Modificamos width para mantener relacion aspecto
+		do {
+			w -= 1;
+		} while (w / h > 4.0f / 3.0f);
+	}
+	else if (raw < 4.0f / 3.0f) {
+		// Modificamos height para manterner relacion aspecto
+		do {
+			h -= 1;
+		} while (w / h < 4.0f / 3.0f);
+	}
+
+	currentHeight = h;
+	currentWidth = w;
+	Game::instance().resizeMenu(currentWidth, currentHeight);
 	projection = glm::ortho(0.f, float(currentWidth) / ZOOM_FACTOR, float(currentHeight) / ZOOM_FACTOR, 0.f);
 }
