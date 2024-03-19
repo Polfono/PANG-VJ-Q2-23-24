@@ -44,6 +44,7 @@ public:
 	void dynamite();
 	void freezeTime();
 	void slowTime();
+	void resizeMenu(int width, int height);
 
 private:
 	bool start;

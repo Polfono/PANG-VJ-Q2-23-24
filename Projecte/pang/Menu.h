@@ -4,7 +4,7 @@
 #include <glm/glm.hpp>
 #include "TexturedQuad.h"
 #include "Sprite.h"
-
+#include "Constants.h"
 
 class Menu {
 public:
@@ -15,6 +15,7 @@ public:
 	void render(int n);
 	void update(int deltaTime);
 	void setPosIndex(int pos);
+	void resizeMenu(int witdh, int height);
 
 private:
 	int id;
@@ -25,6 +26,8 @@ private:
 	glm::mat4 projection;
 	Texture menu;
 	Texture credits;
+	int currentWidth = SCREEN_WIDTH;
+	int currentHeight = SCREEN_HEIGHT;
 };
 
 #endif // _MENU_INCLUDE

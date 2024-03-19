@@ -1,10 +1,9 @@
 #include "Menu.h"
 #include "ShaderProgramManager.h"
-#include "Constants.h"
 
 Menu::Menu()
 {
-	glm::vec2 geom[2] = { glm::vec2(0.f, 0.f), glm::vec2(SCREEN_WIDTH, SCREEN_HEIGHT) };
+	glm::vec2 geom[2] = { glm::vec2(0.f, 0.f), glm::vec2(SCREEN_WIDTH / 1.5f, SCREEN_HEIGHT / 1.5f) };
 	glm::vec2 texCoords[2] = { glm::vec2(0.f, 0.f), glm::vec2(1.f, 1.f) };
 	bground = TexturedQuad::createTexturedQuad(geom, texCoords, ShaderProgramManager::instance().getShaderProgram());
 
@@ -85,4 +84,10 @@ void Menu::render(int n)
 		
 	else
 		bground->render(credits);
+}
+
+void Menu::resizeMenu(int width, int height)
+{
+	currentWidth = width;
+	currentHeight = height;
 }
