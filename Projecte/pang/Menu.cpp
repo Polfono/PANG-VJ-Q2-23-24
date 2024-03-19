@@ -29,8 +29,8 @@ Menu::Menu()
 	sprite2->addKeyframe(0, glm::vec2(0.75f, 0.f));
 	sprite2->changeAnimation(0);
 
-	sprite1->setPosition(glm::vec2(70.f, 200.f));
-	sprite2->setPosition(glm::vec2(510.f, 200.f));
+	sprite1->setPosition(glm::vec2(round(7.0f/92.0f*currentWidth), round(5.0f/18.0f*currentHeight)));
+	sprite2->setPosition(glm::vec2(round(51.0f/92.0f*currentWidth), round(5.0f / 18.0f * currentHeight)));
 
 	menu.loadFromFile("images/menu.png", TEXTURE_PIXEL_FORMAT_RGBA);
 	credits.loadFromFile("images/credits.png", TEXTURE_PIXEL_FORMAT_RGBA);
@@ -59,17 +59,17 @@ void Menu::update(int deltaTime)
 void Menu::setPosIndex(int pos)
 {
 	if (pos == 0) {
-		sprite1->setPosition(glm::vec2(70.f, 200.f));
-		sprite2->setPosition(glm::vec2(510.f, 200.f));
+		sprite1->setPosition(glm::vec2(round(70.0f/920.0*currentWidth), round(5.0f / 18.0f * currentHeight)));
+		sprite2->setPosition(glm::vec2(round(510.f/920.0f*currentWidth), round(5.0f / 18.0f * currentHeight)));
 	} else if (pos == 1) {
-		sprite1->setPosition(glm::vec2(70.f, 265.f));
-		sprite2->setPosition(glm::vec2(510.f, 265.f));
+		sprite1->setPosition(glm::vec2(round(70.0f / 920.0 * currentWidth), round(265.f/720.f*currentHeight)));
+		sprite2->setPosition(glm::vec2(round(510.f / 920.0f * currentWidth), round(265.f / 720.f * currentHeight)));
 	} else if (pos == 2) {
-		sprite1->setPosition(glm::vec2(70.f, 330.f));
-		sprite2->setPosition(glm::vec2(510.f, 330.f));
+		sprite1->setPosition(glm::vec2(round(70.0f / 920.0 * currentWidth), round(330.f/720.f*currentHeight)));
+		sprite2->setPosition(glm::vec2(round(510.f / 920.0f * currentWidth), round(330.f / 720.f * currentHeight)));
 	} else {
-		sprite1->setPosition(glm::vec2(70.f, 395.f));
-		sprite2->setPosition(glm::vec2(510.f, 395.f));
+		sprite1->setPosition(glm::vec2(round(70.0f / 920.0 * currentWidth), round(395.f / 720 * currentHeight)));
+		sprite2->setPosition(glm::vec2(round(510.f / 920.0f * currentWidth), round(395.f/720*currentHeight)));
 	}
 }
 
@@ -96,4 +96,6 @@ void Menu::resizeMenu(int width, int height)
 	glm::vec2 geom[2] = { glm::vec2(0.f, 0.f), glm::vec2(currentWidth / 1.5f, currentHeight / 1.5f) };
 	glm::vec2 texCoords[2] = { glm::vec2(0.f, 0.f), glm::vec2(1.f, 1.f) };
 	bground = TexturedQuad::createTexturedQuad(geom, texCoords, ShaderProgramManager::instance().getShaderProgram());
+	sprite1->setPosition(glm::vec2(round(7.0f / 92.0f * currentWidth), round(5.0f / 18.0f * currentHeight)));
+	sprite2->setPosition(glm::vec2(round(51.0f / 92.0f * currentWidth), round(5.0f / 18.0f * currentHeight)));
 }
