@@ -128,3 +128,8 @@ void Game::slowTime()
 {
 	scene.slowTime();
 }
+
+void Game::resize(int width, int height)
+{
+	scene.resize(width, height);
+}

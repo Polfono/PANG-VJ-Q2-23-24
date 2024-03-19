@@ -52,8 +52,9 @@ void Scene::init()
 	powerupsManager->setTileMap(map);
 
 	// Init Projection
-	float zoomFactor = 1.425f;
-	projection = glm::ortho(0.f, float(SCREEN_WIDTH) / zoomFactor, float(SCREEN_HEIGHT) / zoomFactor, 0.f);
+	currentHeight = SCREEN_HEIGHT;
+	currentWidth = SCREEN_WIDTH;
+	projection = glm::ortho(0.f, float(currentWidth) / ZOOM_FACTOR, float(currentHeight) / ZOOM_FACTOR, 0.f);
 
 	// Init Writing
 	textRenderer.init("fonts/PressStart2P-vaV7.ttf");
@@ -315,9 +316,9 @@ void Scene::render()
 		if (timeLeft < 100) timeText += "0";
 		if (timeLeft < 10) timeText += "0";
 		timeText += std::to_string(timeLeft);
-		textRenderer.render(timeText, glm::vec2(440, 60), 17, glm::vec4(1, 1, 1, 1));
-		textRenderer.render("STAGE " + std::to_string(level), glm::vec2(250, 425), 17, glm::vec4(1, 1, 1, 1));
-		textRenderer.render(nameStage, glm::vec2(250, 450), 17, glm::vec4(1, 1, 1, 1));
+		textRenderer.render(timeText, glm::vec2(round(11.0f/16.0f*currentWidth), round(1.0f/9.0f*currentHeight)), round(currentWidth / 40), glm::vec4(1, 1, 1, 1));
+		textRenderer.render("STAGE " + std::to_string(level), glm::vec2(round(25.0f/64.0f*currentWidth), round(85.0f/96.0f*currentHeight)), round(currentWidth / 40), glm::vec4(1, 1, 1, 1));
+		textRenderer.render(nameStage, glm::vec2(round(25.0f / 64.0f * currentWidth), round(15.0f/16.0f*currentHeight)), round(currentWidth / 40), glm::vec4(1, 1, 1, 1));
 
 		std::string scoreText = "SCORE:";
 		if (score < 1000000) scoreText += "0";
@@ -327,29 +328,29 @@ void Scene::render()
 		if (score < 100) scoreText += "0";
 		if (score < 10) scoreText += "0";
 		scoreText += std::to_string(score);
-		textRenderer.render(scoreText, glm::vec2(50, 350), 17, glm::vec4(1, 1, 1, 1));
+		textRenderer.render(scoreText, glm::vec2(round(5.0f/64.0f*currentWidth), round(35.0f/48.0f*currentHeight)), round(currentWidth / 40), glm::vec4(1, 1, 1, 1));
 
-		textRenderer.render("Vidas: " + std::to_string(vidas), glm::vec2(50, 375), 17, glm::vec4(1, 1, 1, 1));
+		textRenderer.render("Vidas: " + std::to_string(vidas), glm::vec2(round(5.0f / 64.0f * currentWidth), round(25.0f/32.0f*currentHeight)), round(currentWidth / 40), glm::vec4(1, 1, 1, 1));
 
 		if (!hit && firstHit && vidas >= 0) {
 			if (hitTime / 333 % 2 == 0)
-				textRenderer.render("READY", glm::vec2(250, 200), 32, glm::vec4(1, 1, 1, 1));
+				textRenderer.render("READY", glm::vec2(round(25.0f/64.0f*currentWidth), round(5.0f/12.0f*currentHeight)),round(currentWidth/20), glm::vec4(1, 1, 1, 1));
 		}
 
-		if(god) textRenderer.render("GOD MODE", glm::vec2(440, 350), 17, glm::vec4(1, 1, 1, 1));
+		if(god) textRenderer.render("GOD MODE", glm::vec2(round(11.0f / 16.0f * currentWidth), round(35.0f / 48.0f * currentHeight)), round(currentWidth / 40), glm::vec4(1, 1, 1, 1));
 	}
 	else if (changeStage) {
 		bground->render(completedStage);
 
-		textRenderer.render("STAGE " + std::to_string(level - 1) + " COMPLETED", glm::vec2(150, 330), 20, glm::vec4(1, 1, 1, 1));
-		textRenderer.render("TIME BONUS    " + std::to_string(scoreTime) + " PTS.", glm::vec2(130, 380), 17, glm::vec4(1, 1, 1, 1));
+		textRenderer.render("STAGE " + std::to_string(level - 1) + " COMPLETED", glm::vec2(round(15.0f/64.0f*currentWidth), round(11.0f/16.0f*currentHeight)), round(currentWidth/32), glm::vec4(1, 1, 1, 1));
+		textRenderer.render("TIME BONUS    " + std::to_string(scoreTime) + " PTS.", glm::vec2(round(13.0f/64.0f*currentWidth), round(19.0f/24.0f*currentHeight)), round(currentWidth / 40), glm::vec4(1, 1, 1, 1));
 		
 		if (currentTime - stageTime >= 4000) {
 			changeStage = false;
 		}
 	}
 	else {
-		textRenderer.render("GAME OVER", glm::vec2(175, 200), 32, glm::vec4(1, 1, 1, 1));
+		textRenderer.render("GAME OVER", glm::vec2(round(35.0f/128.0f*currentWidth), round(5.0f/12.0f*currentHeight)), round(currentWidth/20), glm::vec4(1, 1, 1, 1));
 		std::string scoreText = "SCORE:";
 		if (score < 1000000) scoreText += "0";
 		if (score < 100000) scoreText += "0";
@@ -358,8 +359,8 @@ void Scene::render()
 		if (score < 100) scoreText += "0";
 		if (score < 10) scoreText += "0";
 		scoreText += std::to_string(score);
-		textRenderer.render(scoreText, glm::vec2(215, 250), 17, glm::vec4(1, 1, 1, 1));
-		textRenderer.render("PRESS 'ENTER' TO RETURN MENU", glm::vec2(140, 450), 12, glm::vec4(1, 1, 1, 1));
+		textRenderer.render(scoreText, glm::vec2(round(53.0f/160.0f*currentWidth), round(25.0f/48.0f*currentHeight)), round(currentWidth / 40), glm::vec4(1, 1, 1, 1));
+		textRenderer.render("PRESS 'ENTER' TO RETURN MENU", glm::vec2(round(7.0f/32.0f*currentWidth), round(15.0f/16.0f*currentHeight)), round(currentWidth/53), glm::vec4(1, 1, 1, 1));
 	}
 }
 
@@ -434,4 +435,10 @@ void Scene::freezeTime() {
 
 void Scene::slowTime() {
 	ballManager->slowTime();
+}
+
+void Scene::resize(int width, int height) {
+	currentHeight = height;
+	currentWidth = width;
+	projection = glm::ortho(0.f, float(currentWidth) / ZOOM_FACTOR, float(currentHeight) / ZOOM_FACTOR, 0.f);
 }

@@ -35,6 +35,7 @@ public:
 	void dynamite();
 	void freezeTime();
 	void slowTime();
+	void resize(int width, int height);
 
 private:
 	void initShaders();
@@ -64,7 +65,8 @@ private:
 	int stageTime;
 	int scoreTime;
 	bool god = false;
-
+	int currentWidth;
+	int currentHeight;
 };
 
 

@@ -3,10 +3,11 @@
 #define SCREEN_X 32
 #define SCREEN_Y 16
 #define GRAVEDAD 0.075f
-#define SCREEN_WIDTH 640
-#define SCREEN_HEIGHT 480
+#define SCREEN_WIDTH 960
+#define SCREEN_HEIGHT 720
 #define TARGET_FRAMERATE 60.0f
 #define JUMP_ANGLE_STEP 4
 #define FALL_STEP 4
 #define ATLAS_FONT_SIZE 64
 #define MAX_TIME 90
+#define ZOOM_FACTOR 2.15f
