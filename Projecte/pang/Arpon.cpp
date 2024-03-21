@@ -78,9 +78,9 @@ bool Arpon::setPosition(const glm::vec2& pos)
 }
 
 bool Arpon::checkCollision(Ball* ball) {
-	glm::ivec2 arponSize = glm::ivec2(9, 34 + altura);
+	glm::ivec2 arponSize = glm::ivec2(6, 34 + altura);
 	glm::ivec2 ballSize = ball->getSize();
-	glm::vec2 arponPos = glm::vec2(posArpon.x+34, posArpon.y + 175 - altura);
+	glm::vec2 arponPos = glm::vec2(posArpon.x+31, posArpon.y + 175 - altura);
 	glm::vec2 ballPos = ball->getPosition();
 
 	if (arponPos.x < ballPos.x + ballSize.x &&
