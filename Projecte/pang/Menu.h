@@ -26,6 +26,8 @@ private:
 	glm::mat4 projection;
 	Texture menu;
 	Texture credits;
+	Texture instructions1;
+	Texture instructions2;
 	int currentWidth = SCREEN_WIDTH;
 	int currentHeight = SCREEN_HEIGHT;
 };

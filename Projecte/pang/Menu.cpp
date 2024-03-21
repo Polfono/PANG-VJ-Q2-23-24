@@ -34,6 +34,8 @@ Menu::Menu()
 
 	menu.loadFromFile("images/menu.png", TEXTURE_PIXEL_FORMAT_RGBA);
 	credits.loadFromFile("images/credits.png", TEXTURE_PIXEL_FORMAT_RGBA);
+	instructions1.loadFromFile("images/instructions1.png", TEXTURE_PIXEL_FORMAT_RGBA);
+	instructions2.loadFromFile("images/instructions2.png", TEXTURE_PIXEL_FORMAT_RGBA);
 }
 
 Menu::~Menu()
@@ -82,8 +84,11 @@ void Menu::render(int n)
 		sprite1->render();
 		sprite2->render();
 	}
-		
-	else
+	else if(n == 1)
+		bground->render(instructions1);
+	else if (n == 2)
+		bground->render(instructions2);
+	else if (n == 3)
 		bground->render(credits);
 }
 

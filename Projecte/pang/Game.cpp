@@ -70,15 +70,19 @@ void Game::keyPressed(int key)
 	if (key == GLFW_KEY_ENTER && start == false) { //start game
 		engine->play2D("sounds/Select.mp3", false, false);
 		if (menuSection != 0) {
-			menuSection = 0;
+			if(menuSection == 1) menuSection = 2;
+			else menuSection = 0;
 		}
 		else {
 			if (posIndex == 0) {
 				engine->removeSoundSource("sounds/Menu.mp3");
 				start = true;
 			} 
-			else if (posIndex == 2) {
+			else if (posIndex == 1) {
 				menuSection = 1;
+			}
+			else if (posIndex == 2) {
+				menuSection = 3;
 			}
 			else if (posIndex == 3) bPlay = false;
 		}
