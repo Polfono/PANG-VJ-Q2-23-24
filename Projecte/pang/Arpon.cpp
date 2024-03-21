@@ -41,6 +41,7 @@ void Arpon::update()
 					altura = 0;
 					sprite->changeAnimation(0);
 
+
 					ball->split();
 					break;
 				}

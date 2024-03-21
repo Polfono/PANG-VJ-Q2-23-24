@@ -1,6 +1,7 @@
 #include "BallManager.h"
 #include <iostream>
 #include "ShaderProgramManager.h"
+#include "Game.h"
 
 BallManager* BallManager::s_inst = nullptr;
 
@@ -132,3 +133,22 @@ void BallManager::slowTime()
 {
 	delaySlow = 60 * 5;
 }
+
+void BallManager::addScore(int size, glm::vec2 pos) {
+	static const int scores[] = { 200, 150, 100, 50 };
+
+	if (!lastBalls.empty() && lastBalls.top() != size) {
+		lastBalls = stack<int>();
+	}
+
+	if (lastBalls.size() < 4) {
+		lastBalls.push(size);
+	}
+
+	int multiplier = 1 << (lastBalls.size() - 1);
+	int score = scores[size];
+
+	if(multiplier > 1) Game::instance().addScoreCombo(score * multiplier, pos);
+	Game::instance().addScore(score * multiplier);
+}
+

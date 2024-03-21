@@ -96,6 +96,8 @@ void Ball::split()
 
     SoundManager::instance().getSoundEngine()->play2D("sounds/pop.mp3", GL_FALSE);
 
+    ballManager->addScore(size, posBall);
+
     //probablididad de que salga un powerup 0.1
     auto currentTime = std::chrono::system_clock::now();
     auto timestamp = std::chrono::duration_cast<std::chrono::milliseconds>(currentTime.time_since_epoch()).count();

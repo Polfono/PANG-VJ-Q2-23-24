@@ -70,6 +70,15 @@ void Scene::init()
 
 bool Scene::update(int deltaTime)
 {
+	//recorrer popScore y restar 1 a cada uno, si es 0, borrarlo
+	for (auto it = popScore.begin(); it != popScore.end(); ++it) {
+		--it->first;
+		if (it->first == 0) {
+			popScore.erase(it);
+			break;
+		}
+	}
+
 	currentTime += deltaTime;
 
 	static bool wasTPressed = false;
@@ -312,6 +321,11 @@ void Scene::render()
 		powerupsManager->render();
 
 		// Render Text
+		// recorrer popScore y renderizar el score en su respectiva posicion
+		for (auto it = popScore.begin(); it != popScore.end(); ++it) {
+			textRenderer.render(it->second.first, glm::vec2(float(it->second.second.x * 2.5f), float(it->second.second.y * 2.5f)), 15, glm::vec4(1, 1, 0.3, 1));
+		}
+
 		std::string timeText = "TIME:";
 		if (timeLeft < 100) timeText += "0";
 		if (timeLeft < 10) timeText += "0";
@@ -439,6 +453,14 @@ void Scene::slowTime() {
 
 void Scene::invincibility() {
 	player->invincibility();
+}
+
+void Scene::addScore(int score) {
+	this->score += score;
+}
+
+void Scene::addScoreCombo(int score, glm::vec2 pos) {
+	popScore.push_back(make_pair(60, make_pair(std::to_string(score), pos)));
 }
 
 void Scene::resize(int width, int height) {

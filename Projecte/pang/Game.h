@@ -45,6 +45,8 @@ public:
 	void freezeTime();
 	void slowTime();
 	void invincibility();
+	void addScore(int score);
+	void addScoreCombo(int score, glm::vec2 pos);
 	void resizeMenu(int width, int height);
 
 private:

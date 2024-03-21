@@ -3,6 +3,7 @@
 #define _BALLMANAGER_INCLUDE
 
 #include <vector>
+#include <stack>
 #include "Ball.h"
 
 class BallManager
@@ -27,6 +28,7 @@ public:
 	void freezeTime();
 	bool isFreezed();
 	void slowTime();
+	void addScore(int size, glm::vec2 pos);
 
 	void setTileMap(TileMap* tileMap);
 
@@ -35,6 +37,7 @@ private:
 	static BallManager* s_inst;
 	vector<Ball*> balls;
 	TileMap* map;
+	stack <int> lastBalls = stack<int>();
 	int delayDynamite = 0;
 	int delayFreeze = 0;
 	bool freezed = false;

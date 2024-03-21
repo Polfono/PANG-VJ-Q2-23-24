@@ -36,6 +36,8 @@ public:
 	void freezeTime();
 	void slowTime();
 	void invincibility();
+	void addScore(int score);
+	void addScoreCombo(int score, glm::vec2 pos);
 	void resize(int width, int height);
 
 private:
@@ -68,6 +70,9 @@ private:
 	bool god = false;
 	int currentWidth;
 	int currentHeight;
+
+	// initialize empty
+	vector <pair<int, pair<string, glm::vec2>>> popScore = vector <pair<int, pair<string, glm::vec2>>>();
 };
 
 

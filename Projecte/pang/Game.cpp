@@ -147,3 +147,13 @@ void Game::invincibility()
 {
 	scene.invincibility();
 }
+
+void Game::addScore(int score)
+{
+	scene.addScore(score);
+}
+
+void Game::addScoreCombo(int score, glm::vec2 pos)
+{
+	scene.addScoreCombo(score, pos);
+}

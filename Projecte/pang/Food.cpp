@@ -77,6 +77,7 @@ int Food::update(glm::vec2 posPlayer)
 	if (!consumed && posPlayer.x + 15 > posFood.x && posPlayer.x < posFood.x + 15 && posPlayer.y + 32 > posFood.y && posPlayer.y < posFood.y + 15) {
 		consumed = true;
 		SoundManager::instance().getSoundEngine()->play2D("sounds/item.mp3", GL_FALSE);
+		Game::instance().addScoreCombo(points[type], posPlayer);
 		return points[type];
 	}
 	

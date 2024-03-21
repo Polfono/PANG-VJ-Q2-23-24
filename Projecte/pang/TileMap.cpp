@@ -5,6 +5,7 @@
 #include "TileMap.h"
 #include "SoundManager.h"
 #include <queue>
+#include "Game.h"
 
 
 using namespace std;
@@ -298,6 +299,7 @@ bool TileMap::pointCollision(const glm::ivec2& pos, const glm::ivec2& size) cons
 				if (destroyableBlocks[i] == block)
 				{
 					SoundManager::instance().getSoundEngine()->play2D("sounds/crash.wav");
+					Game::instance().addScore(500);
 					// Destroy Blocks  -- Todo lo de aqui no me deja ponerlo en otra funcion :(
 					int coord = y * mapSize.x + x;
 
