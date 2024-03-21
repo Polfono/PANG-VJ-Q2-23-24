@@ -81,9 +81,7 @@ void Powerup::checkCollision(glm::vec2 posPlayer)
 
 		else if (type == FREEZETIME) Game::instance().freezeTime();
 
-		else if (type == INVINCIBILITY) {
-
-		}
+		else if (type == INVINCIBILITY) Game::instance().invincibility();	
 		else if (type == SLOWTIME) Game::instance().slowTime();
 		else if (type == EXTRALIFE) Game::instance().extraLife();
 

@@ -22,6 +22,7 @@ public:
 	bool checkCollision(Ball* ball);
 	void reset();
 	void godMode();
+	void invincibility();
 
 	
 	void setTileMap(TileMap *tileMap);
@@ -36,6 +37,9 @@ private:
 	bool delayClimb = false;
 
 	bool god = false;
+	bool escudoActivo = false;
+	bool hitEscudo = false;
+	int timerEscudo = 0;
 
 	int delayDead = 30;
 	bool fDead = true;
@@ -44,8 +48,9 @@ private:
 	glm::ivec2 tileMapDispl, posPlayer;
 	Arpon arpon;
 	Texture spritesheet;
+	Texture spritesheetEscudo;
 	Sprite *sprite;
-	Sprite *spriteDead;
+	Sprite* escudo;
 	TileMap *map;
 
 };

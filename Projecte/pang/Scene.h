@@ -35,6 +35,7 @@ public:
 	void dynamite();
 	void freezeTime();
 	void slowTime();
+	void invincibility();
 	void resize(int width, int height);
 
 private:

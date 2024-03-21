@@ -89,7 +89,7 @@ bool Scene::update(int deltaTime)
 	static bool wasUPressed = false;
 	if (Game::instance().getKey(GLFW_KEY_U) && !wasUPressed) {
 		wasUPressed = true;
-		// invincibility
+		player->invincibility();
 	}
 	if (!Game::instance().getKey(GLFW_KEY_U)) wasUPressed = false;
 
@@ -435,6 +435,10 @@ void Scene::freezeTime() {
 
 void Scene::slowTime() {
 	ballManager->slowTime();
+}
+
+void Scene::invincibility() {
+	player->invincibility();
 }
 
 void Scene::resize(int width, int height) {

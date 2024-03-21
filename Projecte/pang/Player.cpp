@@ -13,6 +13,15 @@ enum PlayerAnims
 
 void Player::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 {
+	spritesheetEscudo.loadFromFile("images/escudo.png", TEXTURE_PIXEL_FORMAT_RGBA);
+	escudo = Sprite::createSprite(glm::ivec2(32, 40), glm::vec2(0.5, 1), &spritesheetEscudo, &shaderProgram);
+	escudo->setNumberAnimations(1);
+	escudo->setAnimationSpeed(0, 12);
+	escudo->addKeyframe(0, glm::vec2(0.0f, 0.0f));
+	escudo->addKeyframe(0, glm::vec2(0.5f, 0.0f));
+	escudo->changeAnimation(0);
+
+
 	spritesheet.loadFromFile("images/player.png", TEXTURE_PIXEL_FORMAT_RGBA);
 	sprite = Sprite::createSprite(glm::ivec2(30, 32), glm::vec2(0.1, 0.25), &spritesheet, &shaderProgram);
 	sprite->setNumberAnimations(13);
@@ -65,6 +74,7 @@ void Player::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 
 bool Player::update(int deltaTime)
 {
+	escudo->update(deltaTime);
 	sprite->update(deltaTime);
 
 	// Comprueba colisiones con las bolas
@@ -72,7 +82,15 @@ bool Player::update(int deltaTime)
 		for (Ball* ball : BallManager::instance()->getBalls()) {
 			if (checkCollision(ball)) {
 				arpon.reset();
-				return true;
+				if (!escudoActivo) return true;
+				else {
+					if (!hitEscudo) {
+						ball->split();
+						SoundManager::instance().getSoundEngine()->play2D("sounds/shieldBreak.wav", GL_FALSE);
+					} 
+					hitEscudo = true;
+				}
+				break;
 			}
 		}
 	}
@@ -251,6 +269,20 @@ void Player::die()
 
 void Player::render()
 {
+	if (escudoActivo) {
+		escudo->setPosition(glm::vec2(float(tileMapDispl.x + posPlayer.x -1), float(tileMapDispl.y + posPlayer.y -3)));
+		if (hitEscudo) {
+			--timerEscudo;
+			if (timerEscudo / 10 % 2 == 0) escudo->render();
+			if (timerEscudo == 0) {
+				escudoActivo = false;
+				hitEscudo = false;
+			}
+		}
+		else 
+			escudo->render();
+	}
+
 	arpon.render();
 	sprite->render();
 }
@@ -299,11 +331,18 @@ void Player::reset() {
 	fDead = true;
 	fBounceDead = true;
 	subiendo = false;
+	escudoActivo = false;
 	sprite->changeAnimation(0);
 }
 
 void Player::godMode() {
 	god = !god;
+}
+
+void Player::invincibility() {
+	escudoActivo = true;
+	hitEscudo = false;
+	timerEscudo = 40;
 }
 
 
