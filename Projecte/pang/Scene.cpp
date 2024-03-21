@@ -55,6 +55,7 @@ void Scene::init()
 	currentHeight = SCREEN_HEIGHT;
 	currentWidth = SCREEN_WIDTH;
 	projection = glm::ortho(0.f, float(currentWidth) / ZOOM_FACTOR, float(currentHeight) / ZOOM_FACTOR, 0.f);
+	glViewport(0, 0, currentWidth, currentHeight);
 
 	// Init Writing
 	textRenderer.init("fonts/PressStart2P-vaV7.ttf");
@@ -464,25 +465,23 @@ void Scene::addScoreCombo(int score, glm::vec2 pos) {
 }
 
 void Scene::resize(int width, int height) {
-	// Tenemos que comprobar que las coordenadas mantengan relacion de aspecto de 4/3
-	float w = width;
-	float h = height;
-	float raw = w / h;
-	if (raw > 4.0f/3.0f) {
-		// Modificamos width para mantener relacion aspecto
-		do {
-			w -= 1;
-		} while (w / h > 4.0f / 3.0f);
+	int newWidth, newHeight;
+	if (width / 4 >= height / 3) {
+		newWidth = height * 4 / 3;
+		newHeight = height;
 	}
-	else if (raw < 4.0f / 3.0f) {
-		// Modificamos height para manterner relacion aspecto
-		do {
-			h -= 1;
-		} while (w / h < 4.0f / 3.0f);
+	else {
+		newWidth = width;
+		newHeight = width * 3 / 4;
 	}
 
-	currentHeight = h;
-	currentWidth = w;
-	Game::instance().resizeMenu(currentWidth, currentHeight);
-	projection = glm::ortho(0.f, float(currentWidth) / ZOOM_FACTOR, float(currentHeight) / ZOOM_FACTOR, 0.f);
+	// Calculate the offset to center the viewport
+	int offsetX = (width - newWidth) / 2;
+	int offsetY = (height - newHeight) / 2;
+
+	currentHeight = newHeight;
+	currentWidth = newWidth;
+
+	// Set the viewport with the calculated dimensions and offset
+	glViewport(offsetX, offsetY, newWidth, newHeight);
 }

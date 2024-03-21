@@ -138,11 +138,6 @@ void Game::resize(int width, int height)
 	scene.resize(width, height);
 }
 
-void Game::resizeMenu(int width, int height)
-{
-	menu->resizeMenu(width, height);
-}
-
 void Game::invincibility()
 {
 	scene.invincibility();

@@ -15,7 +15,6 @@ public:
 	void render(int n);
 	void update(int deltaTime);
 	void setPosIndex(int pos);
-	void resizeMenu(int witdh, int height);
 
 private:
 	int id;
