@@ -331,7 +331,7 @@ void Scene::render()
 		if (timeLeft < 100) timeText += "0";
 		if (timeLeft < 10) timeText += "0";
 		timeText += std::to_string(timeLeft);
-		textRenderer.render(timeText, glm::vec2(round(11.0f/16.0f*currentWidth), round(1.0f/9.0f*currentHeight)), round(currentWidth / 40), glm::vec4(1, 1, 1, 1));
+		textRenderer.render(timeText, glm::vec2(round(11.3f/16.0f*currentWidth), round(1.0f/9.0f*currentHeight)), round(currentWidth / 40), glm::vec4(1, 1, 1, 1));
 		textRenderer.render("STAGE " + std::to_string(level), glm::vec2(round(25.0f/64.0f*currentWidth), round(85.0f/96.0f*currentHeight)), round(currentWidth / 40), glm::vec4(1, 1, 1, 1));
 		textRenderer.render(nameStage, glm::vec2(round(25.0f / 64.0f * currentWidth), round(15.0f/16.0f*currentHeight)), round(currentWidth / 40), glm::vec4(1, 1, 1, 1));
 
