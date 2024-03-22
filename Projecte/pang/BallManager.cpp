@@ -148,6 +148,9 @@ void BallManager::addScore(int size, glm::vec2 pos) {
 	int multiplier = 1 << (lastBalls.size() - 1);
 	int score = scores[size];
 
+	if (size == 0)
+		pos.y += 15;
+
 	if(multiplier > 1) Game::instance().addScoreCombo(score * multiplier, pos);
 	Game::instance().addScore(score * multiplier);
 }

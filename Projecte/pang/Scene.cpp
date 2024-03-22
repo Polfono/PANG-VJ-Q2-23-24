@@ -324,7 +324,8 @@ void Scene::render()
 		// Render Text
 		// recorrer popScore y renderizar el score en su respectiva posicion
 		for (auto it = popScore.begin(); it != popScore.end(); ++it) {
-			textRenderer.render(it->second.first, glm::vec2(float(round(it->second.second.x * 1.0f/368.0f*currentWidth)), float(round(it->second.second.y * 1.0f/288.0f*currentHeight))), round(currentWidth/61.0f), glm::vec4(1, 1, 0, 1));
+			cout << "x: " << it->second.second.x << " y: " << it->second.second.y << endl;
+			textRenderer.render(it->second.first, glm::vec2(round((it->second.second.x * 3.0f/1350.0f*currentWidth)+50),round(it->second.second.y * 3.0f/1250.0f*currentHeight)+100), round(currentWidth/61.0f), glm::vec4(1, 1, 0, 1));
 		}
 
 		std::string timeText = "TIME:";
