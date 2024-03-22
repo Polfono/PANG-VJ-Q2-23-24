@@ -324,7 +324,6 @@ void Scene::render()
 		// Render Text
 		// recorrer popScore y renderizar el score en su respectiva posicion
 		for (auto it = popScore.begin(); it != popScore.end(); ++it) {
-			cout << "x: " << it->second.second.x << " y: " << it->second.second.y << endl;
 			textRenderer.render(it->second.first, glm::vec2(round((it->second.second.x * 3.0f/1350.0f*currentWidth)+50),round(it->second.second.y * 3.0f/1250.0f*currentHeight)+100), round(currentWidth/61.0f), glm::vec4(1, 1, 0, 1));
 		}
 
