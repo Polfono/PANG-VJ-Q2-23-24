@@ -268,7 +268,7 @@ bool Scene::update(int deltaTime)
 	}
 	else {
 		hitTime += deltaTime;
-		player->die();
+		if(vidas >= 0) player->die();
 		if (hitTime >= 3000) { // 3000 milisegundos son 3 segundos
 			SoundManager::instance().getSoundEngine()->removeAllSoundSources();
 

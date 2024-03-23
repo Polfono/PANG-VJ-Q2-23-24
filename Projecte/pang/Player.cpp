@@ -240,7 +240,7 @@ void Player::die()
 	}
 	if (--delayDead < 0)
 	{
-		if(delayDead == -1) SoundManager::instance().getSoundEngine()->play2D("sounds/Hit.mp3", GL_FALSE);
+		if (delayDead == -1) SoundManager::instance().getSoundEngine()->play2D("sounds/Hit.mp3", GL_FALSE);
 		if(dDead == -1) sprite->changeAnimation(DEAD_LEFT);
 		else sprite->changeAnimation(DEAD_RIGHT);
 
