@@ -170,6 +170,10 @@ bool Player::update(int deltaTime)
 	// Si esta tocando el suelo y se pulsa por primera vez S se dispara y anima
 	if (map->collisionMoveDownPlayer(glm::vec2(posPlayer.x + 5, posPlayer.y), glm::ivec2(20, 32), temp)) {
 		speed = 0;
+		if (map->playerOverIce())
+			overIce = true;
+		else
+			overIce = false;
 		static bool wasSPressed = false;
 		if (!wasSPressed && Game::instance().getKey(GLFW_KEY_S) && arpon.setPosition(glm::vec2(posPlayer.x, posPlayer.y))) {
 			if (sprite->animation() == MOVE_LEFT || sprite->animation() == STAND_LEFT)
@@ -183,22 +187,41 @@ bool Player::update(int deltaTime)
 		}
 		wasSPressed = Game::instance().getKey(GLFW_KEY_S);
 	}
-	
+
+	// Si esta en hielo
+	if (overIce) {
+		posPlayer.x += round(horizontalSpeed);
+		if (horizontalSpeed > 0)
+			horizontalSpeed -= 0.2;
+		else if (horizontalSpeed < 0)
+			horizontalSpeed += 0.2;
+	}
 
 	// Si acaba de disparar, se puede mover
 	if (!subiendo && --delayShoot < 0)
 	{
-
 		if (Game::instance().getKey(GLFW_KEY_RIGHT))
 		{
 			if (sprite->animation() != MOVE_RIGHT)
 				sprite->changeAnimation(MOVE_RIGHT);
 
 			lastDir = true;
-			posPlayer.x += 2;
+
+			if (overIce) {
+				horizontalSpeed += 0.3;
+				if (horizontalSpeed > 2)
+					horizontalSpeed = 2;
+			}
+			else {
+				posPlayer.x += 2;
+			}
+			
 			if (map->collisionMoveRight(posPlayer, glm::ivec2(27, 32)))
 			{
-				posPlayer.x -= 2;
+				if (overIce)
+					horizontalSpeed = 0;
+				else 
+					posPlayer.x -= 2;
 				sprite->changeAnimation(STAND_RIGHT);
 			}
 		}
@@ -207,11 +230,22 @@ bool Player::update(int deltaTime)
 			if (sprite->animation() != MOVE_LEFT)
 				sprite->changeAnimation(MOVE_LEFT);
 
-			posPlayer.x -= 2;
+			if (overIce) {
+				horizontalSpeed -= 0.3;
+				if (horizontalSpeed < -2)
+					horizontalSpeed = -2;
+			}
+			else {
+				posPlayer.x -= 2;
+			}
+		
 			lastDir = false;
 			if (map->collisionMoveLeft(posPlayer, glm::ivec2(30, 32)))
 			{
-				posPlayer.x += 2;
+				if (overIce)
+					horizontalSpeed = 0;
+				else
+					posPlayer.x += 2;
 				sprite->changeAnimation(STAND_LEFT);
 			}
 		}

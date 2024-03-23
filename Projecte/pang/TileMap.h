@@ -46,6 +46,7 @@ public:
 	bool checkBrokenBlocks();
 	void prepareArrays(const glm::vec2& minCoords, ShaderProgram& program);
 	void doAnimations();
+	bool playerOverIce();
 
 private:
 	bool loadLevel(const string &levelFile);
@@ -63,6 +64,7 @@ private:
 	Texture tilesheet;
 	glm::vec2 tileTexSize;
 	int* map;
+	mutable bool overIce = false;
 	vector<int> destroyableBlocks = {5, 25, 26, 27, 28, 60, 61, 62, 65, 66, 67, 70, 71, 72, 73, 74, 81, 82, 83, 84, 89, 90, 91, 92};
 	vector<int> blueBlocksId = {65, 66, 67};
 	vector<int> goldBlocksId = {5, 25, 26, 27, 28, 70, 71, 72, 73, 74, 81, 82, 83, 84};

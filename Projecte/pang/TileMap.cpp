@@ -217,6 +217,10 @@ bool TileMap::collisionMoveDownPlayer(const glm::ivec2& pos, const glm::ivec2& s
 	for (int x = x0; x <= x1; x++)
 	{
 		int block = map[y * mapSize.x + x];
+		if (block == 3 || block == 4)
+			overIce = true;
+		else if (overIce)
+			overIce = false;
 		if (block != 0)
 		{
 			if (*posY - tileSize * y + size.y <= 4)
@@ -228,6 +232,11 @@ bool TileMap::collisionMoveDownPlayer(const glm::ivec2& pos, const glm::ivec2& s
 	}
 
 	return false;
+}
+
+bool TileMap::playerOverIce()
+{
+	return overIce;
 }
 
 bool TileMap::collisionMoveDownLadder(const glm::ivec2& pos, const glm::ivec2& size, int* posY) const

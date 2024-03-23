@@ -44,6 +44,8 @@ private:
 	int delayDead = 30;
 	bool fDead = true;
 	bool fBounceDead = true;
+	bool overIce = false;
+	float horizontalSpeed = 0;
 	int dDead;
 	glm::ivec2 tileMapDispl, posPlayer;
 	Arpon arpon;
