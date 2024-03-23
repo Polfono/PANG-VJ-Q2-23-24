@@ -17,7 +17,7 @@ Ganxo amb col·lisions amb bombolles i blocs
 -> Dinamita, separa totes les bombolles fins a la mida més petita
 -> Congelar el temps, durant 5 segons les bombolles no es mouran ni et faran mal
 -> Invencibilitat, et dona un escut que et fa resistent a un impacte de bombolla.
--> Temps lent, redueix un 33% la velocitat de moviment de les bombolles
+-> Temps lent, redueix un 25% la velocitat de moviment de les bombolles
 -> Vida extra, afegeix una vida al jugador (Aquest power-up no està al joc original, ha estat afegit per millorar la jugabilitat)
 
 27 Objectes de menjar

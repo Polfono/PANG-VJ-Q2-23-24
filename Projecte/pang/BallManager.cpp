@@ -52,7 +52,7 @@ bool BallManager::updateBalls()
 	}
 
 	--delaySlow;
-	if (delaySlow < 0 || delaySlow % 3 > 0) {
+	if (delaySlow < 0 || delaySlow % 4 > 0) {
 		for (auto& ball : balls)
 		{
 			ball->update();
