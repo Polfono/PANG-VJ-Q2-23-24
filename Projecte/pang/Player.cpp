@@ -161,12 +161,13 @@ bool Player::update(int deltaTime)
 	int aux = 0; int* temp = &aux;
 	if (!subiendo) {
 		speed += 0.2f;
+		if (speed > MAX_GRAVITY_SPEED) // MAX_GRAVITY_SPEED
+			speed = MAX_GRAVITY_SPEED;
 		posPlayer.y += int(round(speed));
 		temp = &posPlayer.y;
 	}
 
 	// Si esta tocando el suelo y se pulsa por primera vez S se dispara y anima
-	
 	if (map->collisionMoveDownPlayer(glm::vec2(posPlayer.x + 5, posPlayer.y), glm::ivec2(20, 32), temp)) {
 		speed = 0;
 		static bool wasSPressed = false;

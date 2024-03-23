@@ -11,3 +11,4 @@
 #define ATLAS_FONT_SIZE 64
 #define MAX_TIME 90
 #define ZOOM_FACTOR 2.15f
+#define MAX_GRAVITY_SPEED 4

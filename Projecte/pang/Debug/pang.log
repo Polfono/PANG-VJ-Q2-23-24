@@ -1,19 +1,55 @@
-﻿  Scene.cpp
-C:\Users\polfo\PANG-VJ-Q2-23-24\Projecte\pang\Scene.cpp(312,133): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\polfo\PANG-VJ-Q2-23-24\Projecte\pang\Scene.cpp(313,145): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\polfo\PANG-VJ-Q2-23-24\Projecte\pang\Scene.cpp(322,126): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\polfo\PANG-VJ-Q2-23-24\Projecte\pang\Scene.cpp(323,145): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\polfo\PANG-VJ-Q2-23-24\Projecte\pang\Scene.cpp(356,179): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
-C:\Users\polfo\PANG-VJ-Q2-23-24\Projecte\pang\Scene.cpp(363,129): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\polfo\PANG-VJ-Q2-23-24\Projecte\pang\Scene.cpp(364,127): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\polfo\PANG-VJ-Q2-23-24\Projecte\pang\Scene.cpp(365,140): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\polfo\PANG-VJ-Q2-23-24\Projecte\pang\Scene.cpp(366,121): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\polfo\PANG-VJ-Q2-23-24\Projecte\pang\Scene.cpp(376,116): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\polfo\PANG-VJ-Q2-23-24\Projecte\pang\Scene.cpp(380,115): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\polfo\PANG-VJ-Q2-23-24\Projecte\pang\Scene.cpp(383,134): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\polfo\PANG-VJ-Q2-23-24\Projecte\pang\Scene.cpp(388,159): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\polfo\PANG-VJ-Q2-23-24\Projecte\pang\Scene.cpp(389,162): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\polfo\PANG-VJ-Q2-23-24\Projecte\pang\Scene.cpp(396,127): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\polfo\PANG-VJ-Q2-23-24\Projecte\pang\Scene.cpp(405,126): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\polfo\PANG-VJ-Q2-23-24\Projecte\pang\Scene.cpp(406,145): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-  pang.vcxproj -> C:\Users\polfo\PANG-VJ-Q2-23-24\Projecte\Debug\pang.exe
+﻿  Arpon.cpp
+C:\Users\Gorka\Documents\Gorka\Uni\Q6\VJ\PANG2\PANG-VJ-Q2-23-24\Projecte\pang\Arpon.cpp(27,16): warning C4305: '+=': truncamiento de 'double' a 'float'
+C:\Users\Gorka\Documents\Gorka\Uni\Q6\VJ\PANG2\PANG-VJ-Q2-23-24\Projecte\pang\Arpon.cpp(31,102): warning C4806: '==': operación no segura: ningún valor del tipo 'bool' promovido al tipo 'int' puede igualar la constante proporcionada
+  Ball.cpp
+  BallManager.cpp
+  Food.cpp
+C:\Users\Gorka\Documents\Gorka\Uni\Q6\VJ\PANG2\PANG-VJ-Q2-23-24\Projecte\pang\Food.cpp(58,16): warning C4244: '+=': conversión de 'float' a 'T'; posible pérdida de datos
+C:\Users\Gorka\Documents\Gorka\Uni\Q6\VJ\PANG2\PANG-VJ-Q2-23-24\Projecte\pang\Food.cpp(58,16): warning C4244:         with
+C:\Users\Gorka\Documents\Gorka\Uni\Q6\VJ\PANG2\PANG-VJ-Q2-23-24\Projecte\pang\Food.cpp(58,16): warning C4244:         [
+C:\Users\Gorka\Documents\Gorka\Uni\Q6\VJ\PANG2\PANG-VJ-Q2-23-24\Projecte\pang\Food.cpp(58,16): warning C4244:             T=int
+C:\Users\Gorka\Documents\Gorka\Uni\Q6\VJ\PANG2\PANG-VJ-Q2-23-24\Projecte\pang\Food.cpp(58,16): warning C4244:         ]
+  Game.cpp
+C:\Users\Gorka\Documents\Gorka\Uni\Q6\VJ\PANG2\PANG-VJ-Q2-23-24\Projecte\pang\Game.cpp(1,10): warning C4067: símbolos (token) inesperados después de la directiva del preprocesador; se esperaba una nueva línea
+  Level.cpp
+  Menu.cpp
+  Player.cpp
+C:\Users\Gorka\Documents\Gorka\Uni\Q6\VJ\PANG2\PANG-VJ-Q2-23-24\Projecte\pang\Player.cpp(311,19): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
+  Powerup.cpp
+C:\Users\Gorka\Documents\Gorka\Uni\Q6\VJ\PANG2\PANG-VJ-Q2-23-24\Projecte\pang\Powerup.cpp(58,18): warning C4244: '+=': conversión de 'float' a 'T'; posible pérdida de datos
+C:\Users\Gorka\Documents\Gorka\Uni\Q6\VJ\PANG2\PANG-VJ-Q2-23-24\Projecte\pang\Powerup.cpp(58,18): warning C4244:         with
+C:\Users\Gorka\Documents\Gorka\Uni\Q6\VJ\PANG2\PANG-VJ-Q2-23-24\Projecte\pang\Powerup.cpp(58,18): warning C4244:         [
+C:\Users\Gorka\Documents\Gorka\Uni\Q6\VJ\PANG2\PANG-VJ-Q2-23-24\Projecte\pang\Powerup.cpp(58,18): warning C4244:             T=int
+C:\Users\Gorka\Documents\Gorka\Uni\Q6\VJ\PANG2\PANG-VJ-Q2-23-24\Projecte\pang\Powerup.cpp(58,18): warning C4244:         ]
+  PowerupsManager.cpp
+  Scene.cpp
+C:\Users\Gorka\Documents\Gorka\Uni\Q6\VJ\PANG2\PANG-VJ-Q2-23-24\Projecte\pang\Scene.cpp(312,133): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\Gorka\Documents\Gorka\Uni\Q6\VJ\PANG2\PANG-VJ-Q2-23-24\Projecte\pang\Scene.cpp(313,145): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\Gorka\Documents\Gorka\Uni\Q6\VJ\PANG2\PANG-VJ-Q2-23-24\Projecte\pang\Scene.cpp(322,126): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\Gorka\Documents\Gorka\Uni\Q6\VJ\PANG2\PANG-VJ-Q2-23-24\Projecte\pang\Scene.cpp(323,145): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\Gorka\Documents\Gorka\Uni\Q6\VJ\PANG2\PANG-VJ-Q2-23-24\Projecte\pang\Scene.cpp(356,179): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\Gorka\Documents\Gorka\Uni\Q6\VJ\PANG2\PANG-VJ-Q2-23-24\Projecte\pang\Scene.cpp(363,129): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\Gorka\Documents\Gorka\Uni\Q6\VJ\PANG2\PANG-VJ-Q2-23-24\Projecte\pang\Scene.cpp(364,127): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\Gorka\Documents\Gorka\Uni\Q6\VJ\PANG2\PANG-VJ-Q2-23-24\Projecte\pang\Scene.cpp(365,140): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\Gorka\Documents\Gorka\Uni\Q6\VJ\PANG2\PANG-VJ-Q2-23-24\Projecte\pang\Scene.cpp(366,121): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\Gorka\Documents\Gorka\Uni\Q6\VJ\PANG2\PANG-VJ-Q2-23-24\Projecte\pang\Scene.cpp(376,116): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\Gorka\Documents\Gorka\Uni\Q6\VJ\PANG2\PANG-VJ-Q2-23-24\Projecte\pang\Scene.cpp(380,115): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\Gorka\Documents\Gorka\Uni\Q6\VJ\PANG2\PANG-VJ-Q2-23-24\Projecte\pang\Scene.cpp(383,134): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\Gorka\Documents\Gorka\Uni\Q6\VJ\PANG2\PANG-VJ-Q2-23-24\Projecte\pang\Scene.cpp(388,159): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\Gorka\Documents\Gorka\Uni\Q6\VJ\PANG2\PANG-VJ-Q2-23-24\Projecte\pang\Scene.cpp(389,162): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\Gorka\Documents\Gorka\Uni\Q6\VJ\PANG2\PANG-VJ-Q2-23-24\Projecte\pang\Scene.cpp(396,127): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\Gorka\Documents\Gorka\Uni\Q6\VJ\PANG2\PANG-VJ-Q2-23-24\Projecte\pang\Scene.cpp(405,126): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\Gorka\Documents\Gorka\Uni\Q6\VJ\PANG2\PANG-VJ-Q2-23-24\Projecte\pang\Scene.cpp(406,145): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+  Text.cpp
+  TileMap.cpp
+C:\Users\Gorka\Documents\Gorka\Uni\Q6\VJ\PANG2\PANG-VJ-Q2-23-24\Projecte\pang\TileMap.cpp(297,22): warning C4018: '<': no coinciden signed/unsigned
+C:\Users\Gorka\Documents\Gorka\Uni\Q6\VJ\PANG2\PANG-VJ-Q2-23-24\Projecte\pang\TileMap.cpp(449,21): warning C4018: '<': no coinciden signed/unsigned
+C:\Users\Gorka\Documents\Gorka\Uni\Q6\VJ\PANG2\PANG-VJ-Q2-23-24\Projecte\pang\TileMap.cpp(463,21): warning C4018: '<': no coinciden signed/unsigned
+C:\Users\Gorka\Documents\Gorka\Uni\Q6\VJ\PANG2\PANG-VJ-Q2-23-24\Projecte\pang\TileMap.cpp(477,21): warning C4018: '<': no coinciden signed/unsigned
+C:\Users\Gorka\Documents\Gorka\Uni\Q6\VJ\PANG2\PANG-VJ-Q2-23-24\Projecte\pang\TileMap.cpp(496,20): warning C4018: '<': no coinciden signed/unsigned
+C:\Users\Gorka\Documents\Gorka\Uni\Q6\VJ\PANG2\PANG-VJ-Q2-23-24\Projecte\pang\TileMap.cpp(500,20): warning C4018: '<': no coinciden signed/unsigned
+C:\Users\Gorka\Documents\Gorka\Uni\Q6\VJ\PANG2\PANG-VJ-Q2-23-24\Projecte\pang\TileMap.cpp(504,20): warning C4018: '<': no coinciden signed/unsigned
+C:\Users\Gorka\Documents\Gorka\Uni\Q6\VJ\PANG2\PANG-VJ-Q2-23-24\Projecte\pang\TileMap.cpp(513,20): warning C4018: '<': no coinciden signed/unsigned
+  main.cpp
+  Generando código...
+  pang.vcxproj -> C:\Users\Gorka\Documents\Gorka\Uni\Q6\VJ\PANG2\PANG-VJ-Q2-23-24\Projecte\Debug\pang.exe
