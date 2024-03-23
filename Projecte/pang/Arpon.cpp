@@ -8,7 +8,7 @@
 void Arpon::init(const glm::ivec2& tileMapPos, ShaderProgram& shaderProgram)
 {
 	bThrowing = false;
-	spritesheet.loadFromFile("images/arpon.png", TEXTURE_PIXEL_FORMAT_RGBA);
+	spritesheet.loadFromFile("images/arponshoot.png", TEXTURE_PIXEL_FORMAT_RGBA);
 	sprite = Sprite::createSprite(glm::ivec2(9, 191), glm::vec2(0.01454334, 1), &spritesheet, &shaderProgram);
 	sprite->setNumberAnimations(NUMBER_FRAMES_ARPON);
 
