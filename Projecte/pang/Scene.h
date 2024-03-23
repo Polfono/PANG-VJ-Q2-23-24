@@ -59,6 +59,7 @@ private:
 	Texture completedStage;
 	Texture life;
 	Sprite* lifeSprite;
+	bool win = false;
 	int level = 1;
 	int vidas = 2;
 	bool hit = false;

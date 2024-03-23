@@ -210,6 +210,10 @@ bool Scene::update(int deltaTime)
 		if(vidas == -1) {
 			SoundManager::instance().getSoundEngine()->play2D("sounds/GameOver.mp3", false);
 		}
+		if (level == 18) {
+			SoundManager::instance().getSoundEngine()->play2D("sounds/StageCompleted.mp3", false);
+			level = 19;
+		}
 
 		--vidas;
 		if (Game::instance().getKey(GLFW_KEY_ENTER)) { // Enter
@@ -304,6 +308,21 @@ void Scene::render()
 	modelview = glm::mat4(0.5f);
 	texProgram.setUniformMatrix4f("modelview", modelview);
 	texProgram.setUniform2f("texCoordDispl", 0.f, 0.f);
+	if (win) {
+		textRenderer.render("CONGRATULATIONS", glm::vec2(round(35.0f / 128.0f * currentWidth), round(2.0f / 12.0f * currentHeight)), round(currentWidth / 32), glm::vec4(1, 1, 1, 1));
+		textRenderer.render("YOU HAVE COMPLETED THE GAME", glm::vec2(round(10.0f / 128.0f * currentWidth), round(3.0f / 12.0f * currentHeight)), round(currentWidth / 32), glm::vec4(1, 1, 1, 1));
+		std::string scoreText = "FINAL SCORE:";
+		if (score < 1000000) scoreText += "0";
+		if (score < 100000) scoreText += "0";
+		if (score < 10000) scoreText += "0";
+		if (score < 1000) scoreText += "0";
+		if (score < 100) scoreText += "0";
+		if (score < 10) scoreText += "0";
+		scoreText += std::to_string(score);
+		textRenderer.render(scoreText, glm::vec2(round(40.0f / 160.0f * currentWidth), round(20.0f / 48.0f * currentHeight)), round(currentWidth / 40), glm::vec4(1, 1, 1, 1));
+		textRenderer.render("PRESS 'ENTER' TO RETURN MENU", glm::vec2(round(7.0f / 32.0f * currentWidth), round(15.0f / 16.0f * currentHeight)), round(currentWidth / 53), glm::vec4(1, 1, 1, 1));
+		return;
+	}
 
 	if (vidas >= 0 && !changeStage) {
 
@@ -373,7 +392,7 @@ void Scene::render()
 		}
 	}
 	else {
-		textRenderer.render("GAME OVER", glm::vec2(round(35.0f/128.0f*currentWidth), round(5.0f/12.0f*currentHeight)), round(currentWidth/20), glm::vec4(1, 1, 1, 1));
+		textRenderer.render("GAME OVER", glm::vec2(round(35.0f / 128.0f * currentWidth), round(5.0f / 12.0f * currentHeight)), round(currentWidth / 20), glm::vec4(1, 1, 1, 1));
 		std::string scoreText = "SCORE:";
 		if (score < 1000000) scoreText += "0";
 		if (score < 100000) scoreText += "0";
@@ -382,8 +401,8 @@ void Scene::render()
 		if (score < 100) scoreText += "0";
 		if (score < 10) scoreText += "0";
 		scoreText += std::to_string(score);
-		textRenderer.render(scoreText, glm::vec2(round(53.0f/160.0f*currentWidth), round(25.0f/48.0f*currentHeight)), round(currentWidth / 40), glm::vec4(1, 1, 1, 1));
-		textRenderer.render("PRESS 'ENTER' TO RETURN MENU", glm::vec2(round(7.0f/32.0f*currentWidth), round(15.0f/16.0f*currentHeight)), round(currentWidth/53), glm::vec4(1, 1, 1, 1));
+		textRenderer.render(scoreText, glm::vec2(round(53.0f / 160.0f * currentWidth), round(25.0f / 48.0f * currentHeight)), round(currentWidth / 40), glm::vec4(1, 1, 1, 1));
+		textRenderer.render("PRESS 'ENTER' TO RETURN MENU", glm::vec2(round(7.0f / 32.0f * currentWidth), round(15.0f / 16.0f * currentHeight)), round(currentWidth / 53), glm::vec4(1, 1, 1, 1));
 	}
 }
 
@@ -393,7 +412,8 @@ void Scene::nextLevel() {
 
 	level++;
 	if (level > 17) { // 17 niveles
-		vidas = -1;
+		win = true;
+		vidas = -2;
 		return;
 	}
 
@@ -433,6 +453,7 @@ void Scene::setLevel(int level) {
 void Scene::reset() {
 	hitTime = 0;
 	firstHit = true;
+	win = false;
 
 	level = 1;
 	vidas = 2;
