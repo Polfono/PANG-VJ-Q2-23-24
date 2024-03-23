@@ -369,6 +369,7 @@ bool Player::checkCollision(Ball* ball) {
 
 void Player::reset() {
 	speed = 0;
+	horizontalSpeed = 0;
 	lastDir = false;
 	arpon.reset();
 	fDead = true;

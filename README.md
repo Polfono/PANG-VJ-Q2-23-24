@@ -35,6 +35,8 @@ Puntuació
 
 El jugador pot pujar i baixar escales
 
+El jugador rellisca sobre superficies gelades
+
 El jugador perd una vida si el temps del nivell arriba a 0 o és impactat per una bombolla, si no li queden vides perd la partida.
 
 Interfície gràfica que mostra el temps restant, la puntuació acumulada, les vides restants i el nivell en el qual es troba el jugador.
