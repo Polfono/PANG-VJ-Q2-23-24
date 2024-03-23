@@ -57,6 +57,8 @@ private:
 	TexturedQuad* bground;
 	Texture scene;
 	Texture completedStage;
+	Texture life;
+	Sprite* lifeSprite;
 	int level = 1;
 	int vidas = 2;
 	bool hit = false;

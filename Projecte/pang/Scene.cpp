@@ -37,6 +37,10 @@ void Scene::init()
 	glm::vec2 texCoords[2] = { glm::vec2(0.f, 0.f), glm::vec2(1.f, 1.f) }; // Texture coordinates
 	bground = TexturedQuad::createTexturedQuad(geom, texCoords, ShaderProgramManager::instance().getShaderProgram());
 
+	// incializar sprite life
+	life.loadFromFile("images/life.png", TEXTURE_PIXEL_FORMAT_RGBA);
+	lifeSprite = Sprite::createSprite(glm::ivec2(18, 18), glm::vec2(1, 1), &life, &texProgram);
+
 	// Completed Stage
 	completedStage.loadFromFile("images/stageCompleted.png", TEXTURE_PIXEL_FORMAT_RGBA);
 
@@ -302,7 +306,7 @@ void Scene::render()
 	texProgram.setUniform2f("texCoordDispl", 0.f, 0.f);
 
 	if (vidas >= 0 && !changeStage) {
-		
+
 		// Render Background
 		bground->render(scene);
 
@@ -320,6 +324,12 @@ void Scene::render()
 
 		// Render Powerups
 		powerupsManager->render();
+
+		// Render Life
+		for (int i = 0; i < min(19, vidas); i++) {
+			lifeSprite->setPosition(glm::vec2(35.0f + i * 20.0f, 250.0f));
+			lifeSprite->render();
+		}
 
 		// Render Text
 		// recorrer popScore y renderizar el score en su respectiva posicion
@@ -344,8 +354,6 @@ void Scene::render()
 		if (score < 10) scoreText += "0";
 		scoreText += std::to_string(score);
 		textRenderer.render(scoreText, glm::vec2(round(5.0f/64.0f*currentWidth), round(35.0f/48.0f*currentHeight)), round(currentWidth / 40), glm::vec4(1, 1, 1, 1));
-
-		textRenderer.render("Vidas: " + std::to_string(vidas), glm::vec2(round(5.0f / 64.0f * currentWidth), round(25.0f/32.0f*currentHeight)), round(currentWidth / 40), glm::vec4(1, 1, 1, 1));
 
 		if (!hit && firstHit && vidas >= 0) {
 			if (hitTime / 333 % 2 == 0)
