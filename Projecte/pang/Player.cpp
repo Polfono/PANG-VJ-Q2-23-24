@@ -191,6 +191,19 @@ bool Player::update(int deltaTime)
 	// Si esta en hielo
 	if (overIce) {
 		posPlayer.x += round(horizontalSpeed);
+
+		if (map->collisionMoveRight(posPlayer, glm::ivec2(27, 32)))
+		{
+			posPlayer.x -= round(horizontalSpeed);
+			sprite->changeAnimation(STAND_RIGHT);
+		}
+
+		if (map->collisionMoveLeft(posPlayer, glm::ivec2(30, 32)))
+		{
+			posPlayer.x -= round(horizontalSpeed);
+			sprite->changeAnimation(STAND_LEFT);
+		}
+
 		if (horizontalSpeed > 0)
 			horizontalSpeed -= 0.2;
 		else if (horizontalSpeed < 0)
@@ -207,14 +220,12 @@ bool Player::update(int deltaTime)
 
 			lastDir = true;
 
-			if (overIce) {
-				horizontalSpeed += 0.3;
-				if (horizontalSpeed > 2)
-					horizontalSpeed = 2;
-			}
-			else {
+			horizontalSpeed += 0.3;
+			if (horizontalSpeed > 2)
+				horizontalSpeed = 2;
+			
+			if (!overIce)
 				posPlayer.x += 2;
-			}
 			
 			if (map->collisionMoveRight(posPlayer, glm::ivec2(27, 32)))
 			{
@@ -230,14 +241,11 @@ bool Player::update(int deltaTime)
 			if (sprite->animation() != MOVE_LEFT)
 				sprite->changeAnimation(MOVE_LEFT);
 
-			if (overIce) {
-				horizontalSpeed -= 0.3;
-				if (horizontalSpeed < -2)
-					horizontalSpeed = -2;
-			}
-			else {
+			horizontalSpeed -= 0.3;
+			if (horizontalSpeed < -2)
+				horizontalSpeed = -2;
+			if (!overIce)
 				posPlayer.x -= 2;
-			}
 		
 			lastDir = false;
 			if (map->collisionMoveLeft(posPlayer, glm::ivec2(30, 32)))
