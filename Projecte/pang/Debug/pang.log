@@ -1,4 +1,19 @@
-﻿  Arpon.cpp
-C:\Users\polfo\PANG-VJ-Q2-23-24\Projecte\pang\Arpon.cpp(27,16): warning C4305: '+=': truncamiento de 'double' a 'float'
-C:\Users\polfo\PANG-VJ-Q2-23-24\Projecte\pang\Arpon.cpp(31,102): warning C4806: '==': operación no segura: ningún valor del tipo 'bool' promovido al tipo 'int' puede igualar la constante proporcionada
+﻿  Scene.cpp
+C:\Users\polfo\PANG-VJ-Q2-23-24\Projecte\pang\Scene.cpp(312,133): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\polfo\PANG-VJ-Q2-23-24\Projecte\pang\Scene.cpp(313,145): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\polfo\PANG-VJ-Q2-23-24\Projecte\pang\Scene.cpp(322,126): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\polfo\PANG-VJ-Q2-23-24\Projecte\pang\Scene.cpp(323,145): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\polfo\PANG-VJ-Q2-23-24\Projecte\pang\Scene.cpp(356,179): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\polfo\PANG-VJ-Q2-23-24\Projecte\pang\Scene.cpp(363,129): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\polfo\PANG-VJ-Q2-23-24\Projecte\pang\Scene.cpp(364,127): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\polfo\PANG-VJ-Q2-23-24\Projecte\pang\Scene.cpp(365,140): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\polfo\PANG-VJ-Q2-23-24\Projecte\pang\Scene.cpp(366,121): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\polfo\PANG-VJ-Q2-23-24\Projecte\pang\Scene.cpp(376,116): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\polfo\PANG-VJ-Q2-23-24\Projecte\pang\Scene.cpp(380,115): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\polfo\PANG-VJ-Q2-23-24\Projecte\pang\Scene.cpp(383,134): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\polfo\PANG-VJ-Q2-23-24\Projecte\pang\Scene.cpp(388,159): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\polfo\PANG-VJ-Q2-23-24\Projecte\pang\Scene.cpp(389,162): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\polfo\PANG-VJ-Q2-23-24\Projecte\pang\Scene.cpp(396,127): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\polfo\PANG-VJ-Q2-23-24\Projecte\pang\Scene.cpp(405,126): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\polfo\PANG-VJ-Q2-23-24\Projecte\pang\Scene.cpp(406,145): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
   pang.vcxproj -> C:\Users\polfo\PANG-VJ-Q2-23-24\Projecte\Debug\pang.exe
