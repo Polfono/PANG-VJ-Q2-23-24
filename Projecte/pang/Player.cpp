@@ -131,7 +131,7 @@ bool Player::update(int deltaTime)
 			posPlayer.y += 2;
 			subiendo = true;
 			// ACABAS DE BAJAR
-			if (map->collisionMoveDownLadder(glm::ivec2(posPlayer.x + 14, posPlayer.y), glm::ivec2(2, 32), &posPlayer.y))
+			if (map->collisionMoveDownLadder(glm::ivec2(posPlayer.x + 10, posPlayer.y), glm::ivec2(10, 32), &posPlayer.y))
 			{
 				if (lastDir) sprite->changeAnimation(STAND_RIGHT);
 				else sprite->changeAnimation(STAND_LEFT);

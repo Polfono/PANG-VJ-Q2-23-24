@@ -12,6 +12,7 @@ C:\Users\polfo\PANG-VJ-Q2-23-24\Projecte\pang\Food.cpp(58,16): warning C4244:   
   Game.cpp
 C:\Users\polfo\PANG-VJ-Q2-23-24\Projecte\pang\Game.cpp(1,10): warning C4067: símbolos (token) inesperados después de la directiva del preprocesador; se esperaba una nueva línea
   Level.cpp
+  main.cpp
   Menu.cpp
   Player.cpp
 C:\Users\polfo\PANG-VJ-Q2-23-24\Projecte\pang\Player.cpp(193,23): warning C4244: '+=': conversión de 'float' a 'T'; posible pérdida de datos
@@ -67,9 +68,9 @@ C:\Users\polfo\PANG-VJ-Q2-23-24\Projecte\pang\Scene.cpp(406,145): warning C4244:
   Sprite.cpp
   Text.cpp
   Texture.cpp
-  TexturedQuad.cpp
   Generando código...
   Compilando...
+  TexturedQuad.cpp
   TileMap.cpp
 C:\Users\polfo\PANG-VJ-Q2-23-24\Projecte\pang\TileMap.cpp(306,22): warning C4018: '<': no coinciden signed/unsigned
 C:\Users\polfo\PANG-VJ-Q2-23-24\Projecte\pang\TileMap.cpp(458,21): warning C4018: '<': no coinciden signed/unsigned
@@ -79,7 +80,6 @@ C:\Users\polfo\PANG-VJ-Q2-23-24\Projecte\pang\TileMap.cpp(505,20): warning C4018
 C:\Users\polfo\PANG-VJ-Q2-23-24\Projecte\pang\TileMap.cpp(509,20): warning C4018: '<': no coinciden signed/unsigned
 C:\Users\polfo\PANG-VJ-Q2-23-24\Projecte\pang\TileMap.cpp(513,20): warning C4018: '<': no coinciden signed/unsigned
 C:\Users\polfo\PANG-VJ-Q2-23-24\Projecte\pang\TileMap.cpp(522,20): warning C4018: '<': no coinciden signed/unsigned
-  main.cpp
   Generando código...
 LINK : warning LNK4098: la biblioteca predeterminada'MSVCRT' entra en conflicto con otras bibliotecas; use la biblioteca /NODEFAULTLIB:biblioteca
 SOIL.lib(image_DXT.obj) : warning LNK4099: no se encontró PDB '' con 'SOIL.lib(image_DXT.obj)' o en ''; se vinculará el objeto sin tener en cuenta información de depuración

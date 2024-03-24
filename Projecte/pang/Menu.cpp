@@ -29,8 +29,8 @@ Menu::Menu()
 	sprite2->addKeyframe(0, glm::vec2(0.75f, 0.f));
 	sprite2->changeAnimation(0);
 
-	sprite1->setPosition(glm::vec2(round(7.0f/92.0f*currentWidth), round(5.0f/18.0f*currentHeight)));
-	sprite2->setPosition(glm::vec2(round(51.0f/92.0f*currentWidth), round(5.0f / 18.0f * currentHeight)));
+	sprite1->setPosition(glm::vec2(round(70.0f / 920.0 * currentWidth), round(5.0f / 18.0f * currentHeight)));
+	sprite2->setPosition(glm::vec2(round(485.f / 920.0f * currentWidth), round(5.0f / 18.0f * currentHeight)));
 
 	menu.loadFromFile("images/menu.png", TEXTURE_PIXEL_FORMAT_RGBA);
 	credits.loadFromFile("images/credits.png", TEXTURE_PIXEL_FORMAT_RGBA);
@@ -62,16 +62,16 @@ void Menu::setPosIndex(int pos)
 {
 	if (pos == 0) {
 		sprite1->setPosition(glm::vec2(round(70.0f/920.0*currentWidth), round(5.0f / 18.0f * currentHeight)));
-		sprite2->setPosition(glm::vec2(round(510.f/920.0f*currentWidth), round(5.0f / 18.0f * currentHeight)));
+		sprite2->setPosition(glm::vec2(round(485.f/920.0f*currentWidth), round(5.0f / 18.0f * currentHeight)));
 	} else if (pos == 1) {
 		sprite1->setPosition(glm::vec2(round(70.0f / 920.0 * currentWidth), round(265.f/720.f*currentHeight)));
-		sprite2->setPosition(glm::vec2(round(510.f / 920.0f * currentWidth), round(265.f / 720.f * currentHeight)));
+		sprite2->setPosition(glm::vec2(round(485.f / 920.0f * currentWidth), round(265.f / 720.f * currentHeight)));
 	} else if (pos == 2) {
 		sprite1->setPosition(glm::vec2(round(70.0f / 920.0 * currentWidth), round(330.f/720.f*currentHeight)));
-		sprite2->setPosition(glm::vec2(round(510.f / 920.0f * currentWidth), round(330.f / 720.f * currentHeight)));
+		sprite2->setPosition(glm::vec2(round(485.f / 920.0f * currentWidth), round(330.f / 720.f * currentHeight)));
 	} else {
 		sprite1->setPosition(glm::vec2(round(70.0f / 920.0 * currentWidth), round(395.f / 720 * currentHeight)));
-		sprite2->setPosition(glm::vec2(round(510.f / 920.0f * currentWidth), round(395.f/720*currentHeight)));
+		sprite2->setPosition(glm::vec2(round(485.f / 920.0f * currentWidth), round(395.f/720*currentHeight)));
 	}
 }
 
