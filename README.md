@@ -1,11 +1,15 @@
 # PANG-VJ-Q2-23-24
 
---- Nom i cognoms dels integrats del grup ---
+<img width="652" alt="image" src="https://github.com/Polfono/PANG-VJ-Q2-23-24/assets/87941477/a654290c-b589-4b55-a2d2-9fbbfe810a97">
 
-Fonoyet González, Pol
-Parra Ordorica, Gorka
+--- Nom i cognoms dels integrats del grup ---  
+
+Fonoyet González, Pol  
+Parra Ordorica, Gorka  
 
 --- Funcionalitats implementades ---
+
+<img width="622" alt="image" src="https://github.com/Polfono/PANG-VJ-Q2-23-24/assets/87941477/98d222e6-3f2a-4387-a979-43bd68a7b440">
 
 4 pantalles -> Menú principal -> Jugar -> Instruccions -> Crèdits
 
